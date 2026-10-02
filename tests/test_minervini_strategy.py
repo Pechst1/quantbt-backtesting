@@ -156,17 +156,46 @@ def _next_event(index, frames, day: int, stale: set[str] = frozenset()):
     return MarketEvent(timestamp=ts, bars=bars)
 
 
-def test_unfilled_exit_is_not_resent_on_later_stale_bars() -> None:
+def test_unfilled_exit_is_not_resent_while_it_waits_for_a_real_bar() -> None:
+    strategy, portfolio, index, frames = _warmed_strategy()
+    event = _next_event(index, frames, 1)
+    position = portfolio.position_for_symbol("LEAD")
+    position.quantity, position.avg_price = 100, event.bars["LEAD"].close / 0.90
+
+    sells = [s for s in strategy.on_data(event) if s.symbol == "LEAD" and s.side.name == "SELL"]
+    # The exit can't fill on gap days; the position is still open on the next real bar.
+    for day, stale in ((2, {"LEAD"}), (3, {"LEAD"}), (4, set())):
+        signals = strategy.on_data(_next_event(index, frames, day, stale=stale))
+        sells += [s for s in signals if s.symbol == "LEAD" and s.side.name == "SELL"]
+    assert [s.metadata["reason"] for s in sells] == ["STOP_LOSS"]
+
+
+def test_temporary_gap_neither_exits_nor_enters_the_indicator_windows() -> None:
     strategy, portfolio, index, frames = _warmed_strategy()
     position = portfolio.position_for_symbol("LEAD")
     position.quantity, position.avg_price = 100, float(frames["LEAD"]["close"].iloc[-1])
+    i = strategy.symbols.index("LEAD")
+    before = strategy._close[:, i].copy()
 
-    sells = []
-    for day in (1, 2, 3):
-        signals = strategy.on_data(_next_event(index, frames, day, stale={"LEAD"}))
-        sells += [s for s in signals if s.symbol == "LEAD" and s.side.name == "SELL"]
-    assert len(sells) == 1
-    assert sells[0].metadata["reason"] == "NO_DATA"
+    signals = strategy.on_data(_next_event(index, frames, 1, stale={"LEAD"}))
+    assert not [s for s in signals if s.symbol == "LEAD"]
+    np.testing.assert_array_equal(strategy._close[:, i], before)
+
+    strategy.on_data(_next_event(index, frames, 2))
+    np.testing.assert_array_equal(strategy._close[:-1, i], before[1:])
+
+
+def test_held_stock_is_sold_at_the_close_of_its_last_listed_day() -> None:
+    strategy, portfolio, index, frames = _warmed_strategy()
+    event = _next_event(index, frames, 1)
+    strategy.last_bar_dates = {"LEAD": event.timestamp.date(), "FLAT": event.timestamp.date()}
+    position = portfolio.position_for_symbol("LEAD")
+    position.quantity, position.avg_price = 100, event.bars["LEAD"].close
+
+    signals = strategy.on_data(event)
+    lead = [(s.side.name, s.order_type.name, s.metadata.get("reason")) for s in signals if s.symbol == "LEAD"]
+    assert lead == [("SELL", "MOC", "DELISTED")]
+    assert not [s for s in signals if s.symbol == "FLAT"]
 
 
 def test_stopped_out_symbol_is_not_rebought_on_the_same_bar() -> None:

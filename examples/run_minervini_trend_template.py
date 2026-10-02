@@ -101,6 +101,7 @@ def main() -> None:
         symbols=data.active_symbols,
         is_member=membership.is_member,
         market_symbol="SPY" if args.market_filter else None,
+        last_bar_dates=source.listing_end_dates(),
     )
     portfolio = Portfolio(initial_cash=args.initial_cash, leverage=1.0)
     engine = BacktestEngine(

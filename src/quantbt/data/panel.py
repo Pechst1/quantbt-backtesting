@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 
 import pandas as pd
@@ -35,6 +35,16 @@ class ParquetPanelSource(DataSource):
     @property
     def symbols(self) -> list[str]:
         return sorted(self._frames)
+
+    def listing_end_dates(self) -> dict[str, date]:
+        """Last day with traded volume, for symbols whose history ends before the panel does."""
+        panel_end = max(frame.index.max() for frame in self._frames.values())
+        out: dict[str, date] = {}
+        for symbol, frame in self._frames.items():
+            traded = frame.index[frame["volume"] > 0]
+            if len(traded) and frame.index.max() < panel_end:
+                out[symbol] = traded.max().date()
+        return out
 
     def fetch_ohlcv(
         self,

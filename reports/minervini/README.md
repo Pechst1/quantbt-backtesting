@@ -21,8 +21,8 @@ The engine fixes being made in parallel do not touch this strategy's order types
 - **Exits** happen at the next open when one of these is true:
   - The close is 8% or more below the entry (Minervini caps losses at 10% and averages 6–7%; O'Neil uses 7–8%).
   - The close is below the 50-day SMA.
-  - The stock stops trading (delisted or acquired).
-- **Variant B** adds a market filter: new buys only while SPY itself passes criteria 1–5. Both variants were declared before running, and they are the only two runs. They were re-run once after a review fix: a stopped-out stock could be bought back on the same bar, and an unfilled exit could be re-sent.
+- **Delisting and gaps:** a held stock is sold at the close of its last traded day when its listing ends (acquisition or delisting, both announced in advance). A day with no real print is skipped: it triggers no decision and does not count toward the moving-average or 52-week windows.
+- **Variant B** adds a market filter: new buys only while SPY itself passes criteria 1–5. Both variants were declared before running, and they are the only two runs. They were re-run twice after review fixes. The first fix stopped a stopped-out stock from being bought back on the same bar and an unfilled exit from being re-sent. The second fix keeps forward-filled gap days out of the indicator windows and only exits a stock on its real last listed day.
 
 The Volatility Contraction Pattern (VCP) pivot entry, fundamentals and position pyramiding are left out because they are discretionary or need data this repo doesn't have.
 
@@ -30,17 +30,17 @@ The Volatility Contraction Pattern (VCP) pivot entry, fundamentals and position 
 
 | | CAGR | Vol | Sharpe (rf=0) | Max DD | Avg exposure | Trades | Win rate |
 |---|---|---|---|---|---|---|---|
-| A: Trend Template | 7.5% | 24.7% | 0.42 | −61.3% | 97% | 2,733 | 35% |
-| B: Trend Template + SPY filter | 9.4% | 20.9% | 0.54 | −37.1% | 60% | 1,403 | 37% |
+| A: Trend Template | 7.6% | 24.7% | 0.42 | −61.3% | 97% | 2,707 | 35% |
+| B: Trend Template + SPY filter | 9.3% | 20.8% | 0.53 | −37.1% | 60% | 1,388 | 37% |
 | SPY total return | 8.6% | 19.2% | 0.53 | −55.2% | 100% | | |
 
-Excluding the 2026 year-to-date (A +46%, B +64%, SPY +13%), the CAGRs for 1999–2025 are A 6.2%, B 7.7% and SPY 8.4%.
+Excluding the 2026 year-to-date (A +46%, B +64%, SPY +13%), the CAGRs for 1999–2025 are A 6.3%, B 7.6% and SPY 8.4%.
 
 | Sub-period CAGR | A | B | SPY |
 |---|---|---|---|
-| 1999–2009 | 5.3% | 10.8% | 0.7% |
-| 2010–2019 | 5.7% | 3.7% | 13.3% |
-| 2020–2026 | 13.2% | 15.3% | 15.1% |
+| 1999–2009 | 5.3% | 10.7% | 0.7% |
+| 2010–2019 | 5.6% | 3.6% | 13.3% |
+| 2020–2026 | 14.1% | 15.4% | 15.1% |
 
 ## Data and remaining survivorship bias
 
@@ -62,7 +62,7 @@ Excluding the 2026 year-to-date (A +46%, B +64%, SPY +13%), the CAGRs for 1999�
   - It lags badly in the low-dispersion 2010s.
 - The market filter (B) mostly helps by staying out of 2001–2002 and most of 2008.
   - That roughly halves the drawdown.
-  - Its overall edge over SPY depends on the 2026 year-to-date. Through 2025 it trails SPY by about 0.7%/yr, and its best period is also the one with the most survivorship bias.
+  - Its overall edge over SPY depends on the 2026 year-to-date. Through 2025 it trails SPY by about 0.8%/yr, and its best period is also the one with the most survivorship bias.
 - Conclusion: this mechanical version of the template is a risk-reduction overlay rather than a source of excess return on S&P 500 large caps.
   - Minervini applied it to a much broader universe of smaller growth stocks, together with the discretionary VCP entries left out here.
 
