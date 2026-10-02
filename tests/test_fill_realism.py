@@ -207,6 +207,21 @@ def test_cash_interest_excludes_short_proceeds():
     assert portfolio.cash_interest_earned == pytest.approx(100.0)
 
 
+def test_margin_interest_uses_cash_net_of_short_proceeds():
+    # 100k equity, 100k short and 150k long: recorded cash is +50k, but net of the
+    # short proceeds the account has borrowed 50k.
+    portfolio = Portfolio(initial_cash=100_000.0, margin_interest_rate=0.0365, cash_interest_rate=0.0365)
+    short = portfolio.position_for_symbol("SSS")
+    short.quantity, short.avg_price = -1_000, 100.0
+    long = portfolio.position_for_symbol("LLL")
+    long.quantity, long.avg_price = 1_500, 100.0
+    portfolio.cash = 50_000.0
+    cost = portfolio.apply_financing(timestamp=datetime(2023, 1, 11), previous_timestamp=datetime(2023, 1, 1))
+    assert cost == pytest.approx(50.0)
+    assert portfolio.margin_interest_paid == pytest.approx(50.0)
+    assert portfolio.cash_interest_earned == 0.0
+
+
 def test_leveraged_backtest_pays_financing(tmp_path):
     script = {1: lambda s, ts: [s.buy(timestamp=ts, symbol="A", quantity=1500)]}
     portfolio = Portfolio(initial_cash=100_000.0, leverage=2.0, margin_interest_rate=0.05)

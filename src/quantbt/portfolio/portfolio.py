@@ -616,9 +616,9 @@ class Portfolio:
     def apply_financing(self, *, timestamp: datetime, previous_timestamp: datetime | None) -> float:
         """Accrue interest on the cash balance held since the previous bar.
 
-        Negative cash (leveraged longs) pays the margin rate. Positive cash earns the cash
-        rate, but short-sale proceeds are excluded because brokers hold them as collateral.
-        Returns the net amount charged (positive = cost).
+        Short-sale proceeds are held by the broker as collateral, so financing uses cash net
+        of them. A negative net balance (longs bought on margin) pays the margin rate; a
+        positive one earns the cash rate. Returns the net amount charged (positive = cost).
         """
         if previous_timestamp is None:
             return 0.0
@@ -628,12 +628,6 @@ class Portfolio:
 
         as_of = previous_timestamp.date()
         year_fraction = elapsed_days / 365.0
-        if self.cash < 0.0:
-            cost = -self.cash * max(self._rate_on(self.margin_interest_rate, as_of), 0.0) * year_fraction
-            self.cash -= cost
-            self.margin_interest_paid += cost
-            return cost
-
         short_proceeds = 0.0
         for symbol, position in self.positions.items():
             if position.quantity >= 0 or self._is_futures_symbol(symbol):
@@ -641,8 +635,15 @@ class Portfolio:
             bar = self.latest_bars.get(symbol)
             price = bar.close if bar is not None else position.avg_price
             short_proceeds += abs(self._notional_value(symbol, position.quantity, price))
-        free_cash = max(self.cash - short_proceeds, 0.0)
-        earned = free_cash * self._rate_on(self.cash_interest_rate, as_of) * year_fraction
+        net_cash = self.cash - short_proceeds
+
+        if net_cash < 0.0:
+            cost = -net_cash * max(self._rate_on(self.margin_interest_rate, as_of), 0.0) * year_fraction
+            self.cash -= cost
+            self.margin_interest_paid += cost
+            return cost
+
+        earned = net_cash * self._rate_on(self.cash_interest_rate, as_of) * year_fraction
         self.cash += earned
         self.cash_interest_earned += earned
         return -earned

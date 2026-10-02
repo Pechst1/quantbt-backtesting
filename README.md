@@ -298,7 +298,7 @@ Zusatzmodelle:
 - Spread-Proxies (bps) + volumenbasierte Impact-Slippage
 - Kommissionen (fix + prozentual) + SEC/Exchange Fees
 - Shorting Constraints (Hard-to-Borrow Rejects)
-- Finanzierung: Sollzinsen auf negatives Cash (`Portfolio(margin_interest_rate=0.05)`), Habenzinsen auf freies Cash ohne Short-Erloese (`cash_interest_rate=0.0`); beide als Konstante oder `Callable[[date], float]`
+- Finanzierung: Zinsen auf Cash abzueglich Short-Erloesen: negativ zahlt `Portfolio(margin_interest_rate=0.05)`, positiv erhaelt `cash_interest_rate=0.0`; beide als Konstante oder `Callable[[date], float]`
 
 Fill-Regeln (konservativ, ohne Look-ahead):
 
