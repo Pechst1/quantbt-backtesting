@@ -1,5 +1,6 @@
 from quantbt.data.base import DataSource
 from quantbt.data.handler import DataHandlerConfig, PublicOHLCVDataHandler
+from quantbt.data.massive import MassiveSource
 from quantbt.data.yahoo import YahooFinanceSource
 
-__all__ = ["DataHandlerConfig", "DataSource", "PublicOHLCVDataHandler", "YahooFinanceSource"]
+__all__ = ["DataHandlerConfig", "DataSource", "MassiveSource", "PublicOHLCVDataHandler", "YahooFinanceSource"]
