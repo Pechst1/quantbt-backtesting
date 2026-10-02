@@ -119,3 +119,66 @@ def test_parquet_panel_source_round_trip(tmp_path) -> None:
     frame = source.fetch_ohlcv("BBB-201901", datetime(2021, 1, 4), datetime(2021, 1, 6), "1d")
     assert list(frame.index) == list(index[1:4])
     assert frame["adj_close"].iloc[0] == 2.4
+
+
+def _warmed_strategy(n_days: int = 330):
+    from quantbt.core.events import MarketEvent
+    from quantbt.core.models import Bar
+
+    index, frames = _universe(n_days)
+    strategy = MinerviniTrendTemplateStrategy(symbols=list(frames), is_member=lambda s, d: True)
+    for ts in index:
+        bars = {
+            s: Bar(symbol=s, timestamp=ts.to_pydatetime(), open=f.at[ts, "open"], high=f.at[ts, "high"],
+                   low=f.at[ts, "low"], close=f.at[ts, "close"], volume=f.at[ts, "volume"])
+            for s, f in frames.items()
+        }
+        strategy.on_data(MarketEvent(timestamp=ts.to_pydatetime(), bars=bars))
+    portfolio = Portfolio(initial_cash=100_000.0, leverage=1.0)
+    strategy.bind_portfolio(portfolio)
+    return strategy, portfolio, index, frames
+
+
+def _next_event(index, frames, day: int, stale: set[str] = frozenset()):
+    from quantbt.core.events import MarketEvent
+    from quantbt.core.models import Bar
+
+    ts = (index[-1] + pd.offsets.BDay(day)).to_pydatetime()
+    bars = {}
+    for s, f in frames.items():
+        last = f.iloc[-1]
+        if s in stale:
+            c = float(last["close"])
+            bars[s] = Bar(symbol=s, timestamp=ts, open=c, high=c, low=c, close=c, volume=0.0)
+        else:
+            c = float(last["close"]) * (1.002 ** day)
+            bars[s] = Bar(symbol=s, timestamp=ts, open=c, high=c * 1.005, low=c * 0.995, close=c, volume=1e6)
+    return MarketEvent(timestamp=ts, bars=bars)
+
+
+def test_unfilled_exit_is_not_resent_on_later_stale_bars() -> None:
+    strategy, portfolio, index, frames = _warmed_strategy()
+    position = portfolio.position_for_symbol("LEAD")
+    position.quantity, position.avg_price = 100, float(frames["LEAD"]["close"].iloc[-1])
+
+    sells = []
+    for day in (1, 2, 3):
+        signals = strategy.on_data(_next_event(index, frames, day, stale={"LEAD"}))
+        sells += [s for s in signals if s.symbol == "LEAD" and s.side.name == "SELL"]
+    assert len(sells) == 1
+    assert sells[0].metadata["reason"] == "NO_DATA"
+
+
+def test_stopped_out_symbol_is_not_rebought_on_the_same_bar() -> None:
+    strategy, portfolio, index, frames = _warmed_strategy()
+    event = _next_event(index, frames, 1)
+    price = event.bars["LEAD"].close
+    position = portfolio.position_for_symbol("LEAD")
+    # 10% below entry triggers the 8% stop while LEAD still passes the template.
+    position.quantity, position.avg_price = 100, price / 0.90
+    portfolio.cash -= 100 * position.avg_price
+
+    signals = strategy.on_data(event)
+    assert "LEAD" in strategy.last_screen
+    lead = [(s.side.name, s.metadata.get("reason")) for s in signals if s.symbol == "LEAD"]
+    assert lead == [("SELL", "STOP_LOSS")]
