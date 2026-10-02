@@ -2,6 +2,7 @@
 
 Usage:
     python examples/run_turtle_tsmom.py                      # Yahoo via the repo cache
+    python examples/run_turtle_tsmom.py --source massive     # Massive (Polygon) aggregates
     python examples/run_turtle_tsmom.py --data-dir path/csv  # <SYMBOL>.csv files with OHLC + adj_close
 
 All parameters are fixed in the configs; this script has no tuning knobs on purpose.
@@ -40,13 +41,21 @@ def windows(series: pd.Series) -> dict[str, pd.Series]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-dir", type=Path, default=None)
+    parser.add_argument("--source", choices=["yahoo", "massive"], default="yahoo")
     parser.add_argument("--end", default=datetime.today().strftime("%Y-%m-%d"))
     parser.add_argument("--out", type=Path, default=Path("reports/turtle_tsmom"))
     args = parser.parse_args()
     end = datetime.strptime(args.end, "%Y-%m-%d")
 
     symbols = sorted(set(TURTLE_UNIVERSE) | set(TSMOM_UNIVERSE) | {CASH_SYMBOL, BENCHMARK})
-    panel = load_panel(symbols, DATA_START, end, data_dir=args.data_dir)
+    source = None
+    if args.source == "massive":
+        from quantbt.data.massive import MassiveSource
+
+        source = MassiveSource()
+    panel = load_panel(symbols, DATA_START, end, data_dir=args.data_dir, source=source)
+    first_bars = {s: str(panel.close[s].first_valid_index().date()) for s in panel.symbols}
+    print("First bar per symbol:", first_bars)
     missing = sorted(set(symbols) - set(panel.symbols))
     if missing:
         print(f"WARNING: no data for {missing}")
@@ -75,6 +84,8 @@ def main() -> None:
         }
     results["_notes"] = {
         "symbols_missing": missing,
+        "first_bar": first_bars,
+        "data_source": "csv" if args.data_dir else args.source,
         "turtle_trades_s1": int(len(s1.trades)),
         "turtle_trades_s2": int(len(s2.trades)),
         "cost_bps_per_side": s1.config.cost_bps_per_side,

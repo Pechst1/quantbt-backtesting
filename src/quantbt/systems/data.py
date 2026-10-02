@@ -7,6 +7,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from quantbt.data.base import DataSource
 from quantbt.data.handler import DataHandlerConfig, PublicOHLCVDataHandler
 
 
@@ -84,10 +85,11 @@ def load_panel(
     end: datetime,
     *,
     data_dir: Path | None = None,
+    source: DataSource | None = None,
     cache_dir: Path = Path(".cache/market_data"),
     strict: bool = False,
 ) -> PricePanel:
-    """Load daily bars from `data_dir/<SYMBOL>.csv` if given, else Yahoo via the repo's cached source."""
+    """Load daily bars from `data_dir/<SYMBOL>.csv` if given, else from `source` (default Yahoo) via the repo cache."""
     frames: dict[str, pd.DataFrame] = {}
     missing: list[str] = []
     for symbol in symbols:
@@ -97,7 +99,8 @@ def load_panel(
                 raw = _read_csv_frame(path)
             else:
                 handler = PublicOHLCVDataHandler(
-                    DataHandlerConfig(symbols=[symbol], start=start, end=end, cache_dir=cache_dir, strict_symbols=True)
+                    DataHandlerConfig(symbols=[symbol], start=start, end=end, cache_dir=cache_dir, strict_symbols=True),
+                    source=source,
                 )
                 raw = handler._load_symbol(symbol)
         except Exception:
