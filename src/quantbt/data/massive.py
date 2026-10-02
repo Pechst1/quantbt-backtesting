@@ -139,6 +139,19 @@ class MassiveSource(DataSource):
             factor.iloc[:position] *= 1.0 - amount / previous_close
         return factor
 
+    @staticmethod
+    def _map_daily_factor(daily_factor: pd.Series, bar_index: pd.DatetimeIndex, timespan: str) -> pd.Series:
+        """Pick, for each bar, the daily factor of the trading day whose close ends that bar."""
+        if timespan in {"week", "month", "quarter", "year"}:
+            # Coarse bars are stamped with the window start; the window closes before the next bar starts.
+            boundaries = list(bar_index[1:]) + [daily_factor.index[-1] + pd.Timedelta(days=1)]
+        else:
+            boundaries = list(bar_index.normalize() + pd.Timedelta(days=1))
+        positions = daily_factor.index.searchsorted(pd.DatetimeIndex(boundaries), side="left") - 1
+        values = daily_factor.to_numpy()[np.clip(positions, 0, len(daily_factor) - 1)]
+        values[positions < 0] = daily_factor.iloc[0]
+        return pd.Series(values, index=bar_index)
+
     def fetch_ohlcv(
         self,
         symbol: str,
@@ -147,6 +160,13 @@ class MassiveSource(DataSource):
         interval: str,
     ) -> pd.DataFrame:
         frame = self._fetch_aggs(symbol, start, end, interval, adjusted=True)
+        timespan = _INTERVALS[interval][1]
+        if timespan in {"minute", "hour"}:
+            # The endpoint is queried by calendar date; honor intraday bounds explicitly.
+            start_ts, end_ts = pd.Timestamp(start), pd.Timestamp(end)
+            frame = frame[frame.index >= start_ts]
+            if end_ts != end_ts.normalize():
+                frame = frame[frame.index <= end_ts]
         if frame.empty:
             raise ValueError(f"No data returned from Massive for {symbol}.")
 
@@ -154,8 +174,10 @@ class MassiveSource(DataSource):
         if dividends.empty:
             frame["adj_close"] = frame["close"]
         else:
-            raw = self._fetch_aggs(symbol, start, end, interval, adjusted=False)
-            raw_close = raw["close"].reindex(frame.index).ffill()
-            frame["adj_close"] = frame["close"] * self.dividend_adjustment(raw_close, dividends)
+            # Dividend factors are always computed on daily raw closes, then mapped onto the bars.
+            daily_start = min(pd.Timestamp(start), frame.index[0])
+            raw_daily = self._fetch_aggs(symbol, daily_start, end, "1d", adjusted=False)
+            daily_factor = self.dividend_adjustment(raw_daily["close"], dividends)
+            frame["adj_close"] = frame["close"] * self._map_daily_factor(daily_factor, frame.index, timespan)
 
         return frame[["open", "high", "low", "close", "adj_close", "volume"]]

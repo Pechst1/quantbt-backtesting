@@ -62,3 +62,41 @@ def test_no_dividends_skips_raw_request():
 def test_unsupported_interval():
     with pytest.raises(ValueError):
         FakeMassive().fetch_ohlcv("XYZ", datetime(2024, 1, 2), datetime(2024, 1, 4), "2d")
+
+
+class RoutedMassive(MassiveSource):
+    def __init__(self, routes: dict[str, list[dict]], dividends: list[dict]) -> None:
+        super().__init__(api_key="test")
+        self.routes = routes
+        self.dividends = dividends
+
+    def _get_json(self, url: str) -> dict:
+        if "/v3/reference/dividends" in url:
+            return {"status": "OK", "results": self.dividends}
+        for key, rows in self.routes.items():
+            if key in url:
+                return {"status": "OK", "results": rows}
+        raise AssertionError(f"unexpected url {url}")
+
+
+def test_weekly_bars_take_dividend_in_the_week_it_goes_ex():
+    daily = [_bar(day, 100.0) for day in pd.bdate_range("2024-01-01", "2024-01-12").strftime("%Y-%m-%d")]
+    weekly = [_bar("2024-01-01", 100.0), _bar("2024-01-08", 99.0)]
+    source = RoutedMassive(
+        {"/range/1/week/": weekly, "/range/1/day/": daily},
+        [{"ex_dividend_date": "2024-01-10", "cash_amount": 1.0}],
+    )
+    frame = source.fetch_ohlcv("XYZ", datetime(2024, 1, 1), datetime(2024, 1, 12), "1wk")
+    # Week 1 closes before the Wednesday ex-date and is scaled; week 2 closes after it and is not.
+    assert frame["adj_close"].tolist() == pytest.approx([99.0, 99.0])
+
+
+def test_intraday_bounds_are_respected():
+    hours = ["2024-01-02 09:00", "2024-01-02 12:00", "2024-01-02 15:00", "2024-01-02 16:00"]
+    rows = []
+    for stamp in hours:
+        ts = pd.Timestamp(stamp, tz="America/New_York").tz_convert("UTC")
+        rows.append({"t": int(ts.value // 1_000_000), "o": 1.0, "h": 1.0, "l": 1.0, "c": 1.0, "v": 1.0})
+    source = RoutedMassive({"/range/1/hour/": rows}, [])
+    frame = source.fetch_ohlcv("XYZ", datetime(2024, 1, 2, 12), datetime(2024, 1, 2, 15), "1h")
+    assert list(frame.index) == list(pd.to_datetime(["2024-01-02 12:00", "2024-01-02 15:00"]))
