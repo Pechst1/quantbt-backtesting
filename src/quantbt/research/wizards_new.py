@@ -322,6 +322,8 @@ class StatArbConfig:
     borrow_bps_yr: float = 50.0
     lookback: int = 5
     min_history: int = 60
+    frequency: str = "W"  # "W" = last trading day of each week, "M" = of each month
+    cohorts: int = 1  # hold each formation K periods; book = average of the last K targets
 
 
 def run_stat_arb(
@@ -346,8 +348,8 @@ def run_stat_arb(
     rel = close.pct_change(cfg.lookback, fill_method=None).sub(spy.pct_change(cfg.lookback), axis=0)
     history = close.notna().cumsum()
     eligible = panel.member & (history >= cfg.min_history) & rel.notna() & close.notna()
-    week = index.to_period("W-FRI")
-    rebalance = np.r_[week[1:] != week[:-1], False]  # last trading day of each week
+    period = index.to_period("W-FRI" if cfg.frequency == "W" else "M")
+    rebalance = np.r_[period[1:] != period[:-1], False]  # last trading day of each period
     tb = tbill.reindex(index).fillna(0.0).to_numpy()
     cost = cfg.cost_bps / 10_000.0
     borrow = cfg.borrow_bps_yr / 10_000.0 / TRADING_DAYS
@@ -356,7 +358,9 @@ def run_stat_arb(
     equity = np.full(len(index), np.nan)
     value = initial
     rel_np, elig_np = rel.to_numpy(), eligible.to_numpy()
+    close_ok = close.notna().to_numpy()
     pending: np.ndarray | None = None
+    recent: list[np.ndarray] = []
     for i in range(len(index) - 1):
         if pending is not None:  # trade at this open
             value -= value * cost * np.abs(pending - weights).sum()
@@ -379,6 +383,10 @@ def run_stat_arb(
                 target[order[:n]] = 1.0 / n
                 if not cfg.long_only:
                     target[order[-n:]] = -1.0 / n
-                pending = target
+                recent = (recent + [target])[-cfg.cohorts:]
+                book = np.sum(recent, axis=0) / cfg.cohorts
+                # Older cohorts drop names that have since left the data.
+                book[~close_ok[i]] = 0.0
+                pending = book
     equity[-1] = value
     return pd.Series(equity, index=index, name="equity").ffill()

@@ -32,9 +32,23 @@
 | S2 quintile long/short | -5.0% | -0.21 | -77% | -0.7% | 0.08 | -48% | -8.6% |
 | S3 decile losers, long only | 9.1% | 0.44 | -69% | 15.2% | 0.62 | -60% | -14.5% |
 
+## H4
+
+| Variant | IS CAGR | IS Sharpe | IS MaxDD | HO CAGR | HO Sharpe | HO MaxDD | Worst day (HO) |
+|---|---|---|---|---|---|---|---|
+| SPY total return | 6.6% | 0.43 | -55% | 15.2% | 0.81 | -34% | -10.9% |
+| Equal-weight members | 10.6% | 0.60 | -58% | 11.9% | 0.64 | -40% | -12.6% |
+| R1 weekly, 2-week cohorts, long/short | 0.9% | 0.14 | -47% | -3.9% | -0.10 | -42% | -12.0% |
+| R2 weekly, 4-week cohorts, long/short | 0.8% | 0.13 | -29% | 1.0% | 0.14 | -31% | -8.9% |
+| R3 monthly 21-day reversal, long/short | -1.2% | 0.06 | -71% | -9.3% | -0.27 | -64% | -9.5% |
+| R4 as R2, long-only losers | 10.6% | 0.50 | -71% | 17.5% | 0.75 | -50% | -12.5% |
+| R5 as R3, long-only losers | 8.5% | 0.42 | -83% | 9.1% | 0.44 | -52% | -12.0% |
+
 ## diagnostics_zero_cost
 
 | Variant | IS CAGR | IS Sharpe | IS MaxDD | HO CAGR | HO Sharpe | HO MaxDD | Worst day (HO) |
 |---|---|---|---|---|---|---|---|
 | H1 A at 0 bps | 18.0% | 1.16 | -29% | 11.0% | 0.72 | -22% | -8.1% |
 | H3 S1 at 0 bps | 14.6% | 0.71 | -29% | 18.0% | 0.75 | -48% | -10.7% |
+| H4 R2 at 0 bps | 5.6% | 0.50 | -24% | 5.9% | 0.47 | -31% | -8.9% |
+| H4 R3 at 0 bps | 3.0% | 0.24 | -58% | -5.4% | -0.10 | -54% | -9.5% |

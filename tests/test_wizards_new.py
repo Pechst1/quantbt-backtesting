@@ -93,3 +93,22 @@ def test_period_stats_counts_first_day():
     stats = period_stats(eq, str(index[1].date()), str(index[-1].date()))
     assert stats["max_dd"] == 0.0
     assert stats["worst_day"] == pytest.approx(0.10)
+
+
+def test_stat_arb_cohorts_cut_turnover():
+    n = 260
+    index = pd.bdate_range("2020-01-01", periods=n)
+    rng = np.random.default_rng(1)
+    closes = {f"S{i:02d}": 100 * np.cumprod(1 + rng.normal(0, 0.02, n)) for i in range(80)}
+    panel = _panel(closes)
+    spy = panel.close.mean(axis=1)
+    tb = pd.Series(0.0, index=index)
+    gross = run_stat_arb(panel, StatArbConfig(cost_bps=0.0, borrow_bps_yr=0.0), spy, tb)
+    for k in (1, 4):
+        free = run_stat_arb(panel, StatArbConfig(cost_bps=0.0, borrow_bps_yr=0.0, cohorts=k), spy, tb)
+        paid = run_stat_arb(panel, StatArbConfig(cost_bps=100.0, borrow_bps_yr=0.0, cohorts=k), spy, tb)
+        drag = np.log(free.iloc[-1] / paid.iloc[-1])
+        if k == 1:
+            assert free.iloc[-1] == pytest.approx(gross.iloc[-1])
+            drag_one = drag
+    assert drag < 0.6 * drag_one  # four overlapping cohorts trade much less than one

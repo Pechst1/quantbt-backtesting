@@ -1,16 +1,21 @@
-# Three untested Market Wizards methods: Parker, Thorp, and the volatility premium
+# Untested Market Wizards methods: Parker, Thorp, and the volatility premium
 
 Run date: 2026-10-02. Rules, variants and the success bar were committed in
 [PREREGISTRATION.md](PREREGISTRATION.md) before the first run (one amendment, made after a data
-check and before any strategy run, is recorded there). Every variant is reported. Reproduce with
+check and before any strategy run, is recorded there). H4, the slower reversal follow-up, was
+pre-registered after H1–H3 were reported and before any H4 run. Every variant is reported. Reproduce with
 `python examples/fetch_sp500_panel.py && python examples/run_new_wizards.py`.
 
-**Bottom line: none of the 15 variants clears the bar** (beat SPY by 3+ points a year in both
+**Bottom line: none of the 20 variants clears the bar** (beat SPY by 3+ points a year in both
 the in-sample period and the 2020–2026 hold-out, with an equal or better Sharpe). Two of the
 three ideas have a real raw edge, but trading costs eat it: mean reversion makes 18% a year
 before costs from 1999 to 2019, and stat-arb makes 15–18%, yet both fall below SPY once 10 bps
 per side is charged. The volatility premium pays well in calm years, but it wiped out 93% of
-the account in February 2018.
+the account in February 2018. Slowing the reversal down (H4) cuts the costs but loses the
+signal faster: the 4-week long/short book makes only 5.6%/5.9% a year even at zero cost. The
+best long-only book (R4) beats SPY in both periods (10.6% vs 6.6%, 17.5% vs 15.2%), but by
+less than 3 points in the hold-out, with a lower hold-out Sharpe and a −71% drawdown, and
+in-sample it only matches the equal-weight basket.
 
 ## Results
 
@@ -86,13 +91,45 @@ IS = in-sample (1999–2019 for H1/H3, 2011-11 to 2019 for H2, the SVXY history)
   (9.1% vs 6.6%). But it trails the equal-weight panel (10.6%) and has deeper drawdowns
   (−69% and −60%). It is a high-beta equal-weight portfolio, not an edge.
 
+### H4. Slower reversal: overlapping 2–4 week cohorts and monthly reversal
+
+| Variant | IS CAGR | IS Sharpe | IS MaxDD | HO CAGR | HO Sharpe | HO MaxDD |
+|---|---|---|---|---|---|---|
+| SPY total return | 6.6% | 0.43 | −55% | 15.2% | 0.81 | −34% |
+| Equal-weight members | 10.6% | 0.60 | −58% | 11.9% | 0.64 | −40% |
+| R1: weekly, 2-week cohorts, long/short | 0.9% | 0.14 | −47% | −3.9% | −0.10 | −42% |
+| R2: weekly, 4-week cohorts, long/short | 0.8% | 0.13 | −29% | 1.0% | 0.14 | −31% |
+| R3: monthly 21-day reversal, long/short | −1.2% | 0.06 | −71% | −9.3% | −0.27 | −64% |
+| R4: as R2, long-only losers | 10.6% | 0.50 | −71% | 17.5% | 0.75 | −50% |
+| R5: as R3, long-only losers | 8.5% | 0.42 | −83% | 9.1% | 0.44 | −52% |
+| *Diagnostic: R2 at 0 bps* | *5.6%* | *0.50* | *−24%* | *5.9%* | *0.47* | *−31%* |
+| *Diagnostic: R3 at 0 bps* | *3.0%* | *0.24* | *−58%* | *−5.4%* | *−0.10* | *−54%* |
+
+- **The reversal fades within days.** Four overlapping cohorts cut the cost drag from about
+  19 to about 5 points a year, as intended. But the zero-cost return falls from 15–18% (one
+  week) to under 6% (four weeks), so most of the edge sits in the first week, and the slower
+  book nets about 1%.
+- **Monthly reversal is gone in large caps.** R3 loses money even before costs from 2020 on.
+  The Fama-French short-term reversal factor has weakened among large caps since the 2000s,
+  and this matches that.
+- **R4, the long-only 4-week losers book, comes closest so far.** It beats SPY in both
+  periods: by 4.0 points in-sample and 2.3 points in the hold-out. It also beats the
+  equal-weight basket by 5.6 points in the hold-out. But it fails the bar. Its hold-out
+  margin is under 3 points, its hold-out Sharpe (0.75) is below SPY's (0.81), and it lost 71%
+  in 2008–09. In-sample it only matches the equal-weight basket (10.6%), so before 2020 the
+  reversal added nothing on top of equal-weight market exposure. Calendar years 2020–2026:
+  +17%, +35%, −4%, +24%, +15%, +20%, +14%, against SPY's +18%, +29%, −18%, +26%, +25%, +18%,
+  +13%.
+
 ## What this means for the search
 
-- These are the first ideas in this project with a raw edge that holds in both periods:
-  short-term reversal (H1 at 0 bps, H3 at 0 bps). The constraint is execution cost, not the
-  signal. A test of lower-turnover versions (holding two or four weeks, trading only the
-  extremes) would have to be pre-registered as a new hypothesis. Tuning the turnover on these
-  results would be fitting to them.
+- Short-term reversal has a real edge before costs in both periods (H1 and H3 at 0 bps). But
+  it lives in the first few days. Slower versions (H4) keep the costs down and lose most of
+  the signal. A retail account can't trade the fast version profitably at 10 bps a side.
+- The long-only 4-week losers book (R4) is the strongest result in this project: 17.5% a year
+  since 2020, against 15.2% for SPY. It is mostly equal-weight, high-beta market exposure, and
+  that comes with a −71% drawdown. It is worth keeping as a candidate. It is not proof of an
+  edge.
 - Short volatility doesn't add return that survives its crashes. If it is used at all, it
   should be a small sleeve (V6 at 50% still lost 60% in 2018).
 

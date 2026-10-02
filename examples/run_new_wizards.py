@@ -40,7 +40,7 @@ def stats(equity: pd.Series, periods: dict) -> dict:
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     irx = fetch_yahoo_close("^IRX")
-    results: dict[str, dict] = {"H1": {}, "H2": {}, "H3": {}}
+    results: dict[str, dict] = {"H1": {}, "H2": {}, "H3": {}, "H4": {}}
     curves: dict[str, pd.Series] = {}
 
     # ------------------------------------------------------------------ H2 (fast, first)
@@ -122,6 +122,22 @@ def main() -> None:
         curves[f"H3 {name}"] = eq
         print(name, results["H3"][name], flush=True)
 
+    # ------------------------------------------------------------------ H4 (slower reversal)
+    results["H4"]["SPY total return"] = results["H1"]["SPY total return"]
+    results["H4"]["Equal-weight members"] = results["H1"]["Equal-weight members"]
+    h4 = {
+        "R1 weekly, 2-week cohorts, long/short": StatArbConfig(cohorts=2),
+        "R2 weekly, 4-week cohorts, long/short": StatArbConfig(cohorts=4),
+        "R3 monthly 21-day reversal, long/short": StatArbConfig(lookback=21, frequency="M"),
+        "R4 as R2, long-only losers": StatArbConfig(cohorts=4, long_only=True),
+        "R5 as R3, long-only losers": StatArbConfig(lookback=21, frequency="M", long_only=True),
+    }
+    for name, cfg in h4.items():
+        eq = run_stat_arb(panel, cfg, spy, tb)
+        results["H4"][name] = stats(eq, STOCK_PERIODS)
+        curves[f"H4 {name}"] = eq
+        print(name, results["H4"][name], flush=True)
+
     # Diagnostics, not variants: the same rules with zero trading costs, to show how much
     # of the raw edge the costs absorb.
     results["diagnostics_zero_cost"] = {}
@@ -129,6 +145,9 @@ def main() -> None:
     results["diagnostics_zero_cost"]["H1 A at 0 bps"] = stats(eq, STOCK_PERIODS)
     eq = run_stat_arb(panel, StatArbConfig(cost_bps=0.0), spy, tb)
     results["diagnostics_zero_cost"]["H3 S1 at 0 bps"] = stats(eq, STOCK_PERIODS)
+    for name, cfg in {"H4 R2 at 0 bps": StatArbConfig(cohorts=4, cost_bps=0.0),
+                      "H4 R3 at 0 bps": StatArbConfig(lookback=21, frequency="M", cost_bps=0.0)}.items():
+        results["diagnostics_zero_cost"][name] = stats(run_stat_arb(panel, cfg, spy, tb), STOCK_PERIODS)
     print(results["diagnostics_zero_cost"], flush=True)
 
     (OUT / "results.json").write_text(json.dumps(results, indent=2, default=float))
