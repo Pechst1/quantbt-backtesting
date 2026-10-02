@@ -16,6 +16,7 @@ from quantbt.strategies.market_wizards import (
     TrendPullbackReversalWizardStrategy,
     ValueCatalystWizardStrategy,
 )
+from quantbt.strategies.minervini import MinerviniTrendTemplateStrategy
 from quantbt.strategies.popular import (
     AtrBreakoutStrategy,
     BollingerMeanReversionStrategy,
@@ -40,6 +41,7 @@ __all__ = [
     "EventMomentumWizardStrategy",
     "LongVolatilityConvexityWizardStrategy",
     "MacdSignalStrategy",
+    "MinerviniTrendTemplateStrategy",
     "Momentum121Strategy",
     "PairSpec",
     "PEADInconsistencyAvoidanceStrategy",
