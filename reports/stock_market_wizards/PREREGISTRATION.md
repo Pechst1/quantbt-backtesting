@@ -111,3 +111,28 @@ liquid stocks. The published rule-based form is the weekly contrarian strategy o
 
 Expectation stated in advance: H3 is the most likely to fail after costs, because weekly
 turnover is near 100% and the effect has been widely traded since the 1990s.
+
+---
+
+## Follow-up (added 2026-10-02 after the nine runs above, before any run of these)
+
+**Why a follow-up.** H2's buy signal held up out of sample, but the 2x overlay (H2-B) deepened
+drawdowns. These variants change only the overlay size and add one trend condition. The
+signal itself (breadth proxy, 21-day sum, 5th percentile entry, median exit) is unchanged,
+so nothing here is fitted to the signal. Because they were chosen after seeing H2-B, they
+are a second look at the same signal, not independent evidence; the 2020+ hold-out has
+already been seen once.
+
+All hold 100% SPY when no buy signal is on. During a buy signal:
+
+| Variant | Exposure on signal | Condition |
+|---|---|---|
+| H2-D | 1.25x SPY | none |
+| H2-E | 1.5x SPY | none |
+| H2-B (already run) | 2.0x SPY | none |
+| H2-F | 1.5x SPY | only while SPY's close is above its 200-day SMA, else 1.0x |
+| H2-G | 2.0x SPY | only while SPY's close is above its 200-day SMA, else 1.0x |
+
+The 200-day condition is checked on every close during a signal, so exposure can step
+between 1x and the overlay inside one signal. Margin at 5%/yr, engine default costs.
+Same pass bar as above: beat SPY's CAGR in both periods with no worse max drawdown.
