@@ -133,6 +133,44 @@ IS = in-sample (1999–2019 for H1/H3, 2011-11 to 2019 for H2, the SVXY history)
 - Short volatility doesn't add return that survives its crashes. If it is used at all, it
   should be a small sleeve (V6 at 50% still lost 60% in 2018).
 
+## Real costs at Scalable Capital (checked 2026-10-02)
+
+Checked through Vincent's own Scalable Capital account. One buy preview was run on gettex and
+one on Xetra; no order was placed.
+
+- **Order fee:** €1.99 per order on both venues, for buys and sells alike. On a €1,000 position
+  that is 20 bps per side. On €10,000 it is 2 bps.
+- **Bid-ask spread:** US stocks trade in euros on gettex/Xetra, with a market maker's quote.
+  Snapshot at 13:29–13:31 UTC, around the US open, as half-spread per side: KO 5, AAPL 6,
+  MSFT 7, PG 21, HRL 25, JPM 26, TAP 27, HAS 35, BBWI 41, WHR 46, GNRC 50, RL 101, MHK 126
+  (MHK was quoted before the US open). **Median: 27 bps.** The mega caps are close to US
+  spreads, but mid-size members cost 25–50 bps, and dip-buying trades exactly the names that
+  just fell. This is one snapshot near the open, when spreads are widest. Spreads later in the
+  US session are probably tighter.
+- **No short selling** of single stocks at Scalable, so the long/short books (H3, H4 R1–R3)
+  can't be traded there at all.
+
+So **realistic per-side costs at Scalable are about 25–35 bps** (spread plus fee) for a typical
+S&P 500 member, not lower than the 10 bps assumed above. At US-direct brokers (e.g. Interactive
+Brokers on the US exchanges) spreads in these names are a few bps, and 2–5 bps all-in is
+achievable for larger accounts.
+
+Cost sweep (`examples/cost_sweep_new_wizards.py`, `cost_sweep.json`), CAGR in-sample / hold-out:
+
+| Per-side cost | H1 A dip-buying | H3 S1 weekly long/short | H4 R4 long-only 4-week losers | SPY |
+|---|---|---|---|---|
+| 0 bps | 18.0% / 11.0% | 14.6% / 18.0% | 13.2% / 20.4% | 6.6% / 15.2% |
+| 2 bps | 16.0% / 9.1% | 10.6% / 13.9% | 12.7% / 19.8% | |
+| 5 bps | 13.1% / 6.3% | 4.8% / 7.9% | 11.9% / 19.0% | |
+| 10 bps | 8.3% / 1.7% | −4.2% / −1.4% | 10.6% / 17.5% | |
+| 25 bps (≈ Scalable) | −4.7% / −10.9% | −27.0% / −24.8% | 6.7% / 13.3% | |
+
+- At Scalable's real costs, H1 and H3 lose money. Even at 2 bps, H1 trails SPY in the hold-out.
+- At 2–5 bps, the H3 long/short book roughly matches SPY in the hold-out (13.9% at 2 bps). But it
+  needs short selling and institutional execution.
+- R4 is the only one that keeps beating SPY at low cost: 19–20% vs 15.2% since 2020 at 0–5 bps.
+  At Scalable's ~25 bps it falls behind SPY in the hold-out (13.3%).
+
 ## Caveats
 
 - Survivorship: the panel lacks about a third of historical members. The equal-weight
