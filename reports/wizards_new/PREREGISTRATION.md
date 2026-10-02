@@ -111,3 +111,13 @@ rebalance. Equity earns T-bills; shorts pay 0.5%/yr borrow.
 | S1 | bottom / top decile, long/short |
 | S2 | bottom / top quintile, long/short |
 | S3 | bottom decile, long only (no short leg) |
+
+## Amendment 1 (2026-10-02, after a data check, before any strategy run)
+
+A check of the inputs showed that a −1× rebuild from VIXY's 4 pm closes misses how XIV and SVXY
+actually died: their daily reset used the 4:15 pm futures settlement, so over 2018-02-05/06 the
+real SVXY fell 88% while the rebuild fell only 32%. From 2011-10 to 2018-02-26 the rebuild grew
+22× against 2.6× for the real fund. The rebuild would hide exactly the crash risk this test is
+about, so H2 uses the **real SVXY** as the short-volatility instrument instead (−1× until
+2018-02-27, −0.5× after; history from 2011-10-04). Everything else stays: V1 is buy-and-hold
+SVXY, V6 holds 50% SVXY and 50% T-bills when on. In-sample starts 2011-11-01.
