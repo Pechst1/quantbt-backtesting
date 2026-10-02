@@ -1,8 +1,9 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from copy import deepcopy
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import date, datetime
 from math import isclose
 from typing import TYPE_CHECKING, Any
 
@@ -15,6 +16,9 @@ from quantbt.portfolio.sizing import BasePositionSizer, FixedFractionalSizer
 
 if TYPE_CHECKING:  # pragma: no cover
     from quantbt.altdata.base import BorrowDataSource
+
+# An annualized rate, either constant or looked up per date (e.g. from a T-bill series).
+RateInput = float | Callable[[date], float]
 
 
 @dataclass(slots=True)
@@ -46,6 +50,8 @@ class Portfolio:
         symbol_multipliers: dict[str, float] | None = None,
         futures_symbols: set[str] | None = None,
         hard_stop_loss_pct: float | None = None,
+        cash_interest_rate: RateInput = 0.0,
+        margin_interest_rate: RateInput = 0.05,
     ) -> None:
         self.initial_cash = float(initial_cash)
         self.cash = float(initial_cash)
@@ -64,12 +70,17 @@ class Portfolio:
         }
         self.futures_symbols = {symbol.upper() for symbol in (futures_symbols or set())}
         self.hard_stop_loss_pct = hard_stop_loss_pct
+        # Debit balances pay margin_interest_rate; free credit balances earn cash_interest_rate.
+        self.cash_interest_rate = cash_interest_rate
+        self.margin_interest_rate = margin_interest_rate
 
         self.positions: dict[str, Position] = {}
         self.history: list[PortfolioSnapshot] = []
         self.closed_trades: list[ClosedTrade] = []
         self.latest_bars: dict[str, Bar] = {}
         self.borrow_fees_paid: float = 0.0
+        self.margin_interest_paid: float = 0.0
+        self.cash_interest_earned: float = 0.0
         self.rejected_by_risk: int = 0
         self._risk_exit_pending: set[str] = set()
         self._open_trade_context: dict[str, dict[str, Any]] = {}
@@ -595,6 +606,46 @@ class Portfolio:
 
         self.borrow_fees_paid += fee_total
         return fee_total
+
+    @staticmethod
+    def _rate_on(rate: RateInput, as_of: date) -> float:
+        value = rate(as_of) if callable(rate) else rate
+        value = float(value)
+        return 0.0 if not np.isfinite(value) else value
+
+    def apply_financing(self, *, timestamp: datetime, previous_timestamp: datetime | None) -> float:
+        """Accrue interest on the cash balance held since the previous bar.
+
+        Negative cash (leveraged longs) pays the margin rate. Positive cash earns the cash
+        rate, but short-sale proceeds are excluded because brokers hold them as collateral.
+        Returns the net amount charged (positive = cost).
+        """
+        if previous_timestamp is None:
+            return 0.0
+        elapsed_days = max((timestamp - previous_timestamp).total_seconds() / 86_400.0, 0.0)
+        if elapsed_days <= 0.0:
+            return 0.0
+
+        as_of = previous_timestamp.date()
+        year_fraction = elapsed_days / 365.0
+        if self.cash < 0.0:
+            cost = -self.cash * max(self._rate_on(self.margin_interest_rate, as_of), 0.0) * year_fraction
+            self.cash -= cost
+            self.margin_interest_paid += cost
+            return cost
+
+        short_proceeds = 0.0
+        for symbol, position in self.positions.items():
+            if position.quantity >= 0 or self._is_futures_symbol(symbol):
+                continue
+            bar = self.latest_bars.get(symbol)
+            price = bar.close if bar is not None else position.avg_price
+            short_proceeds += abs(self._notional_value(symbol, position.quantity, price))
+        free_cash = max(self.cash - short_proceeds, 0.0)
+        earned = free_cash * self._rate_on(self.cash_interest_rate, as_of) * year_fraction
+        self.cash += earned
+        self.cash_interest_earned += earned
+        return -earned
 
     def mark_to_market(self, timestamp: datetime, bars: dict[str, Bar]) -> PortfolioSnapshot:
         self.latest_bars.update({symbol.upper(): bar for symbol, bar in bars.items()})
