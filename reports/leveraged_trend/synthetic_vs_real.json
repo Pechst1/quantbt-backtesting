@@ -1,0 +1,40 @@
+{
+  "window": [
+    "2021-10-04",
+    "2026-09-30"
+  ],
+  "funds": {
+    "SSO": {
+      "days": 1253,
+      "real_cagr": 0.1966,
+      "synthetic_cagr": 0.1928,
+      "annual_gap_synth_minus_real": -0.0038,
+      "daily_return_corr": 0.99905,
+      "daily_tracking_error_bps": 9.8
+    },
+    "UPRO": {
+      "days": 1253,
+      "real_cagr": 0.2208,
+      "synthetic_cagr": 0.2262,
+      "annual_gap_synth_minus_real": 0.0054,
+      "daily_return_corr": 0.99902,
+      "daily_tracking_error_bps": 15.2
+    },
+    "QLD": {
+      "days": 1253,
+      "real_cagr": 0.2254,
+      "synthetic_cagr": 0.2267,
+      "annual_gap_synth_minus_real": 0.0012,
+      "daily_return_corr": 0.99972,
+      "daily_tracking_error_bps": 6.9
+    },
+    "TQQQ": {
+      "days": 1253,
+      "real_cagr": 0.2364,
+      "synthetic_cagr": 0.2348,
+      "annual_gap_synth_minus_real": -0.0016,
+      "daily_return_corr": 0.99967,
+      "daily_tracking_error_bps": 11.8
+    }
+  }
+}
