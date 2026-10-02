@@ -64,6 +64,8 @@ class MinerviniTrendTemplateStrategy(BaseStrategy):
         self._low = np.full((self._window, n), np.nan)
         self._sma200_hist = np.full((22, n), np.nan)
         self.last_screen: dict[str, float] = {}
+        # Exits already sent but not yet filled, so a missing next bar can't re-send them.
+        self._pending_exits: set[str] = set()
 
     def _push(self, market_event: MarketEvent) -> np.ndarray:
         close = np.full(len(self.symbols), np.nan)
@@ -126,10 +128,19 @@ class MinerviniTrendTemplateStrategy(BaseStrategy):
 
         signals: list[SignalEvent] = []
         held: list[str] = []
+        open_symbols: set[str] = set()
+        unfilled_exits = 0
         exit_proceeds = 0.0
+        self._pending_exits = {
+            s for s in self._pending_exits if self.portfolio.position_for_symbol(s).quantity > 0
+        }
         for symbol, position in self.portfolio.positions.items():
             qty = int(position.quantity)
             if qty <= 0:
+                continue
+            open_symbols.add(symbol)
+            if symbol in self._pending_exits:
+                unfilled_exits += 1
                 continue
             i = self._index.get(symbol)
             if i is None:
@@ -145,6 +156,7 @@ class MinerviniTrendTemplateStrategy(BaseStrategy):
                 held.append(symbol)
                 continue
             exit_proceeds += qty * price[i]
+            self._pending_exits.add(symbol)
             signals.append(
                 self.sell_moo(
                     timestamp=market_event.timestamp,
@@ -162,15 +174,15 @@ class MinerviniTrendTemplateStrategy(BaseStrategy):
             if m is None or not bool(structure[m]):
                 return signals
 
-        free_slots = self.max_positions - len(held)
+        free_slots = self.max_positions - len(held) - unfilled_exits
         if free_slots <= 0:
             return signals
         equity = self.portfolio.latest_equity
         cash = self.portfolio.cash + exit_proceeds
         slot_value = equity / self.max_positions
-        held_set = set(held)
+        # Held names, including ones exiting on this bar, are never bought again on the same bar.
         candidates = sorted(
-            (i for i in np.flatnonzero(qualifies) if self.symbols[i] not in held_set),
+            (i for i in np.flatnonzero(qualifies) if self.symbols[i] not in open_symbols),
             key=lambda i: -rs_score[i],
         )
         for i in candidates[:free_slots]:
