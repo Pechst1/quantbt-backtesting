@@ -1,0 +1,664 @@
+{
+  "windows": {
+    "SPY": {
+      "full": [
+        "1999-01-01",
+        "2026-09-30"
+      ],
+      "in_sample_1999_2019": [
+        "1999-01-01",
+        "2019-12-31"
+      ],
+      "holdout_2020_2026": [
+        "2020-01-01",
+        "2026-09-30"
+      ]
+    },
+    "QQQ": {
+      "full": [
+        "1999-12-22",
+        "2026-09-30"
+      ],
+      "in_sample_1999_2019": [
+        "1999-12-22",
+        "2019-12-31"
+      ],
+      "holdout_2020_2026": [
+        "2020-01-01",
+        "2026-09-30"
+      ]
+    }
+  },
+  "variants": {
+    "SPY 1x buy&hold": {
+      "robustness_only": false,
+      "switches": 1,
+      "fills": 1,
+      "margin_calls": 0,
+      "cash_interest": 339.38,
+      "margin_interest": 0.0,
+      "full": {
+        "cagr": 0.08655970089357212,
+        "ann_vol": 0.19155329955501477,
+        "sharpe": 0.42327804538855557,
+        "max_drawdown": -0.5504421083672046,
+        "longest_drawdown_days": 1656,
+        "growth_of_1": 10.00056464357604,
+        "time_invested": 1.0
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.06620216837999471,
+        "ann_vol": 0.1886700550240801,
+        "sharpe": 0.34019815596074693,
+        "max_drawdown": -0.5504421083672046,
+        "longest_drawdown_days": 1656,
+        "growth_of_1": 3.8397845134146644,
+        "time_invested": 1.0
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.15093252570348614,
+        "ann_vol": 0.2003120084495288,
+        "sharpe": 0.6611300350602541,
+        "max_drawdown": -0.33684119762909526,
+        "longest_drawdown_days": 488,
+        "growth_of_1": 2.580353232138899,
+        "time_invested": 1.0
+      }
+    },
+    "SPY 1x SMA200": {
+      "robustness_only": false,
+      "switches": 195,
+      "fills": 195,
+      "margin_calls": 0,
+      "cash_interest": 29011.9,
+      "margin_interest": 515.05,
+      "full": {
+        "cagr": 0.06391137988310147,
+        "ann_vol": 0.11848324875030788,
+        "sharpe": 0.4106674817423245,
+        "max_drawdown": -0.24961761488448497,
+        "longest_drawdown_days": 1148,
+        "growth_of_1": 5.575464558136872,
+        "time_invested": 0.7499283462310118
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.048464837598968025,
+        "ann_vol": 0.11565073605465578,
+        "sharpe": 0.3138493082443796,
+        "max_drawdown": -0.24961761488448497,
+        "longest_drawdown_days": 1148,
+        "growth_of_1": 2.700176230999201,
+        "time_invested": 0.7327276168843461
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.11197018638974088,
+        "ann_vol": 0.12688630165910364,
+        "sharpe": 0.6765343340358082,
+        "max_drawdown": -0.19730325582816355,
+        "longest_drawdown_days": 516,
+        "growth_of_1": 2.045601880266312,
+        "time_invested": 0.8035398230088495
+      }
+    },
+    "SPY 2x buy&hold": {
+      "robustness_only": false,
+      "switches": 1,
+      "fills": 1,
+      "margin_calls": 0,
+      "cash_interest": 710.95,
+      "margin_interest": 0.0,
+      "full": {
+        "cagr": 0.09875870662714603,
+        "ann_vol": 0.3805301129471558,
+        "sharpe": 0.38502820455077136,
+        "max_drawdown": -0.8797027132151845,
+        "longest_drawdown_days": 3673,
+        "growth_of_1": 13.63059191100942,
+        "time_invested": 1.0
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.062001783128805554,
+        "ann_vol": 0.3740200270446162,
+        "sharpe": 0.3006166249840384,
+        "max_drawdown": -0.8797027132151845,
+        "longest_drawdown_days": 3673,
+        "growth_of_1": 3.5344852599372403,
+        "time_invested": 1.0
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.21828178810864762,
+        "ann_vol": 0.40022878671664414,
+        "sharpe": 0.6249440597595626,
+        "max_drawdown": -0.5874667954607431,
+        "longest_drawdown_days": 541,
+        "growth_of_1": 3.786387762456377,
+        "time_invested": 1.0
+      }
+    },
+    "SPY 2x SMA200": {
+      "robustness_only": false,
+      "switches": 195,
+      "fills": 195,
+      "margin_calls": 0,
+      "cash_interest": 33994.8,
+      "margin_interest": 1215.6,
+      "full": {
+        "cagr": 0.08953837138438447,
+        "ann_vol": 0.23752041279019817,
+        "sharpe": 0.39508195476423624,
+        "max_drawdown": -0.5194465831495607,
+        "longest_drawdown_days": 2642,
+        "growth_of_1": 10.789522986798506,
+        "time_invested": 0.7499283462310118
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.06221143846243593,
+        "ann_vol": 0.23188092991406334,
+        "sharpe": 0.30035252262609524,
+        "max_drawdown": -0.5194465831495607,
+        "longest_drawdown_days": 2642,
+        "growth_of_1": 3.549159057541126,
+        "time_invested": 0.7327276168843461
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.17601703871472174,
+        "ann_vol": 0.2542741434663038,
+        "sharpe": 0.6550617272224658,
+        "max_drawdown": -0.3611421369790304,
+        "longest_drawdown_days": 541,
+        "growth_of_1": 2.984159203626146,
+        "time_invested": 0.8035398230088495
+      }
+    },
+    "SPY 3x buy&hold": {
+      "robustness_only": false,
+      "switches": 1,
+      "fills": 1,
+      "margin_calls": 0,
+      "cash_interest": 1099.97,
+      "margin_interest": 0.0,
+      "full": {
+        "cagr": 0.08034199643911943,
+        "ann_vol": 0.5543378472068519,
+        "sharpe": 0.3820713578453877,
+        "max_drawdown": -0.9761483036952215,
+        "longest_drawdown_days": 4651,
+        "growth_of_1": 8.528923506467109,
+        "time_invested": 1.0
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.029999735327151056,
+        "ann_vol": 0.5396520777865008,
+        "sharpe": 0.29280594524924,
+        "max_drawdown": -0.9761483036952215,
+        "longest_drawdown_days": 4651,
+        "growth_of_1": 1.8596448182528602,
+        "time_invested": 1.0
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.2483467978187599,
+        "ann_vol": 0.5979175574142372,
+        "sharpe": 0.6280503445489584,
+        "max_drawdown": -0.7588369153684769,
+        "longest_drawdown_days": 613,
+        "growth_of_1": 4.462929780826838,
+        "time_invested": 1.0
+      }
+    },
+    "SPY 3x SMA200": {
+      "robustness_only": false,
+      "switches": 195,
+      "fills": 195,
+      "margin_calls": 0,
+      "cash_interest": 37261.27,
+      "margin_interest": 1956.72,
+      "full": {
+        "cagr": 0.10804457068027618,
+        "ann_vol": 0.35715570115293005,
+        "sharpe": 0.4108164019791422,
+        "max_drawdown": -0.7052505628287202,
+        "longest_drawdown_days": 3587,
+        "growth_of_1": 17.214376671232348,
+        "time_invested": 0.7499283462310118
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.06910617141341469,
+        "ann_vol": 0.34869812636145037,
+        "sharpe": 0.31651322481175465,
+        "max_drawdown": -0.7052505628287202,
+        "longest_drawdown_days": 3587,
+        "growth_of_1": 4.065368186834732,
+        "time_invested": 0.7327276168843461
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.23356270342569574,
+        "ann_vol": 0.38229090680725697,
+        "sharpe": 0.6696588023607775,
+        "max_drawdown": -0.49847636218703295,
+        "longest_drawdown_days": 554,
+        "growth_of_1": 4.118413392980838,
+        "time_invested": 0.8035398230088495
+      }
+    },
+    "QQQ 1x buy&hold": {
+      "robustness_only": false,
+      "switches": 1,
+      "fills": 1,
+      "margin_calls": 0,
+      "cash_interest": 11.97,
+      "margin_interest": 797.23,
+      "full": {
+        "cagr": 0.08938001269690843,
+        "ann_vol": 0.2698068968505493,
+        "sharpe": 0.38030566968330654,
+        "max_drawdown": -0.8330823191734352,
+        "longest_drawdown_days": 3747,
+        "growth_of_1": 9.895109779905194,
+        "time_invested": 1.0
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.05143312335838357,
+        "ann_vol": 0.2764986561590663,
+        "sharpe": 0.26014208711749864,
+        "max_drawdown": -0.8330823191734352,
+        "longest_drawdown_days": 3747,
+        "growth_of_1": 2.7300449914404132,
+        "time_invested": 1.0
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.20743752716336927,
+        "ann_vol": 0.24883009981904067,
+        "sharpe": 0.7693606759327459,
+        "max_drawdown": -0.35170898077610246,
+        "longest_drawdown_days": 493,
+        "growth_of_1": 3.564841253744044,
+        "time_invested": 1.0
+      }
+    },
+    "QQQ 1x SMA200": {
+      "robustness_only": false,
+      "switches": 187,
+      "fills": 187,
+      "margin_calls": 0,
+      "cash_interest": 28693.85,
+      "margin_interest": 811.13,
+      "full": {
+        "cagr": 0.08284528826236848,
+        "ann_vol": 0.17196561370215738,
+        "sharpe": 0.4366110561115328,
+        "max_drawdown": -0.518239139855714,
+        "longest_drawdown_days": 2526,
+        "growth_of_1": 8.422903658980564,
+        "time_invested": 0.7394920540620823
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.04815093196694642,
+        "ann_vol": 0.16842476859031053,
+        "sharpe": 0.26658247157325965,
+        "max_drawdown": -0.518239139855714,
+        "longest_drawdown_days": 2526,
+        "growth_of_1": 2.5643644815910416,
+        "time_invested": 0.7173481540293767
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.1899166834880186,
+        "ann_vol": 0.18193941173369005,
+        "sharpe": 0.8926046866381486,
+        "max_drawdown": -0.23283374277105806,
+        "longest_drawdown_days": 368,
+        "growth_of_1": 3.2302250210671706,
+        "time_invested": 0.8053097345132744
+      }
+    },
+    "QQQ 2x buy&hold": {
+      "robustness_only": false,
+      "switches": 1,
+      "fills": 1,
+      "margin_calls": 0,
+      "cash_interest": 11.97,
+      "margin_interest": 1540.92,
+      "full": {
+        "cagr": 0.06800187836169558,
+        "ann_vol": 0.5930132428415139,
+        "sharpe": 0.37386580693765536,
+        "max_drawdown": -0.9935190915727622,
+        "longest_drawdown_days": 5140,
+        "growth_of_1": 5.820646857811792,
+        "time_invested": 1.0
+      },
+      "in_sample_1999_2019": {
+        "cagr": -0.005450310904019706,
+        "ann_vol": 0.621150946317519,
+        "sharpe": 0.2737105856332568,
+        "max_drawdown": -0.9935190915727622,
+        "longest_drawdown_days": 4972,
+        "growth_of_1": 0.8963368147353631,
+        "time_invested": 1.0
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.3132967598205265,
+        "ann_vol": 0.5001634869158158,
+        "sharpe": 0.7409182916143576,
+        "max_drawdown": -0.6374804992711416,
+        "longest_drawdown_days": 629,
+        "growth_of_1": 6.2828905643411,
+        "time_invested": 1.0
+      }
+    },
+    "QQQ 2x SMA200": {
+      "robustness_only": false,
+      "switches": 187,
+      "fills": 187,
+      "margin_calls": 0,
+      "cash_interest": 30721.21,
+      "margin_interest": 1759.03,
+      "full": {
+        "cagr": 0.11268743349263066,
+        "ann_vol": 0.3448894426899404,
+        "sharpe": 0.4272977521974648,
+        "max_drawdown": -0.8123602056720467,
+        "longest_drawdown_days": 3672,
+        "growth_of_1": 17.44093528990844,
+        "time_invested": 0.7394920540620823
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.04802521632196455,
+        "ann_vol": 0.3378609998806071,
+        "sharpe": 0.26036831425354323,
+        "max_drawdown": -0.8123602056720467,
+        "longest_drawdown_days": 3672,
+        "growth_of_1": 2.558212506473917,
+        "time_invested": 0.7173481540293767
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.32278649661960523,
+        "ann_vol": 0.3647259234597244,
+        "sharpe": 0.874915486898326,
+        "max_drawdown": -0.4233656307854987,
+        "longest_drawdown_days": 410,
+        "growth_of_1": 6.595459662895269,
+        "time_invested": 0.8053097345132744
+      }
+    },
+    "QQQ 3x buy&hold": {
+      "robustness_only": false,
+      "switches": 2,
+      "fills": 3,
+      "margin_calls": 1,
+      "cash_interest": 17.84,
+      "margin_interest": 329.39,
+      "full": {
+        "cagr": -0.08265620788114403,
+        "ann_vol": 0.8310884091793043,
+        "sharpe": 0.29018102708721255,
+        "max_drawdown": -0.9999461721052982,
+        "longest_drawdown_days": 6667,
+        "growth_of_1": 0.09927868722347269,
+        "time_invested": 0.9998514777959305
+      },
+      "in_sample_1999_2019": {
+        "cagr": -0.19655561503808117,
+        "ann_vol": 0.8585791814397443,
+        "sharpe": 0.1562772733475692,
+        "max_drawdown": -0.9999461721052982,
+        "longest_drawdown_days": 4972,
+        "growth_of_1": 0.012496098728231188,
+        "time_invested": 0.9998015085351329
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.3500669265559768,
+        "ann_vol": 0.743270350034514,
+        "sharpe": 0.7427796968819508,
+        "max_drawdown": -0.8140848432898999,
+        "longest_drawdown_days": 659,
+        "growth_of_1": 7.5688227586398,
+        "time_invested": 1.0
+      }
+    },
+    "QQQ 3x SMA200": {
+      "robustness_only": false,
+      "switches": 187,
+      "fills": 187,
+      "margin_calls": 0,
+      "cash_interest": 23144.32,
+      "margin_interest": 1781.9,
+      "full": {
+        "cagr": 0.11616333871174156,
+        "ann_vol": 0.5184324668204716,
+        "sharpe": 0.4371750513663393,
+        "max_drawdown": -0.9368994701619675,
+        "longest_drawdown_days": 4515,
+        "growth_of_1": 18.95991058530177,
+        "time_invested": 0.7394920540620823
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.023314538054429734,
+        "ann_vol": 0.5080099397564564,
+        "sharpe": 0.27003307491381323,
+        "max_drawdown": -0.9368994701619675,
+        "longest_drawdown_days": 4515,
+        "growth_of_1": 1.5864614162702124,
+        "time_invested": 0.7173481540293767
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.43412953768125506,
+        "ann_vol": 0.547867108482022,
+        "sharpe": 0.8857765639209492,
+        "max_drawdown": -0.5763154287439465,
+        "longest_drawdown_days": 413,
+        "growth_of_1": 11.374349680964453,
+        "time_invested": 0.8053097345132744
+      }
+    },
+    "SPY 3x SMA100": {
+      "robustness_only": true,
+      "switches": 325,
+      "fills": 325,
+      "margin_calls": 0,
+      "cash_interest": 28564.12,
+      "margin_interest": 771.57,
+      "full": {
+        "cagr": 0.09763775616980008,
+        "ann_vol": 0.34435120754860044,
+        "sharpe": 0.3855909020786059,
+        "max_drawdown": -0.905271556698069,
+        "longest_drawdown_days": 3741,
+        "growth_of_1": 13.250096701508156,
+        "time_invested": 0.7168243049584408
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.03322353231397446,
+        "ann_vol": 0.3354650455405228,
+        "sharpe": 0.2137303145708483,
+        "max_drawdown": -0.905271556698069,
+        "longest_drawdown_days": 3741,
+        "growth_of_1": 1.9857058028983454,
+        "time_invested": 0.6969524891160326
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.319705831276172,
+        "ann_vol": 0.3704740072169042,
+        "sharpe": 0.8615828306527323,
+        "max_drawdown": -0.45677706108816596,
+        "longest_drawdown_days": 535,
+        "growth_of_1": 6.4925702935109575,
+        "time_invested": 0.7787610619469026
+      }
+    },
+    "SPY 3x SMA150": {
+      "robustness_only": true,
+      "switches": 271,
+      "fills": 271,
+      "margin_calls": 0,
+      "cash_interest": 29058.92,
+      "margin_interest": 1068.34,
+      "full": {
+        "cagr": 0.09240624990466095,
+        "ann_vol": 0.35320729852011756,
+        "sharpe": 0.37108875795067164,
+        "max_drawdown": -0.8143228761009871,
+        "longest_drawdown_days": 3637,
+        "growth_of_1": 11.605618189678982,
+        "time_invested": 0.738463743192892
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.044470187770974556,
+        "ann_vol": 0.3443073941318513,
+        "sharpe": 0.24834631740060883,
+        "max_drawdown": -0.8143228761009871,
+        "longest_drawdown_days": 3637,
+        "growth_of_1": 2.4922817985535572,
+        "time_invested": 0.7179632784402802
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.25110682125434725,
+        "ann_vol": 0.37952812485917276,
+        "sharpe": 0.7089820118504856,
+        "max_drawdown": -0.5086452604819967,
+        "longest_drawdown_days": 597,
+        "growth_of_1": 4.529892026892175,
+        "time_invested": 0.8023598820058997
+      }
+    },
+    "SPY 3x SMA250": {
+      "robustness_only": true,
+      "switches": 161,
+      "fills": 161,
+      "margin_calls": 0,
+      "cash_interest": 25759.07,
+      "margin_interest": 1482.92,
+      "full": {
+        "cagr": 0.10763592350630913,
+        "ann_vol": 0.3714009388561878,
+        "sharpe": 0.40878568085242806,
+        "max_drawdown": -0.6121498468903859,
+        "longest_drawdown_days": 1968,
+        "growth_of_1": 17.039148091614774,
+        "time_invested": 0.763829177414732
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.08660747495334853,
+        "ann_vol": 0.35759047823988777,
+        "sharpe": 0.3632240590628103,
+        "max_drawdown": -0.5389453811546768,
+        "longest_drawdown_days": 1968,
+        "growth_of_1": 5.7161908071991725,
+        "time_invested": 0.7463562369865606
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.1709923440034491,
+        "ann_vol": 0.41154005376157493,
+        "sharpe": 0.5252039484881268,
+        "max_drawdown": -0.6121498468903859,
+        "longest_drawdown_days": 548,
+        "growth_of_1": 2.899228060256975,
+        "time_invested": 0.8182890855457227
+      }
+    },
+    "QQQ 3x SMA100": {
+      "robustness_only": true,
+      "switches": 321,
+      "fills": 321,
+      "margin_calls": 0,
+      "cash_interest": 39788.73,
+      "margin_interest": 1906.73,
+      "full": {
+        "cagr": 0.05121853416339306,
+        "ann_vol": 0.486276508243982,
+        "sharpe": 0.30884518750842255,
+        "max_drawdown": -0.9448897199999732,
+        "longest_drawdown_days": 5141,
+        "growth_of_1": 3.8088734802456314,
+        "time_invested": 0.6967176592900639
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.007346313503270752,
+        "ann_vol": 0.47314785522500025,
+        "sharpe": 0.21951503475282622,
+        "max_drawdown": -0.9448897199999732,
+        "longest_drawdown_days": 4972,
+        "growth_of_1": 1.1578554821192637,
+        "time_invested": 0.6754664549424375
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.18455381038352203,
+        "ann_vol": 0.5232069698962123,
+        "sharpe": 0.5363295284683065,
+        "max_drawdown": -0.612858843998541,
+        "longest_drawdown_days": 517,
+        "growth_of_1": 3.1333145200871493,
+        "time_invested": 0.759882005899705
+      }
+    },
+    "QQQ 3x SMA150": {
+      "robustness_only": true,
+      "switches": 221,
+      "fills": 221,
+      "margin_calls": 0,
+      "cash_interest": 52846.09,
+      "margin_interest": 3427.88,
+      "full": {
+        "cagr": 0.11219533666894566,
+        "ann_vol": 0.5030843512346481,
+        "sharpe": 0.42781714197762905,
+        "max_drawdown": -0.9788935337213083,
+        "longest_drawdown_days": 5004,
+        "growth_of_1": 17.23559309817003,
+        "time_invested": 0.7372642210010396
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.013959742392972707,
+        "ann_vol": 0.4898486638566642,
+        "sharpe": 0.24275278982675744,
+        "max_drawdown": -0.9788935337213083,
+        "longest_drawdown_days": 4972,
+        "growth_of_1": 1.3199655666632404,
+        "time_invested": 0.7173481540293767
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.45314663229118013,
+        "ann_vol": 0.5400690476020138,
+        "sharpe": 0.9152144299844669,
+        "max_drawdown": -0.5855735845525525,
+        "longest_drawdown_days": 379,
+        "growth_of_1": 12.430985057988412,
+        "time_invested": 0.7964601769911505
+      }
+    },
+    "QQQ 3x SMA250": {
+      "robustness_only": true,
+      "switches": 147,
+      "fills": 147,
+      "margin_calls": 0,
+      "cash_interest": 25094.04,
+      "margin_interest": 1335.75,
+      "full": {
+        "cagr": 0.11950895862903721,
+        "ann_vol": 0.5144869252661903,
+        "sharpe": 0.4427791433364458,
+        "max_drawdown": -0.8825515491583458,
+        "longest_drawdown_days": 3619,
+        "growth_of_1": 20.541725956363987,
+        "time_invested": 0.7467696420614882
+      },
+      "in_sample_1999_2019": {
+        "cagr": 0.04809366935809245,
+        "ann_vol": 0.4988699196973786,
+        "sharpe": 0.3142094958458602,
+        "max_drawdown": -0.8825515491583458,
+        "longest_drawdown_days": 3619,
+        "growth_of_1": 2.5615605584022174,
+        "time_invested": 0.7242953552997221
+      },
+      "holdout_2020_2026": {
+        "cagr": 0.3517377065025098,
+        "ann_vol": 0.5580959723304587,
+        "sharpe": 0.7735118915071232,
+        "max_drawdown": -0.6793767766617933,
+        "longest_drawdown_days": 640,
+        "growth_of_1": 7.6322112136684055,
+        "time_invested": 0.8135693215339233
+      }
+    }
+  }
+}
