@@ -1,0 +1,113 @@
+{
+  "baseline_metrics": {
+    "annualized_return": 0.12114051678247884,
+    "sharpe_ratio": 0.8807174170112456,
+    "sortino_ratio": 1.0432687466423962,
+    "max_drawdown": -0.23993460977702574,
+    "calmar_ratio": 0.5048897151397052,
+    "win_rate": 0.6252220248667851,
+    "profit_factor": 4.392806659285562,
+    "num_closed_trades": 563.0,
+    "max_drawdown_duration_days": 912.0
+  },
+  "phase3rate_metrics": {
+    "annualized_return": 0.12163643713255001,
+    "sharpe_ratio": 0.8839451699847968,
+    "sortino_ratio": 1.0480919484737323,
+    "max_drawdown": -0.23994898561105005,
+    "calmar_ratio": 0.5069262402705839,
+    "win_rate": 0.6245551601423488,
+    "profit_factor": 4.413907367451563,
+    "num_closed_trades": 562.0,
+    "max_drawdown_duration_days": 912.0
+  },
+  "episodes": {
+    "crisis_2007_2009": {
+      "baseline": {
+        "return": 1.05981196074548,
+        "pnl": 266729.6976593052,
+        "max_drawdown": -0.23993460977702574,
+        "positive_day_ratio": 0.5092592592592593
+      },
+      "phase3rate": {
+        "return": 1.059912272129126,
+        "pnl": 266754.9436708834,
+        "max_drawdown": -0.23994898561105005,
+        "positive_day_ratio": 0.5092592592592593
+      },
+      "delta_return": 0.00010031138364618997,
+      "delta_pnl": 25.24601157824509
+    },
+    "transition_2014_2016": {
+      "baseline": {
+        "return": 0.47751727492942897,
+        "pnl": 278081.19220127305,
+        "max_drawdown": -0.14428340020201014,
+        "positive_day_ratio": 0.5542328042328042
+      },
+      "phase3rate": {
+        "return": 0.4775113635708004,
+        "pnl": 278092.8224114415,
+        "max_drawdown": -0.14428263368036043,
+        "positive_day_ratio": 0.5542328042328042
+      },
+      "delta_return": -5.911358628596375e-06,
+      "delta_pnl": 11.630210168426856
+    },
+    "shock_2020": {
+      "baseline": {
+        "return": 0.6302267189243471,
+        "pnl": 620364.3012492342,
+        "max_drawdown": -0.0990278895941743,
+        "positive_day_ratio": 0.6007905138339921
+      },
+      "phase3rate": {
+        "return": 0.6302145457937884,
+        "pnl": 620377.3196160755,
+        "max_drawdown": -0.09902523209967151,
+        "positive_day_ratio": 0.6007905138339921
+      },
+      "delta_return": -1.217313055867919e-05,
+      "delta_pnl": 13.0183668412501
+    },
+    "shock_2022": {
+      "baseline": {
+        "return": 0.23162010332783156,
+        "pnl": 436087.2419560072,
+        "max_drawdown": -0.11027851345105533,
+        "positive_day_ratio": 0.5338645418326693
+      },
+      "phase3rate": {
+        "return": 0.24573839376291273,
+        "pnl": 461475.34528434044,
+        "max_drawdown": -0.11065342625046803,
+        "positive_day_ratio": 0.5338645418326693
+      },
+      "delta_return": 0.014118290435081171,
+      "delta_pnl": 25388.103328333236
+    },
+    "all_other_periods": {
+      "baseline": {
+        "return": 8.808993485013573,
+        "pnl": 2202248.371253393,
+        "max_drawdown": -0.13581723719677596,
+        "positive_day_ratio": 0.5154126615843553
+      },
+      "phase3rate": {
+        "return": 8.895997513607439,
+        "pnl": 2223999.3784018597,
+        "max_drawdown": -0.1358142957296049,
+        "positive_day_ratio": 0.5154126615843553
+      },
+      "delta_return": 0.08700402859386536,
+      "delta_pnl": 21751.00714846654
+    }
+  },
+  "decision_basis": "subperiod_return",
+  "improved_episode_count": 3,
+  "improved_episodes": [
+    "crisis_2007_2009",
+    "shock_2022",
+    "all_other_periods"
+  ]
+}

@@ -1,0 +1,7 @@
+symbol,list_date,delist_date,sector,industry,region,asset_class
+AAPL,1980-12-12,,Technology,Consumer Electronics,US,Equity
+ENRON,1990-01-01,2001-12-02,Energy,Integrated Energy,US,Equity
+RKT,2020-08-06,,Financial Services,Mortgage Finance,US,Equity
+SPY,1993-01-29,,Market,US Equity Index,US,Equity_Index
+TLT,2002-07-26,,Rates,Long Duration Treasuries,US,Bond
+UUP,2007-02-20,,FX,US Dollar Basket,US,FX

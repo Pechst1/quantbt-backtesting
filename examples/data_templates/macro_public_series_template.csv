@@ -1,0 +1,13 @@
+region,factor,provider,series,source,url,path,date_col,value_col,release_date_col,tradable_from_col,transform,weight,scale,release_lag_days,publication_lag_business_days,observation_start,observation_end,realtime_start,realtime_end,units,frequency,aggregation_method,output_type
+US,growth,ALFRED_API,PAYEMS,ALFRED:PAYEMS,,,date,value,realtime_start,,diff_1,0.333333,1.0,0,5,1990-01-01,,,,,,,4
+US,growth,ALFRED_API,INDPRO,ALFRED:INDPRO,,,date,value,realtime_start,,pct_change_12,0.333333,1.0,0,5,1990-01-01,,,,,,,4
+US,growth,ALFRED_API,RSAFS,ALFRED:RSAFS,,,date,value,realtime_start,,pct_change_12,0.333333,1.0,0,5,1992-01-01,,,,,,,4
+US,inflation,ALFRED_API,CPIAUCSL,ALFRED:CPIAUCSL,,,date,value,realtime_start,,pct_change_12,0.5,1.0,0,5,1990-01-01,,,,,,,4
+US,inflation,ALFRED_API,PPIFIS,ALFRED:PPIFIS,,,date,value,realtime_start,,pct_change_12,0.5,1.0,0,5,2009-11-01,,,,,,,4
+US,policy,ALFRED_API,FEDFUNDS,ALFRED:FEDFUNDS,,,date,value,realtime_start,,diff_1,0.5,1.0,0,5,1990-01-01,,,,,,,4
+US,policy,FRED_API,T10Y2Y,FRED:T10Y2Y,,,date,value,,,level,0.5,1.0,0,1,1990-01-01,,,,,,,1
+US,liquidity,FRED_API,NFCI,FRED:NFCI,,,date,value,,,level,0.5,1.0,5,1,1990-01-01,,,,,,,1
+US,liquidity,FRED_API,VIXCLS,FRED:VIXCLS,,,date,value,,,level,0.5,-1.0,0,1,1990-01-01,,,,,,,1
+US,credit,FRED_API,BAMLH0A0HYM2,FRED:BAMLH0A0HYM2,,,date,value,,,level,0.333333,-1.0,0,1,1996-12-31,,,,,,,1
+US,credit,FRED_API,BAMLC0A4CBBB,FRED:BAMLC0A4CBBB,,,date,value,,,level,0.333333,-1.0,0,1,1996-12-31,,,,,,,1
+US,credit,FRED_API,BAMLEMCBPIOAS,FRED:BAMLEMCBPIOAS,,,date,value,,,level,0.333333,-1.0,0,1,1997-12-31,,,,,,,1

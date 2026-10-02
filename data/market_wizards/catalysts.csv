@@ -1,0 +1,9 @@
+symbol,effective_from,effective_to,catalyst_type,direction,strength,target_price,notes
+BABA,2022-10-01,2024-12-31,RESTRUCTURING,1,0.9,110,asset separation and sentiment reset
+SHEL,2021-01-01,2024-12-31,CAPITAL_RETURN,1,0.7,78,capital discipline and buybacks
+RIO,2020-06-01,2024-12-31,COMMODITY_CYCLE,1,0.6,85,iron ore cash flow rerating
+BHP,2020-06-01,2024-12-31,COMMODITY_CYCLE,1,0.6,72,commodity scarcity bid
+SAP,2023-01-01,2024-12-31,MARGIN_EXPANSION,1,0.5,210,cloud transition improving quality
+NFLX,2022-01-01,2022-12-31,EXPECTATION_RISK,-1,0.9,240,subscriber slowdown and margin risk
+TSLA,2024-01-01,2024-12-31,EXPECTATION_RISK,-1,0.8,150,valuation compression risk
+KO,2021-01-01,2023-12-31,DEFENSIVE_MULTIPLE,-1,0.4,52,multiple too rich for growth

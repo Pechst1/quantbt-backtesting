@@ -1,0 +1,55 @@
+{
+  "metrics": {
+    "annualized_return": 0.08699195818815775,
+    "sharpe_ratio": 0.6836641561622394,
+    "sortino_ratio": 0.803882125197927,
+    "max_drawdown": -0.21000697077222608,
+    "calmar_ratio": 0.41423366980760545,
+    "win_rate": 0.5408560311284046,
+    "profit_factor": 2.0719069215128023,
+    "num_closed_trades": 514.0,
+    "max_drawdown_duration_days": 1484.0
+  },
+  "submitted_orders": 1396,
+  "fills": 1396,
+  "risk_rejections": 14,
+  "margin_calls": 0,
+  "diagnostics": {
+    "carry_symbols": [
+      "HYG",
+      "LQD"
+    ],
+    "dislocation_symbols": [
+      "SPY",
+      "EEM",
+      "DBC",
+      "USO",
+      "UUP"
+    ],
+    "engine_a_last_trigger_reason": "CARRY_BASE",
+    "engine_a_last_trigger_metrics": {
+      "hyg_drawdown": -0.010547146102708238,
+      "credit_surprise_z": 0.7120866774088529,
+      "trailing_pnl_ratio": 0.0007706422505825959
+    },
+    "engine_a_trade_summary": {
+      "closed_trades": 110.0,
+      "net_pnl": 68969.27482628926,
+      "win_rate": 0.5727272727272728,
+      "profit_factor": 2.251529973993716
+    },
+    "engine_b_trade_summary": {
+      "closed_trades": 404.0,
+      "net_pnl": 1044530.4371675001,
+      "win_rate": 0.5321782178217822,
+      "profit_factor": 2.061844183415444
+    },
+    "engine_a_avg_gross": 0.19968450151609513,
+    "engine_b_avg_gross": 0.3645367788700323,
+    "engine_a_shutoff_ratio": 0.20325849393999604,
+    "engine_b_dormant_ratio": 0.47605801708722434,
+    "engine_b_avg_max_score": 1.0568855083098354,
+    "engine_a_final_pnl": 117815.52052334424,
+    "engine_b_final_pnl": 1035319.8952470548
+  }
+}

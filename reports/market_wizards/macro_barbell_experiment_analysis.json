@@ -1,0 +1,942 @@
+{
+  "variants": {
+    "step_d_concentration": {
+      "episode_summary": {
+        "pre_crisis_2005_2007": {
+          "engine_b_net_pnl": 0.0,
+          "trade_count": 0,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": []
+        },
+        "gfc_2007_2009": {
+          "engine_b_net_pnl": 213413.97752826454,
+          "trade_count": 98,
+          "phase3_trade_count": 11,
+          "phase3_pnl_fraction": 0.39915125771713433,
+          "top_instruments": [
+            {
+              "symbol": "USO",
+              "pnl": 100915.86754562
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 47841.84736537054
+            },
+            {
+              "symbol": "SPY",
+              "pnl": 42423.01744487829
+            }
+          ]
+        },
+        "post_gfc_qe_2010_2013": {
+          "engine_b_net_pnl": 90598.04982019794,
+          "trade_count": 86,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "EEM",
+              "pnl": 59766.373242612506
+            },
+            {
+              "symbol": "SPY",
+              "pnl": 30831.676577585422
+            }
+          ]
+        },
+        "commodity_growth_2014_2016": {
+          "engine_b_net_pnl": 289975.25046945486,
+          "trade_count": 90,
+          "phase3_trade_count": 4,
+          "phase3_pnl_fraction": 0.2549556045377586,
+          "top_instruments": [
+            {
+              "symbol": "USO",
+              "pnl": 123578.07837802035
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 110927.93556745541
+            },
+            {
+              "symbol": "EEM",
+              "pnl": 41066.6964109891
+            }
+          ]
+        },
+        "late_cycle_2017_2019": {
+          "engine_b_net_pnl": 91343.08481443566,
+          "trade_count": 64,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "EEM",
+              "pnl": 59957.08744194182
+            },
+            {
+              "symbol": "USO",
+              "pnl": 32529.960579313178
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 8691.902567372234
+            }
+          ]
+        },
+        "covid_2020": {
+          "engine_b_net_pnl": 529884.0747183833,
+          "trade_count": 35,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "USO",
+              "pnl": 370075.82528984785
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 83920.11777415375
+            },
+            {
+              "symbol": "SPY",
+              "pnl": 44039.521886600414
+            }
+          ]
+        },
+        "inflation_hiking_2021_2022": {
+          "engine_b_net_pnl": 814219.3561297746,
+          "trade_count": 46,
+          "phase3_trade_count": 20,
+          "phase3_pnl_fraction": 0.7565523806434665,
+          "top_instruments": [
+            {
+              "symbol": "DBC",
+              "pnl": 304941.3887338334
+            },
+            {
+              "symbol": "EEM",
+              "pnl": 284236.51492111565
+            },
+            {
+              "symbol": "USO",
+              "pnl": 144826.34098265835
+            }
+          ]
+        },
+        "normalization_2023_2024": {
+          "engine_b_net_pnl": 70497.33300626109,
+          "trade_count": 38,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "SPY",
+              "pnl": 52391.78158989462
+            },
+            {
+              "symbol": "EEM",
+              "pnl": 18105.551416366477
+            }
+          ]
+        }
+      },
+      "diagnostics": {
+        "carry_symbols": [
+          "HYG",
+          "LQD"
+        ],
+        "dislocation_symbols": [
+          "SPY",
+          "EEM",
+          "DBC",
+          "USO",
+          "UUP"
+        ],
+        "engine_a_last_trigger_reason": "CARRY_BASE",
+        "engine_a_last_trigger_metrics": {
+          "hyg_drawdown": -0.010547146102708238,
+          "credit_surprise_z": 0.7120866774088529,
+          "trailing_pnl_ratio": 0.0007153882494365635
+        },
+        "engine_a_trade_summary": {
+          "closed_trades": 106.0,
+          "net_pnl": 85126.55433237572,
+          "win_rate": 0.5660377358490566,
+          "profit_factor": 2.1018849855900714
+        },
+        "engine_b_trade_summary": {
+          "closed_trades": 457.0,
+          "net_pnl": 2099931.126486772,
+          "win_rate": 0.6389496717724289,
+          "profit_factor": 4.705077377195257
+        },
+        "engine_a_avg_gross": 0.2003462401528391,
+        "engine_b_avg_gross": 0.343873533863919,
+        "engine_a_shutoff_ratio": 0.20325849393999604,
+        "engine_b_dormant_ratio": 0.4667196503079674,
+        "engine_b_avg_max_score": 1.0637102761515822,
+        "engine_a_pnl_5d_ratio_mean": 4.881897265060549e-05,
+        "engine_a_pnl_21d_ratio_mean": 0.00048471569767843085,
+        "engine_b_a_stress_ratio": 0.2797536260679515,
+        "engine_b_a_euphoria_ratio": 0.20445062586926285,
+        "engine_b_long_threshold_multiplier_mean": 0.9591098748261474,
+        "engine_b_short_threshold_multiplier_mean": 0.9160739121796146,
+        "engine_b_velocity_signal_mean": 0.13212828063309393,
+        "engine_b_velocity_multiplier_mean": 1.003771345520351,
+        "engine_b_phase_mean": 0.581164315517584,
+        "engine_b_phase3_ratio": 0.030796741506060005,
+        "engine_b_phase_stop_ratio": 0.15875223524736737,
+        "engine_b_velocity_exit_ratio": 0.0017881978939002583,
+        "engine_b_extreme_active_ratio": 0.020663620107291874,
+        "engine_b_extreme_coherence_mean": 0.2790143788658012,
+        "engine_b_extreme_threshold_mean": 0.7908980340365155,
+        "engine_a_reallocation_active_ratio": 0.02304788396582555,
+        "engine_a_reallocation_gross_mean": 0.006502512452758288,
+        "engine_a_reallocation_avg_active_count": 0.04033379694019471,
+        "overlay_active_ratio": 0.032982316709715874,
+        "overlay_avg_active_count": 0.051857738923107494,
+        "overlay_leader_mean": 0.02536638401275284,
+        "overlay_lag_mean": 0.017796773873091563,
+        "overlay_threshold_mean": 0.7667775463376638,
+        "overlay_weight_mean": 0.0020232084922319656,
+        "overlay_phase_mean": 0.032982316709715874,
+        "overlay_phase_stop_ratio": 0.0007947546195112259,
+        "overlay_velocity_exit_ratio": 0.0,
+        "engine_a_final_pnl": 180512.5202431777,
+        "engine_b_final_pnl": 2091420.2839572728,
+        "engine_a_reallocation_enabled": true,
+        "engine_a_focused_reallocation_enabled": false,
+        "engine_b_asymmetric_phase_enabled": false,
+        "engine_b_extreme_concentration_enabled": true,
+        "engine_b_phase3_profit_rate_enabled": false,
+        "overlay_routing_enabled": false
+      },
+      "metrics": {
+        "annualized_return": 0.12114051678247884,
+        "sharpe_ratio": 0.8807174170112456,
+        "sortino_ratio": 1.0432687466423962,
+        "max_drawdown": -0.23993460977702574,
+        "calmar_ratio": 0.5048897151397052,
+        "win_rate": 0.6252220248667851,
+        "profit_factor": 4.392806659285562,
+        "num_closed_trades": 563.0,
+        "max_drawdown_duration_days": 912.0
+      }
+    },
+    "phase3_profit_rate": {
+      "episode_summary": {
+        "pre_crisis_2005_2007": {
+          "engine_b_net_pnl": 0.0,
+          "trade_count": 0,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": []
+        },
+        "gfc_2007_2009": {
+          "engine_b_net_pnl": 213435.1946791454,
+          "trade_count": 98,
+          "phase3_trade_count": 12,
+          "phase3_pnl_fraction": 0.49412210140616336,
+          "top_instruments": [
+            {
+              "symbol": "USO",
+              "pnl": 100908.1888656487
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 47850.70466245766
+            },
+            {
+              "symbol": "SPY",
+              "pnl": 42410.16830307014
+            }
+          ]
+        },
+        "post_gfc_qe_2010_2013": {
+          "engine_b_net_pnl": 90603.90158407715,
+          "trade_count": 86,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "EEM",
+              "pnl": 59776.899548902504
+            },
+            {
+              "symbol": "SPY",
+              "pnl": 30827.002035174617
+            }
+          ]
+        },
+        "commodity_growth_2014_2016": {
+          "engine_b_net_pnl": 289986.13132709207,
+          "trade_count": 90,
+          "phase3_trade_count": 4,
+          "phase3_pnl_fraction": 0.6068362127750772,
+          "top_instruments": [
+            {
+              "symbol": "USO",
+              "pnl": 123578.84604618336
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 110940.10742730064
+            },
+            {
+              "symbol": "EEM",
+              "pnl": 41064.637740618055
+            }
+          ]
+        },
+        "late_cycle_2017_2019": {
+          "engine_b_net_pnl": 91337.84574201475,
+          "trade_count": 64,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "EEM",
+              "pnl": 59955.38029408353
+            },
+            {
+              "symbol": "USO",
+              "pnl": 32526.96454428901
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 8691.36667783379
+            }
+          ]
+        },
+        "covid_2020": {
+          "engine_b_net_pnl": 529897.2894460206,
+          "trade_count": 35,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "USO",
+              "pnl": 370079.6224651274
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 83926.0720457926
+            },
+            {
+              "symbol": "SPY",
+              "pnl": 44039.521886600414
+            }
+          ]
+        },
+        "inflation_hiking_2021_2022": {
+          "engine_b_net_pnl": 834635.5058515356,
+          "trade_count": 45,
+          "phase3_trade_count": 21,
+          "phase3_pnl_fraction": 0.7601549495537843,
+          "top_instruments": [
+            {
+              "symbol": "DBC",
+              "pnl": 317998.73556213354
+            },
+            {
+              "symbol": "EEM",
+              "pnl": 292152.3046199972
+            },
+            {
+              "symbol": "USO",
+              "pnl": 144834.3553518237
+            }
+          ]
+        },
+        "normalization_2023_2024": {
+          "engine_b_net_pnl": 71157.12771673068,
+          "trade_count": 38,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "SPY",
+              "pnl": 52892.146491274405
+            },
+            {
+              "symbol": "EEM",
+              "pnl": 18264.98122545627
+            }
+          ]
+        }
+      },
+      "diagnostics": {
+        "carry_symbols": [
+          "HYG",
+          "LQD"
+        ],
+        "dislocation_symbols": [
+          "SPY",
+          "EEM",
+          "DBC",
+          "USO",
+          "UUP"
+        ],
+        "engine_a_last_trigger_reason": "CARRY_BASE",
+        "engine_a_last_trigger_metrics": {
+          "hyg_drawdown": -0.010547146102708238,
+          "credit_surprise_z": 0.7120866774088529,
+          "trailing_pnl_ratio": 0.0007152450557636437
+        },
+        "engine_a_trade_summary": {
+          "closed_trades": 106.0,
+          "net_pnl": 84934.73356120735,
+          "win_rate": 0.5660377358490566,
+          "profit_factor": 2.095427494681381
+        },
+        "engine_b_trade_summary": {
+          "closed_trades": 456.0,
+          "net_pnl": 2121052.996346616,
+          "win_rate": 0.6381578947368421,
+          "profit_factor": 4.730038141197067
+        },
+        "engine_a_avg_gross": 0.20034646928311245,
+        "engine_b_avg_gross": 0.34362551802065416,
+        "engine_a_shutoff_ratio": 0.20325849393999604,
+        "engine_b_dormant_ratio": 0.4667196503079674,
+        "engine_b_avg_max_score": 1.0637102761515822,
+        "engine_a_pnl_5d_ratio_mean": 4.882423814739556e-05,
+        "engine_a_pnl_21d_ratio_mean": 0.00048470924344906234,
+        "engine_b_a_stress_ratio": 0.2797536260679515,
+        "engine_b_a_euphoria_ratio": 0.20445062586926285,
+        "engine_b_long_threshold_multiplier_mean": 0.9591098748261474,
+        "engine_b_short_threshold_multiplier_mean": 0.9160739121796146,
+        "engine_b_velocity_signal_mean": 0.13171348992833876,
+        "engine_b_velocity_multiplier_mean": 1.003771345520351,
+        "engine_b_phase_mean": 0.5632492218027684,
+        "engine_b_phase3_ratio": 0.013113451221935227,
+        "engine_b_phase_stop_ratio": 0.16511027220345717,
+        "engine_b_velocity_exit_ratio": 0.0017881978939002583,
+        "engine_b_extreme_active_ratio": 0.020663620107291874,
+        "engine_b_extreme_coherence_mean": 0.2790143788658012,
+        "engine_b_extreme_threshold_mean": 0.7908980340365155,
+        "engine_a_reallocation_active_ratio": 0.022849195310947746,
+        "engine_a_reallocation_gross_mean": 0.0063941574807924294,
+        "engine_a_reallocation_avg_active_count": 0.039936419630439104,
+        "overlay_active_ratio": 0.032982316709715874,
+        "overlay_avg_active_count": 0.05146036161335188,
+        "overlay_leader_mean": 0.0253678652274844,
+        "overlay_lag_mean": 0.017797467504430398,
+        "overlay_threshold_mean": 0.7668262922204205,
+        "overlay_weight_mean": 0.0020234875089725607,
+        "overlay_phase_mean": 0.032982316709715874,
+        "overlay_phase_stop_ratio": 0.0007947546195112259,
+        "overlay_velocity_exit_ratio": 0.0,
+        "engine_a_final_pnl": 181156.21403866034,
+        "engine_b_final_pnl": 2112466.978917189,
+        "engine_a_reallocation_enabled": true,
+        "engine_a_focused_reallocation_enabled": false,
+        "engine_b_asymmetric_phase_enabled": false,
+        "engine_b_extreme_concentration_enabled": true,
+        "engine_b_phase3_profit_rate_enabled": true,
+        "overlay_routing_enabled": false
+      },
+      "metrics": {
+        "annualized_return": 0.12163643713255001,
+        "sharpe_ratio": 0.8839451699847968,
+        "sortino_ratio": 1.0480919484737323,
+        "max_drawdown": -0.23994898561105005,
+        "calmar_ratio": 0.5069262402705839,
+        "win_rate": 0.6245551601423488,
+        "profit_factor": 4.413907367451563,
+        "num_closed_trades": 562.0,
+        "max_drawdown_duration_days": 912.0
+      }
+    },
+    "overlay_routing": {
+      "episode_summary": {
+        "pre_crisis_2005_2007": {
+          "engine_b_net_pnl": 0.0,
+          "trade_count": 0,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": []
+        },
+        "gfc_2007_2009": {
+          "engine_b_net_pnl": 212608.50461077612,
+          "trade_count": 96,
+          "phase3_trade_count": 12,
+          "phase3_pnl_fraction": 0.4928060222302126,
+          "top_instruments": [
+            {
+              "symbol": "USO",
+              "pnl": 100222.33476588901
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 47973.8849862591
+            },
+            {
+              "symbol": "SPY",
+              "pnl": 41881.97836878951
+            }
+          ]
+        },
+        "post_gfc_qe_2010_2013": {
+          "engine_b_net_pnl": 89728.87597744454,
+          "trade_count": 74,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "EEM",
+              "pnl": 58325.27826983647
+            },
+            {
+              "symbol": "SPY",
+              "pnl": 31403.59770760807
+            }
+          ]
+        },
+        "commodity_growth_2014_2016": {
+          "engine_b_net_pnl": 295383.7608425691,
+          "trade_count": 84,
+          "phase3_trade_count": 4,
+          "phase3_pnl_fraction": 0.5953009957600299,
+          "top_instruments": [
+            {
+              "symbol": "USO",
+              "pnl": 123722.8474670517
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 111853.50248843749
+            },
+            {
+              "symbol": "EEM",
+              "pnl": 41256.6492907332
+            }
+          ]
+        },
+        "late_cycle_2017_2019": {
+          "engine_b_net_pnl": 91694.60960258967,
+          "trade_count": 59,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "EEM",
+              "pnl": 60820.48320356235
+            },
+            {
+              "symbol": "USO",
+              "pnl": 32849.18289578025
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 8361.67271967486
+            }
+          ]
+        },
+        "covid_2020": {
+          "engine_b_net_pnl": 533314.0444505572,
+          "trade_count": 36,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "USO",
+              "pnl": 372278.3057871812
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 84409.63659179171
+            },
+            {
+              "symbol": "SPY",
+              "pnl": 44558.84793569746
+            }
+          ]
+        },
+        "inflation_hiking_2021_2022": {
+          "engine_b_net_pnl": 840698.9067335626,
+          "trade_count": 44,
+          "phase3_trade_count": 21,
+          "phase3_pnl_fraction": 0.7615033727405972,
+          "top_instruments": [
+            {
+              "symbol": "DBC",
+              "pnl": 319977.87290020543
+            },
+            {
+              "symbol": "EEM",
+              "pnl": 295759.7212479033
+            },
+            {
+              "symbol": "USO",
+              "pnl": 145712.5311226793
+            }
+          ]
+        },
+        "normalization_2023_2024": {
+          "engine_b_net_pnl": 74143.26481250783,
+          "trade_count": 28,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "SPY",
+              "pnl": 50300.15347571676
+            },
+            {
+              "symbol": "EEM",
+              "pnl": 23843.11133679107
+            }
+          ]
+        }
+      },
+      "diagnostics": {
+        "carry_symbols": [
+          "HYG",
+          "LQD"
+        ],
+        "dislocation_symbols": [
+          "SPY",
+          "EEM",
+          "DBC",
+          "USO",
+          "UUP"
+        ],
+        "engine_a_last_trigger_reason": "CARRY_BASE",
+        "engine_a_last_trigger_metrics": {
+          "hyg_drawdown": -0.010547146102708238,
+          "credit_surprise_z": 0.7120866774088529,
+          "trailing_pnl_ratio": 0.0007123756756897543
+        },
+        "engine_a_trade_summary": {
+          "closed_trades": 105.0,
+          "net_pnl": 85391.46235617492,
+          "win_rate": 0.5619047619047619,
+          "profit_factor": 2.101102244810798
+        },
+        "engine_b_trade_summary": {
+          "closed_trades": 421.0,
+          "net_pnl": 2137571.967030007,
+          "win_rate": 0.6270783847980997,
+          "profit_factor": 4.876142608265513
+        },
+        "engine_a_avg_gross": 0.20037473202038217,
+        "engine_b_avg_gross": 0.3416772231005943,
+        "engine_a_shutoff_ratio": 0.20325849393999604,
+        "engine_b_dormant_ratio": 0.4667196503079674,
+        "engine_b_avg_max_score": 1.0637102761515822,
+        "engine_a_pnl_5d_ratio_mean": 4.876500510706654e-05,
+        "engine_a_pnl_21d_ratio_mean": 0.00048596592217527016,
+        "engine_b_a_stress_ratio": 0.2797536260679515,
+        "engine_b_a_euphoria_ratio": 0.20445062586926285,
+        "engine_b_long_threshold_multiplier_mean": 0.9591098748261474,
+        "engine_b_short_threshold_multiplier_mean": 0.9160739121796146,
+        "engine_b_velocity_signal_mean": 0.13171348992833876,
+        "engine_b_velocity_multiplier_mean": 1.003771345520351,
+        "engine_b_phase_mean": 0.5632492218027684,
+        "engine_b_phase3_ratio": 0.013113451221935227,
+        "engine_b_phase_stop_ratio": 0.16511027220345717,
+        "engine_b_velocity_exit_ratio": 0.0017881978939002583,
+        "engine_b_extreme_active_ratio": 0.020663620107291874,
+        "engine_b_extreme_coherence_mean": 0.2790143788658012,
+        "engine_b_extreme_threshold_mean": 0.7908980340365155,
+        "engine_a_reallocation_active_ratio": 0.022849195310947746,
+        "engine_a_reallocation_gross_mean": 0.006404988398309514,
+        "engine_a_reallocation_avg_active_count": 0.039936419630439104,
+        "overlay_active_ratio": 0.0,
+        "overlay_avg_active_count": 0.0,
+        "overlay_leader_mean": 0.025293194569008165,
+        "overlay_lag_mean": 0.01773478117844939,
+        "overlay_threshold_mean": 0.7659145605035622,
+        "overlay_weight_mean": 0.0,
+        "overlay_phase_mean": 0.0,
+        "overlay_phase_stop_ratio": 0.0,
+        "overlay_velocity_exit_ratio": 0.0,
+        "engine_a_final_pnl": 182171.13499925385,
+        "engine_b_final_pnl": 2128912.167036988,
+        "engine_a_reallocation_enabled": true,
+        "engine_a_focused_reallocation_enabled": false,
+        "engine_b_asymmetric_phase_enabled": false,
+        "engine_b_extreme_concentration_enabled": true,
+        "engine_b_phase3_profit_rate_enabled": true,
+        "overlay_routing_enabled": true
+      },
+      "metrics": {
+        "annualized_return": 0.12209121895552344,
+        "sharpe_ratio": 0.8880701990521467,
+        "sortino_ratio": 1.0521095116034862,
+        "max_drawdown": -0.23997956052262615,
+        "calmar_ratio": 0.5087567403225253,
+        "win_rate": 0.6140684410646388,
+        "profit_factor": 4.534012086401581,
+        "num_closed_trades": 526.0,
+        "max_drawdown_duration_days": 876.0
+      }
+    },
+    "focused_reallocation": {
+      "episode_summary": {
+        "pre_crisis_2005_2007": {
+          "engine_b_net_pnl": 0.0,
+          "trade_count": 0,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": []
+        },
+        "gfc_2007_2009": {
+          "engine_b_net_pnl": 213435.1946791454,
+          "trade_count": 98,
+          "phase3_trade_count": 12,
+          "phase3_pnl_fraction": 0.49412210140616336,
+          "top_instruments": [
+            {
+              "symbol": "USO",
+              "pnl": 100908.1888656487
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 47850.70466245766
+            },
+            {
+              "symbol": "SPY",
+              "pnl": 42410.16830307014
+            }
+          ]
+        },
+        "post_gfc_qe_2010_2013": {
+          "engine_b_net_pnl": 90603.90158407715,
+          "trade_count": 86,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "EEM",
+              "pnl": 59776.899548902504
+            },
+            {
+              "symbol": "SPY",
+              "pnl": 30827.002035174617
+            }
+          ]
+        },
+        "commodity_growth_2014_2016": {
+          "engine_b_net_pnl": 289986.13132709207,
+          "trade_count": 90,
+          "phase3_trade_count": 4,
+          "phase3_pnl_fraction": 0.6068362127750772,
+          "top_instruments": [
+            {
+              "symbol": "USO",
+              "pnl": 123578.84604618336
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 110940.10742730064
+            },
+            {
+              "symbol": "EEM",
+              "pnl": 41064.637740618055
+            }
+          ]
+        },
+        "late_cycle_2017_2019": {
+          "engine_b_net_pnl": 91337.84574201475,
+          "trade_count": 64,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "EEM",
+              "pnl": 59955.38029408353
+            },
+            {
+              "symbol": "USO",
+              "pnl": 32526.96454428901
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 8691.36667783379
+            }
+          ]
+        },
+        "covid_2020": {
+          "engine_b_net_pnl": 529897.2894460206,
+          "trade_count": 35,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "USO",
+              "pnl": 370079.6224651274
+            },
+            {
+              "symbol": "DBC",
+              "pnl": 83926.0720457926
+            },
+            {
+              "symbol": "SPY",
+              "pnl": 44039.521886600414
+            }
+          ]
+        },
+        "inflation_hiking_2021_2022": {
+          "engine_b_net_pnl": 834635.5058515356,
+          "trade_count": 45,
+          "phase3_trade_count": 21,
+          "phase3_pnl_fraction": 0.7601549495537843,
+          "top_instruments": [
+            {
+              "symbol": "DBC",
+              "pnl": 317998.73556213354
+            },
+            {
+              "symbol": "EEM",
+              "pnl": 292152.3046199972
+            },
+            {
+              "symbol": "USO",
+              "pnl": 144834.3553518237
+            }
+          ]
+        },
+        "normalization_2023_2024": {
+          "engine_b_net_pnl": 71157.12771673068,
+          "trade_count": 38,
+          "phase3_trade_count": 0,
+          "phase3_pnl_fraction": 0.0,
+          "top_instruments": [
+            {
+              "symbol": "SPY",
+              "pnl": 52892.146491274405
+            },
+            {
+              "symbol": "EEM",
+              "pnl": 18264.98122545627
+            }
+          ]
+        }
+      },
+      "diagnostics": {
+        "carry_symbols": [
+          "HYG",
+          "LQD"
+        ],
+        "dislocation_symbols": [
+          "SPY",
+          "EEM",
+          "DBC",
+          "USO",
+          "UUP"
+        ],
+        "engine_a_last_trigger_reason": "CARRY_BASE",
+        "engine_a_last_trigger_metrics": {
+          "hyg_drawdown": -0.010547146102708238,
+          "credit_surprise_z": 0.7120866774088529,
+          "trailing_pnl_ratio": 0.0007152450557636437
+        },
+        "engine_a_trade_summary": {
+          "closed_trades": 106.0,
+          "net_pnl": 84934.73356120735,
+          "win_rate": 0.5660377358490566,
+          "profit_factor": 2.095427494681381
+        },
+        "engine_b_trade_summary": {
+          "closed_trades": 456.0,
+          "net_pnl": 2121052.996346616,
+          "win_rate": 0.6381578947368421,
+          "profit_factor": 4.730038141197067
+        },
+        "engine_a_avg_gross": 0.20034646928311245,
+        "engine_b_avg_gross": 0.34362551802065416,
+        "engine_a_shutoff_ratio": 0.20325849393999604,
+        "engine_b_dormant_ratio": 0.4667196503079674,
+        "engine_b_avg_max_score": 1.0637102761515822,
+        "engine_a_pnl_5d_ratio_mean": 4.882423814739556e-05,
+        "engine_a_pnl_21d_ratio_mean": 0.00048470924344906234,
+        "engine_b_a_stress_ratio": 0.2797536260679515,
+        "engine_b_a_euphoria_ratio": 0.20445062586926285,
+        "engine_b_long_threshold_multiplier_mean": 0.9591098748261474,
+        "engine_b_short_threshold_multiplier_mean": 0.9160739121796146,
+        "engine_b_velocity_signal_mean": 0.13171348992833876,
+        "engine_b_velocity_multiplier_mean": 1.003771345520351,
+        "engine_b_phase_mean": 0.5632492218027684,
+        "engine_b_phase3_ratio": 0.013113451221935227,
+        "engine_b_phase_stop_ratio": 0.16511027220345717,
+        "engine_b_velocity_exit_ratio": 0.0017881978939002583,
+        "engine_b_extreme_active_ratio": 0.020663620107291874,
+        "engine_b_extreme_coherence_mean": 0.2790143788658012,
+        "engine_b_extreme_threshold_mean": 0.7908980340365155,
+        "engine_a_reallocation_active_ratio": 0.022849195310947746,
+        "engine_a_reallocation_gross_mean": 0.0063941574807924294,
+        "engine_a_reallocation_avg_active_count": 0.039936419630439104,
+        "overlay_active_ratio": 0.032982316709715874,
+        "overlay_avg_active_count": 0.05146036161335188,
+        "overlay_leader_mean": 0.0253678652274844,
+        "overlay_lag_mean": 0.017797467504430398,
+        "overlay_threshold_mean": 0.7668262922204205,
+        "overlay_weight_mean": 0.0020234875089725607,
+        "overlay_phase_mean": 0.032982316709715874,
+        "overlay_phase_stop_ratio": 0.0007947546195112259,
+        "overlay_velocity_exit_ratio": 0.0,
+        "engine_a_final_pnl": 181156.21403866034,
+        "engine_b_final_pnl": 2112466.978917189,
+        "engine_a_reallocation_enabled": true,
+        "engine_a_focused_reallocation_enabled": true,
+        "engine_b_asymmetric_phase_enabled": false,
+        "engine_b_extreme_concentration_enabled": true,
+        "engine_b_phase3_profit_rate_enabled": true,
+        "overlay_routing_enabled": false
+      },
+      "metrics": {
+        "annualized_return": 0.12163643713255001,
+        "sharpe_ratio": 0.8839451699847968,
+        "sortino_ratio": 1.0480919484737323,
+        "max_drawdown": -0.23994898561105005,
+        "calmar_ratio": 0.5069262402705839,
+        "win_rate": 0.6245551601423488,
+        "profit_factor": 4.413907367451563,
+        "num_closed_trades": 562.0,
+        "max_drawdown_duration_days": 912.0
+      }
+    }
+  },
+  "comparison": [
+    {
+      "variant": "step_d_concentration",
+      "cagr": 0.12114051678247884,
+      "sharpe": 0.8807174170112456,
+      "max_dd": -0.23993460977702574,
+      "profit_factor": 4.392806659285562,
+      "phase3_ratio": 0.030796741506060005,
+      "overlay_weight": 0.0020232084922319656
+    },
+    {
+      "variant": "phase3_profit_rate",
+      "cagr": 0.12163643713255001,
+      "sharpe": 0.8839451699847968,
+      "max_dd": -0.23994898561105005,
+      "profit_factor": 4.413907367451563,
+      "phase3_ratio": 0.013113451221935227,
+      "overlay_weight": 0.0020234875089725607
+    },
+    {
+      "variant": "overlay_routing",
+      "cagr": 0.12209121895552344,
+      "sharpe": 0.8880701990521467,
+      "max_dd": -0.23997956052262615,
+      "profit_factor": 4.534012086401581,
+      "phase3_ratio": 0.013113451221935227,
+      "overlay_weight": 0.0
+    },
+    {
+      "variant": "focused_reallocation",
+      "cagr": 0.12163643713255001,
+      "sharpe": 0.8839451699847968,
+      "max_dd": -0.23994898561105005,
+      "profit_factor": 4.413907367451563,
+      "phase3_ratio": 0.013113451221935227,
+      "overlay_weight": 0.0020234875089725607
+    }
+  ]
+}

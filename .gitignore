@@ -1,0 +1,23 @@
+.env
+.env.*
+!.env.example
+
+# Local runtimes, downloaded caches, and build artifacts.
+.venv/
+venv/
+.cache/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.coverage
+htmlcov/
+
+# Machine-specific files and credentials.
+.DS_Store
+.idea/
+.vscode/
+*.pem
+*.key

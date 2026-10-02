@@ -1,0 +1,11 @@
+{
+  "annualized_return": 0.16235917814841683,
+  "sharpe_ratio": 1.0975032912084415,
+  "sortino_ratio": 1.3454793139577104,
+  "max_drawdown": -0.1978757700388598,
+  "calmar_ratio": 0.820510657350983,
+  "win_rate": 0.6341463414634146,
+  "profit_factor": 4.9083171721591095,
+  "num_closed_trades": 779.0,
+  "max_drawdown_duration_days": 1203.0
+}

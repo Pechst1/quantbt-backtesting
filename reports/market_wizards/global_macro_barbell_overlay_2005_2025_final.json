@@ -1,0 +1,67 @@
+{
+  "metrics": {
+    "annualized_return": 0.09429272220471452,
+    "sharpe_ratio": 0.7174656309624066,
+    "sortino_ratio": 0.8601580653310454,
+    "max_drawdown": -0.21000122833751333,
+    "calmar_ratio": 0.44901033651654426,
+    "win_rate": 0.5472027972027972,
+    "profit_factor": 2.2256900385318166,
+    "num_closed_trades": 572.0,
+    "max_drawdown_duration_days": 1246.0
+  },
+  "submitted_orders": 1539,
+  "fills": 1539,
+  "risk_rejections": 28,
+  "margin_calls": 0,
+  "diagnostics": {
+    "carry_symbols": [
+      "HYG",
+      "LQD"
+    ],
+    "dislocation_symbols": [
+      "SPY",
+      "EEM",
+      "DBC",
+      "USO",
+      "UUP"
+    ],
+    "engine_a_last_trigger_reason": "CARRY_BASE",
+    "engine_a_last_trigger_metrics": {
+      "hyg_drawdown": -0.010547146102708238,
+      "credit_surprise_z": 0.7120866774088529,
+      "trailing_pnl_ratio": 0.0007247526709534718
+    },
+    "engine_a_trade_summary": {
+      "closed_trades": 106.0,
+      "net_pnl": 71100.71554262785,
+      "win_rate": 0.5754716981132075,
+      "profit_factor": 2.292732903801398
+    },
+    "engine_b_trade_summary": {
+      "closed_trades": 466.0,
+      "net_pnl": 1237340.0940169895,
+      "win_rate": 0.5407725321888412,
+      "profit_factor": 2.2220482309464624
+    },
+    "engine_a_avg_gross": 0.19915836977205126,
+    "engine_b_avg_gross": 0.37524890482048096,
+    "engine_a_shutoff_ratio": 0.20325849393999604,
+    "engine_b_dormant_ratio": 0.4667196503079674,
+    "engine_b_avg_max_score": 1.0637102761515822,
+    "engine_a_pnl_5d_ratio_mean": 4.6624769611187184e-05,
+    "engine_a_pnl_21d_ratio_mean": 0.0004836311660074582,
+    "engine_b_a_stress_ratio": 0.28114444665209615,
+    "engine_b_a_euphoria_ratio": 0.20683488972779654,
+    "engine_b_long_threshold_multiplier_mean": 0.9586330220544406,
+    "engine_b_short_threshold_multiplier_mean": 0.9156566660043711,
+    "overlay_active_ratio": 0.03894297635605007,
+    "overlay_avg_active_count": 0.07033578382674349,
+    "overlay_leader_mean": 0.01883848212112847,
+    "overlay_lag_mean": 0.014094750082775333,
+    "overlay_threshold_mean": 0.769553868746794,
+    "overlay_weight_mean": 0.004739926133722086,
+    "engine_a_final_pnl": 128616.05945739124,
+    "engine_b_final_pnl": 1226813.0659360583
+  }
+}

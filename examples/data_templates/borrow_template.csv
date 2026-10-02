@@ -1,0 +1,4 @@
+symbol,date,annualized_fee,is_hard_to_borrow,short_interest_pct
+GME,2024-01-02,0.35,true,22.4
+GME,2024-01-03,0.33,true,22.1
+AAPL,2024-01-02,0.01,false,0.8

@@ -1,0 +1,61 @@
+symbol,list_date,delist_date,sector,industry,region,asset_class
+AAPL,1980-12-12,,Technology,Consumer Electronics,US,Equity
+MSFT,1986-03-13,,Technology,Systems Software,US,Equity
+NVDA,1999-01-22,,Technology,Semiconductors,US,Equity
+TSLA,2010-06-29,,Consumer Discretionary,Automobiles,US,Equity
+AMZN,1997-05-15,,Consumer Discretionary,Internet Retail,US,Equity
+META,2012-05-18,,Communication Services,Internet Content,US,Equity
+NFLX,2002-05-23,,Communication Services,Streaming Media,US,Equity
+AMD,1972-09-27,,Technology,Semiconductors,US,Equity
+SHOP.TO,2015-05-21,,Technology,Software Application,CANADA,Equity
+TSM,1997-10-08,,Technology,Semiconductors,ASIA,Equity
+ASML,1995-03-15,,Technology,Semiconductor Equipment,EUROPE,Equity
+SAP,1988-11-04,,Technology,Enterprise Software,EUROPE,Equity
+SONY,1970-01-01,,Consumer Discretionary,Consumer Electronics,ASIA,Equity
+TM,1980-01-01,,Consumer Discretionary,Automobiles,ASIA,Equity
+HMC,1980-01-01,,Consumer Discretionary,Automobiles,ASIA,Equity
+SHEL,1980-01-01,,Energy,Integrated Energy,EUROPE,Energy
+XOM,1980-01-01,,Energy,Integrated Energy,US,Energy
+RIO,1980-01-01,,Materials,Diversified Metals,EUROPE,Equity
+BHP,1980-01-01,,Materials,Diversified Metals,GLOBAL,Equity
+BABA,2014-09-19,,Consumer Discretionary,Internet Retail,ASIA,Equity
+JPM,1980-01-01,,Financial Services,Diversified Banks,US,Equity
+BAC,1980-01-01,,Financial Services,Diversified Banks,US,Equity
+KO,1980-01-01,,Consumer Staples,Beverages,US,Equity
+PG,1980-01-01,,Consumer Staples,Household Products,US,Equity
+SPY,1993-01-29,,Market,US Equity Index,US,Equity_Index
+QQQ,1999-03-10,,Market,US Growth Index,US,Equity_Index
+DIA,1998-01-14,,Market,US Value Index,US,Equity_Index
+EFA,2001-08-27,,Market,Developed Ex-US Equity,EUROPE,Equity_Index
+EEM,2003-04-14,,Market,Emerging Markets Equity,EM,Equity_Index
+EWJ,1996-03-18,,Market,Japan Equity,JAPAN,Equity_Index
+TLT,2002-07-26,,Rates,Long Duration Treasuries,US,Bond
+IEF,2002-07-30,,Rates,Intermediate Treasuries,US,Bond
+TIP,2003-12-04,,Rates,TIPS,US,Inflation_Linked_Bond
+GLD,2004-11-18,,Commodities,Gold,GLOBAL,Gold
+USO,2006-04-10,,Commodities,Crude Oil,GLOBAL,Commodity
+DBC,2006-02-03,,Commodities,Broad Commodities,GLOBAL,Commodity
+CL=F,1983-03-30,,Commodities,WTI Crude Continuous Future,GLOBAL,Commodity_Future
+GC=F,1974-12-31,,Commodities,Gold Continuous Future,GLOBAL,Commodity_Future
+HG=F,1988-01-01,,Commodities,Copper Continuous Future,GLOBAL,Commodity_Future
+ZC=F,1959-01-01,,Commodities,Corn Continuous Future,GLOBAL,Commodity_Future
+ZT=F,1976-01-01,,Rates,2Y Treasury Continuous Future,US,Rates_Future
+ZF=F,1976-01-01,,Rates,5Y Treasury Continuous Future,US,Rates_Future
+ZN=F,1976-01-01,,Rates,10Y Treasury Continuous Future,US,Rates_Future
+ZB=F,1977-01-01,,Rates,30Y Treasury Continuous Future,US,Rates_Future
+2YY=F,2021-08-16,,Rates,2Y Treasury Yield Future,US,Rates_Yield_Future
+5YY=F,2021-08-16,,Rates,5Y Treasury Yield Future,US,Rates_Yield_Future
+10Y=F,2021-08-16,,Rates,10Y Treasury Yield Future,US,Rates_Yield_Future
+30Y=F,2021-08-16,,Rates,30Y Treasury Yield Future,US,Rates_Yield_Future
+^FVX,1988-01-01,,Rates,5Y Treasury Yield Index Proxy,US,Rates_Yield_Future
+^TNX,1988-01-01,,Rates,10Y Treasury Yield Index Proxy,US,Rates_Yield_Future
+^TYX,1988-01-01,,Rates,30Y Treasury Yield Index Proxy,US,Rates_Yield_Future
+DX=F,1985-01-01,,FX,US Dollar Index Continuous Future,US,FX
+UUP,2007-02-20,,FX,US Dollar Basket,US,FX
+HYG,2007-04-11,,Credit,High Yield Credit,US,Credit
+LQD,2002-07-26,,Credit,Investment Grade Credit,US,Credit
+EMB,2007-12-17,,Credit,Emerging Market USD Bonds,EM,Credit
+XLE,1998-12-22,,Energy,Energy Sector,US,Energy
+XLF,1998-12-22,,Financial Services,Financial Sector,US,Equity
+XLK,1998-12-22,,Technology,Technology Sector,US,Equity
+XLU,1998-12-22,,Utilities,Utilities Sector,US,Defensive

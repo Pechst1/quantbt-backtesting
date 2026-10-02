@@ -1,0 +1,87 @@
+{
+  "carry_symbols": [
+    "HYG",
+    "LQD"
+  ],
+  "dislocation_symbols": [
+    "SPY",
+    "EEM",
+    "CL=F",
+    "GC=F",
+    "HG=F",
+    "UUP"
+  ],
+  "sensor_symbols": [
+    "EMB"
+  ],
+  "macro_sensor_series": [
+    "VIXCLS",
+    "T10Y2Y",
+    "BAMLEMCBPIOAS"
+  ],
+  "engine_a_last_trigger_reason": "CARRY_BASE",
+  "engine_a_last_trigger_metrics": {
+    "hyg_drawdown": -0.010547146102708238,
+    "credit_surprise_z": 0.7120866774088529,
+    "trailing_pnl_ratio": 0.0007148779586859878
+  },
+  "engine_a_trade_summary": {
+    "closed_trades": 108.0,
+    "net_pnl": 63310.68190715214,
+    "win_rate": 0.5740740740740741,
+    "profit_factor": 2.738310060542147
+  },
+  "engine_b_trade_summary": {
+    "closed_trades": 273.0,
+    "net_pnl": 351848.61881673115,
+    "win_rate": 0.6117216117216118,
+    "profit_factor": 2.611098719847943
+  },
+  "engine_a_avg_gross": 0.20557636732323062,
+  "engine_b_avg_gross": 0.24095999459991946,
+  "engine_a_shutoff_ratio": 0.20325849393999604,
+  "engine_b_dormant_ratio": 0.4685078482018677,
+  "engine_b_avg_max_score": 1.0123654202254397,
+  "engine_a_pnl_5d_ratio_mean": 5.942739690457652e-05,
+  "engine_a_pnl_21d_ratio_mean": 0.0005389247681751272,
+  "engine_b_a_stress_ratio": 0.2853169084045301,
+  "engine_b_a_euphoria_ratio": 0.2088217762765746,
+  "engine_b_long_threshold_multiplier_mean": 0.9582356447446851,
+  "engine_b_short_threshold_multiplier_mean": 0.9144049274786409,
+  "engine_b_velocity_signal_mean": 0.13132543082420034,
+  "engine_b_velocity_multiplier_mean": 1.003771345520351,
+  "engine_b_phase_mean": 0.388072057752169,
+  "engine_b_phase3_ratio": 0.00794754619511226,
+  "engine_b_phase_stop_ratio": 0.12994238029008542,
+  "engine_b_velocity_exit_ratio": 0.0015895092390224518,
+  "engine_b_convex_active_ratio": 0.0,
+  "engine_b_convex_weight_mean": 0.0,
+  "engine_b_convex_gross_mean": 0.0,
+  "engine_b_extreme_active_ratio": 0.01967017683290284,
+  "engine_b_extreme_coherence_mean": 0.2786904013606666,
+  "engine_b_extreme_threshold_mean": 0.790974817907174,
+  "engine_a_reallocation_active_ratio": 0.012914762567057422,
+  "engine_a_reallocation_gross_mean": 0.003251378222111835,
+  "engine_a_reallocation_avg_active_count": 0.01748460162924697,
+  "overlay_active_ratio": 0.0,
+  "overlay_avg_active_count": 0.0,
+  "overlay_leader_mean": 0.0,
+  "overlay_lag_mean": 0.0,
+  "overlay_threshold_mean": 0.0,
+  "overlay_weight_mean": 0.0,
+  "overlay_phase_mean": 0.0,
+  "overlay_phase_stop_ratio": 0.0,
+  "overlay_velocity_exit_ratio": 0.0,
+  "emb_stress_ratio": 0.0,
+  "emb_euphoria_ratio": 0.0,
+  "engine_a_final_pnl": 89209.22757343303,
+  "engine_b_final_pnl": 349533.06429205067,
+  "engine_a_reallocation_enabled": true,
+  "engine_a_focused_reallocation_enabled": false,
+  "engine_b_asymmetric_phase_enabled": false,
+  "engine_b_extreme_concentration_enabled": true,
+  "engine_b_phase3_profit_rate_enabled": true,
+  "overlay_routing_enabled": false,
+  "overlay_off": true,
+  "engine_b_convex_dislocation_enabled": false
+}

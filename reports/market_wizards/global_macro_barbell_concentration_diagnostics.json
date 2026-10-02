@@ -1,0 +1,71 @@
+{
+  "carry_symbols": [
+    "HYG",
+    "LQD"
+  ],
+  "dislocation_symbols": [
+    "SPY",
+    "EEM",
+    "DBC",
+    "USO",
+    "UUP"
+  ],
+  "engine_a_last_trigger_reason": "CARRY_BASE",
+  "engine_a_last_trigger_metrics": {
+    "hyg_drawdown": -0.010547146102708238,
+    "credit_surprise_z": 0.7120866774088529,
+    "trailing_pnl_ratio": 0.0007153882494365635
+  },
+  "engine_a_trade_summary": {
+    "closed_trades": 106.0,
+    "net_pnl": 85126.55433237572,
+    "win_rate": 0.5660377358490566,
+    "profit_factor": 2.1018849855900714
+  },
+  "engine_b_trade_summary": {
+    "closed_trades": 457.0,
+    "net_pnl": 2099931.126486772,
+    "win_rate": 0.6389496717724289,
+    "profit_factor": 4.705077377195257
+  },
+  "engine_a_avg_gross": 0.2003462401528391,
+  "engine_b_avg_gross": 0.343873533863919,
+  "engine_a_shutoff_ratio": 0.20325849393999604,
+  "engine_b_dormant_ratio": 0.4667196503079674,
+  "engine_b_avg_max_score": 1.0637102761515822,
+  "engine_a_pnl_5d_ratio_mean": 4.881897265060549e-05,
+  "engine_a_pnl_21d_ratio_mean": 0.00048471569767843085,
+  "engine_b_a_stress_ratio": 0.2797536260679515,
+  "engine_b_a_euphoria_ratio": 0.20445062586926285,
+  "engine_b_long_threshold_multiplier_mean": 0.9591098748261474,
+  "engine_b_short_threshold_multiplier_mean": 0.9160739121796146,
+  "engine_b_velocity_signal_mean": 0.13212828063309393,
+  "engine_b_velocity_multiplier_mean": 1.003771345520351,
+  "engine_b_phase_mean": 0.581164315517584,
+  "engine_b_phase3_ratio": 0.030796741506060005,
+  "engine_b_phase_stop_ratio": 0.15875223524736737,
+  "engine_b_velocity_exit_ratio": 0.0017881978939002583,
+  "engine_b_extreme_active_ratio": 0.020663620107291874,
+  "engine_b_extreme_coherence_mean": 0.2790143788658012,
+  "engine_b_extreme_threshold_mean": 0.7908980340365155,
+  "engine_a_reallocation_active_ratio": 0.02304788396582555,
+  "engine_a_reallocation_gross_mean": 0.006502512452758288,
+  "engine_a_reallocation_avg_active_count": 0.04033379694019471,
+  "overlay_active_ratio": 0.032982316709715874,
+  "overlay_avg_active_count": 0.051857738923107494,
+  "overlay_leader_mean": 0.02536638401275284,
+  "overlay_lag_mean": 0.017796773873091563,
+  "overlay_threshold_mean": 0.7667775463376638,
+  "overlay_weight_mean": 0.0020232084922319656,
+  "overlay_phase_mean": 0.032982316709715874,
+  "overlay_phase_stop_ratio": 0.0007947546195112259,
+  "overlay_velocity_exit_ratio": 0.0,
+  "engine_a_final_pnl": 180512.5202431777,
+  "engine_b_final_pnl": 2091420.2839572728,
+  "engine_a_reallocation_enabled": true,
+  "engine_a_focused_reallocation_enabled": false,
+  "engine_b_asymmetric_phase_enabled": false,
+  "engine_b_extreme_concentration_enabled": true,
+  "engine_b_phase3_profit_rate_enabled": false,
+  "overlay_routing_enabled": false
+}

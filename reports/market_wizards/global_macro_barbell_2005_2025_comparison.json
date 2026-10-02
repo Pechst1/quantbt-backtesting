@@ -1,0 +1,66 @@
+{
+  "baseline_metrics": {
+    "annualized_return": 0.012798033952260646,
+    "sharpe_ratio": 0.2723279459558572,
+    "sortino_ratio": 0.28422304154645117,
+    "max_drawdown": -0.12622766360144733,
+    "calmar_ratio": 0.10138850381220162,
+    "win_rate": 0.4130019120458891,
+    "profit_factor": 1.4200329079289025,
+    "num_closed_trades": 523.0,
+    "max_drawdown_duration_days": 2332.0
+  },
+  "baseline_submitted_orders": 1201,
+  "baseline_fills": 1201,
+  "barbell_metrics": {
+    "annualized_return": 0.06859449904393466,
+    "sharpe_ratio": 0.5350512721556315,
+    "sortino_ratio": 0.5975718108287226,
+    "max_drawdown": -0.2648350594863814,
+    "calmar_ratio": 0.2590083774292051,
+    "win_rate": 0.5531400966183575,
+    "profit_factor": 1.673829777328252,
+    "num_closed_trades": 414.0,
+    "max_drawdown_duration_days": 1515.0
+  },
+  "barbell_submitted_orders": 1227,
+  "barbell_fills": 1227,
+  "barbell_diagnostics": {
+    "carry_symbols": [
+      "HYG",
+      "LQD"
+    ],
+    "dislocation_symbols": [
+      "SPY",
+      "EEM",
+      "DBC",
+      "USO",
+      "UUP"
+    ],
+    "engine_a_last_trigger_reason": "CARRY_BASE",
+    "engine_a_last_trigger_metrics": {
+      "hyg_drawdown": -0.010547146102708238,
+      "credit_surprise_z": 0.7120866774088529,
+      "trailing_pnl_ratio": 0.0007219257285334186
+    },
+    "engine_a_trade_summary": {
+      "closed_trades": 115.0,
+      "net_pnl": 68684.48437306627,
+      "win_rate": 0.5739130434782609,
+      "profit_factor": 2.3126726308736103
+    },
+    "engine_b_trade_summary": {
+      "closed_trades": 299.0,
+      "net_pnl": 646907.0072456242,
+      "win_rate": 0.5451505016722408,
+      "profit_factor": 1.6407224343369728
+    },
+    "engine_a_avg_gross": 0.20277197602134722,
+    "engine_b_avg_gross": 0.2938618764376439,
+    "engine_a_shutoff_ratio": 0.20325849393999604,
+    "engine_b_dormant_ratio": 0.565666600437115,
+    "engine_b_avg_max_score": 0.8546102346635472,
+    "engine_a_final_pnl": 105152.05443430244,
+    "engine_b_final_pnl": 646907.0072456244
+  }
+}

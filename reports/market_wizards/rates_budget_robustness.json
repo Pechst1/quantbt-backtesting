@@ -1,0 +1,863 @@
+{
+  "run_name": "global_macro_barbell_research_reversal_rates_yieldfutures",
+  "variants": [
+    {
+      "label": "short095_long075",
+      "folder": "reports/market_wizards/rates_ev_gate_095",
+      "metrics": {
+        "annualized_return": 0.16611317821227156,
+        "sharpe_ratio": 1.1221410229274738,
+        "sortino_ratio": 1.376333431143908,
+        "max_drawdown": -0.1978757700388598,
+        "calmar_ratio": 0.8394821568080288,
+        "win_rate": 0.6352624495289367,
+        "profit_factor": 5.682543170687745,
+        "num_closed_trades": 743.0,
+        "max_drawdown_duration_days": 1203.0
+      },
+      "diagnostics": {
+        "engine_b_phase3_ratio": 0.013105639396346307,
+        "rates_curve_active_ratio": 0.32922954725972997,
+        "rates_curve_gross_mean": 0.05680254857541554,
+        "rates_curve_futures_gross_mean": 0.04414351778161851,
+        "rates_curve_proxy_gross_mean": 0.012659030793797025,
+        "rates_curve_zero_contract_fallback_total": 2000.0,
+        "rates_curve_trend_filter_total": 1620.0
+      },
+      "by_engine": {
+        "ENGINE_A": {
+          "closed_trades": 106.0,
+          "net_pnl": 73895.16832833951,
+          "win_rate": 0.5660377358490566,
+          "profit_factor": 1.6129558023524524,
+          "avg_days_held": 119.31132075471699,
+          "avg_abs_target_weight": 0.1294662071434091
+        },
+        "ENGINE_B": {
+          "closed_trades": 464.0,
+          "net_pnl": 3101865.2404065146,
+          "win_rate": 0.6056034482758621,
+          "profit_factor": 5.103321793896636,
+          "avg_days_held": 67.44396551724138,
+          "avg_abs_target_weight": 0.4046361896465712
+        },
+        "RATES_CURVE": {
+          "closed_trades": 173.0,
+          "net_pnl": 1883032.233163761,
+          "win_rate": 0.7572254335260116,
+          "profit_factor": 10.237069409718423,
+          "avg_days_held": 58.040462427745666,
+          "avg_abs_target_weight": 0.1101456169985711
+        }
+      },
+      "by_symbol": {
+        "2YY=F": {
+          "closed_trades": 31.0,
+          "net_pnl": 1065314.4059617247,
+          "win_rate": 0.9032258064516129,
+          "profit_factor": 16.35775660472433,
+          "avg_days_held": 118.03225806451613,
+          "avg_abs_target_weight": 0.1420231624266177
+        },
+        "DBC": {
+          "closed_trades": 97.0,
+          "net_pnl": 823168.2896705343,
+          "win_rate": 0.5463917525773195,
+          "profit_factor": 4.393209861150933,
+          "avg_days_held": 75.77319587628865,
+          "avg_abs_target_weight": 0.5347669309813062
+        },
+        "EEM": {
+          "closed_trades": 147.0,
+          "net_pnl": 901749.7000518298,
+          "win_rate": 0.6326530612244898,
+          "profit_factor": 6.064405499819446,
+          "avg_days_held": 67.63945578231292,
+          "avg_abs_target_weight": 0.38546695681771825
+        },
+        "HYG": {
+          "closed_trades": 54.0,
+          "net_pnl": 55636.64580326926,
+          "win_rate": 0.5185185185185185,
+          "profit_factor": 2.0770766739574267,
+          "avg_days_held": 108.5,
+          "avg_abs_target_weight": 0.13020801626830994
+        },
+        "IEF": {
+          "closed_trades": 30.0,
+          "net_pnl": 13576.970017451033,
+          "win_rate": 0.6,
+          "profit_factor": 4.845016674775079,
+          "avg_days_held": 42.6,
+          "avg_abs_target_weight": 0.07125378102136087
+        },
+        "LQD": {
+          "closed_trades": 52.0,
+          "net_pnl": 18258.522525070235,
+          "win_rate": 0.6153846153846154,
+          "profit_factor": 1.2649994535838989,
+          "avg_days_held": 130.53846153846155,
+          "avg_abs_target_weight": 0.12869586689831977
+        },
+        "SPY": {
+          "closed_trades": 137.0,
+          "net_pnl": 371639.799031912,
+          "win_rate": 0.5912408759124088,
+          "profit_factor": 2.651093209287275,
+          "avg_days_held": 71.91970802919708,
+          "avg_abs_target_weight": 0.4311385994807763
+        },
+        "TLT": {
+          "closed_trades": 35.0,
+          "net_pnl": 12444.004132176988,
+          "win_rate": 0.6571428571428571,
+          "profit_factor": 3.5582382499990883,
+          "avg_days_held": 43.285714285714285,
+          "avg_abs_target_weight": 0.03925897598868622
+        },
+        "USO": {
+          "closed_trades": 83.0,
+          "net_pnl": 1005307.4516522384,
+          "win_rate": 0.6506024096385542,
+          "profit_factor": 10.122261799109495,
+          "avg_days_held": 49.975903614457835,
+          "avg_abs_target_weight": 0.24276107120182416
+        },
+        "ZN=F": {
+          "closed_trades": 1.0,
+          "net_pnl": 1266.0602490455517,
+          "win_rate": 1.0,
+          "profit_factor": Infinity,
+          "avg_days_held": 77.0,
+          "avg_abs_target_weight": 0.10237500000000001
+        },
+        "^FVX": {
+          "closed_trades": 33.0,
+          "net_pnl": 191098.5664423029,
+          "win_rate": 0.7575757575757576,
+          "profit_factor": 7.848565520673379,
+          "avg_days_held": 37.63636363636363,
+          "avg_abs_target_weight": 0.10361267054148882
+        },
+        "^TNX": {
+          "closed_trades": 43.0,
+          "net_pnl": 599332.2263610599,
+          "win_rate": 0.8372093023255814,
+          "profit_factor": 7.103757682865283,
+          "avg_days_held": 52.7906976744186,
+          "avg_abs_target_weight": 0.17719076714915524
+        }
+      },
+      "episode_summary": {
+        "all_other_periods": {
+          "all": {
+            "trades": 310.0,
+            "net_pnl": 1398248.442071171,
+            "win_rate": 0.6129032258064516,
+            "profit_factor": 3.8585281783097836
+          },
+          "rates": {
+            "trades": 57.0,
+            "net_pnl": 497874.31185909983,
+            "win_rate": 0.7368421052631579,
+            "profit_factor": 5.838587541688277
+          },
+          "rates_top_symbols": [
+            {
+              "symbol": "2YY=F",
+              "pnl": 293012.41371005616
+            },
+            {
+              "symbol": "^FVX",
+              "pnl": 156773.6964435572
+            },
+            {
+              "symbol": "^TNX",
+              "pnl": 47888.58321762101
+            }
+          ]
+        },
+        "crisis_2007_2009": {
+          "all": {
+            "trades": 158.0,
+            "net_pnl": 272565.8928981044,
+            "win_rate": 0.5822784810126582,
+            "profit_factor": 3.2065721758936383
+          },
+          "rates": {
+            "trades": 32.0,
+            "net_pnl": 17663.467084295742,
+            "win_rate": 0.65625,
+            "profit_factor": 3.248870245206884
+          },
+          "rates_top_symbols": [
+            {
+              "symbol": "^TNX",
+              "pnl": 11493.860974408293
+            },
+            {
+              "symbol": "^FVX",
+              "pnl": 4513.795075635937
+            },
+            {
+              "symbol": "IEF",
+              "pnl": 1696.3821662887049
+            }
+          ]
+        },
+        "shock_2020": {
+          "all": {
+            "trades": 60.0,
+            "net_pnl": 957845.7793575798,
+            "win_rate": 0.8166666666666667,
+            "profit_factor": 13.833646832724007
+          },
+          "rates": {
+            "trades": 11.0,
+            "net_pnl": 158635.68566301308,
+            "win_rate": 1.0,
+            "profit_factor": Infinity
+          },
+          "rates_top_symbols": [
+            {
+              "symbol": "^TNX",
+              "pnl": 92204.96036067265
+            },
+            {
+              "symbol": "^FVX",
+              "pnl": 44597.173287566526
+            },
+            {
+              "symbol": "TLT",
+              "pnl": 10723.519894487426
+            }
+          ]
+        },
+        "shock_2022": {
+          "all": {
+            "trades": 69.0,
+            "net_pnl": 2112285.7330313767,
+            "win_rate": 0.7391304347826086,
+            "profit_factor": 9.307364381029558
+          },
+          "rates": {
+            "trades": 32.0,
+            "net_pnl": 1208054.8135932272,
+            "win_rate": 0.90625,
+            "profit_factor": 18.415526992316842
+          },
+          "rates_top_symbols": [
+            {
+              "symbol": "2YY=F",
+              "pnl": 772301.9922516686
+            },
+            {
+              "symbol": "^TNX",
+              "pnl": 435752.8213415585
+            }
+          ]
+        },
+        "transition_2014_2016": {
+          "all": {
+            "trades": 146.0,
+            "net_pnl": 317846.79454038374,
+            "win_rate": 0.6164383561643836,
+            "profit_factor": 3.290375049206363
+          },
+          "rates": {
+            "trades": 41.0,
+            "net_pnl": 803.954964125458,
+            "win_rate": 0.6829268292682927,
+            "profit_factor": 1.0338671488834412
+          },
+          "rates_top_symbols": [
+            {
+              "symbol": "^TNX",
+              "pnl": 11992.000466799516
+            },
+            {
+              "symbol": "TLT",
+              "pnl": 1963.1638372574623
+            },
+            {
+              "symbol": "IEF",
+              "pnl": 1634.8890245252273
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "short095_long125",
+      "folder": "reports/market_wizards/rates_ev_gate_long125_short095",
+      "metrics": {
+        "annualized_return": 0.16619261486352443,
+        "sharpe_ratio": 1.1233428201344673,
+        "sortino_ratio": 1.37776938103404,
+        "max_drawdown": -0.1981720856676733,
+        "calmar_ratio": 0.8386277729458973,
+        "win_rate": 0.6385041551246537,
+        "profit_factor": 5.688533073726405,
+        "num_closed_trades": 722.0,
+        "max_drawdown_duration_days": 1203.0
+      },
+      "diagnostics": {
+        "engine_b_phase3_ratio": 0.013105639396346307,
+        "rates_curve_active_ratio": 0.2750198570293884,
+        "rates_curve_gross_mean": 0.05376335143591469,
+        "rates_curve_futures_gross_mean": 0.04414351778161851,
+        "rates_curve_proxy_gross_mean": 0.00961983365429617,
+        "rates_curve_zero_contract_fallback_total": 1246.0,
+        "rates_curve_trend_filter_total": 1357.0
+      },
+      "by_engine": {
+        "ENGINE_A": {
+          "closed_trades": 106.0,
+          "net_pnl": 73774.31285163165,
+          "win_rate": 0.5660377358490566,
+          "profit_factor": 1.6105916827913762,
+          "avg_days_held": 119.52830188679245,
+          "avg_abs_target_weight": 0.12947073691115002
+        },
+        "ENGINE_B": {
+          "closed_trades": 464.0,
+          "net_pnl": 3105052.6865866156,
+          "win_rate": 0.6056034482758621,
+          "profit_factor": 5.100765280587206,
+          "avg_days_held": 67.44396551724138,
+          "avg_abs_target_weight": 0.4046013359582167
+        },
+        "RATES_CURVE": {
+          "closed_trades": 152.0,
+          "net_pnl": 1886960.6748991709,
+          "win_rate": 0.7894736842105263,
+          "profit_factor": 10.320609296621663,
+          "avg_days_held": 59.01973684210526,
+          "avg_abs_target_weight": 0.12120719629299072
+        }
+      },
+      "by_symbol": {
+        "2YY=F": {
+          "closed_trades": 31.0,
+          "net_pnl": 1066826.156562599,
+          "win_rate": 0.9032258064516129,
+          "profit_factor": 16.31920546472194,
+          "avg_days_held": 118.03225806451613,
+          "avg_abs_target_weight": 0.1420952585139517
+        },
+        "DBC": {
+          "closed_trades": 97.0,
+          "net_pnl": 824702.4712937977,
+          "win_rate": 0.5463917525773195,
+          "profit_factor": 4.396627585926891,
+          "avg_days_held": 75.77319587628865,
+          "avg_abs_target_weight": 0.5347510201918725
+        },
+        "EEM": {
+          "closed_trades": 147.0,
+          "net_pnl": 902764.6279408707,
+          "win_rate": 0.6326530612244898,
+          "profit_factor": 6.064718127843315,
+          "avg_days_held": 67.63945578231292,
+          "avg_abs_target_weight": 0.3853773412690329
+        },
+        "HYG": {
+          "closed_trades": 54.0,
+          "net_pnl": 55657.714500027185,
+          "win_rate": 0.5185185185185185,
+          "profit_factor": 2.0758611496271033,
+          "avg_days_held": 108.77777777777777,
+          "avg_abs_target_weight": 0.13023087714282358
+        },
+        "IEF": {
+          "closed_trades": 20.0,
+          "net_pnl": 13807.35407702985,
+          "win_rate": 0.65,
+          "profit_factor": 5.689087086353462,
+          "avg_days_held": 38.35,
+          "avg_abs_target_weight": 0.08488642303580839
+        },
+        "LQD": {
+          "closed_trades": 52.0,
+          "net_pnl": 18116.59835160447,
+          "win_rate": 0.6153846153846154,
+          "profit_factor": 1.262213107732485,
+          "avg_days_held": 130.69230769230768,
+          "avg_abs_target_weight": 0.12868136051671974
+        },
+        "SPY": {
+          "closed_trades": 137.0,
+          "net_pnl": 371458.97876690596,
+          "win_rate": 0.5912408759124088,
+          "profit_factor": 2.645256524304221,
+          "avg_days_held": 71.91970802919708,
+          "avg_abs_target_weight": 0.43111361274681376
+        },
+        "TLT": {
+          "closed_trades": 23.0,
+          "net_pnl": 13661.43155457852,
+          "win_rate": 0.6956521739130435,
+          "profit_factor": 4.757492093385671,
+          "avg_days_held": 41.26086956521739,
+          "avg_abs_target_weight": 0.04770062506542708
+        },
+        "USO": {
+          "closed_trades": 83.0,
+          "net_pnl": 1006126.6085850416,
+          "win_rate": 0.6506024096385542,
+          "profit_factor": 10.116214542915696,
+          "avg_days_held": 49.975903614457835,
+          "avg_abs_target_weight": 0.24278478088119962
+        },
+        "ZN=F": {
+          "closed_trades": 1.0,
+          "net_pnl": 1266.0602490455517,
+          "win_rate": 1.0,
+          "profit_factor": Infinity,
+          "avg_days_held": 77.0,
+          "avg_abs_target_weight": 0.10237500000000001
+        },
+        "^FVX": {
+          "closed_trades": 34.0,
+          "net_pnl": 191346.96579579188,
+          "win_rate": 0.7647058823529411,
+          "profit_factor": 7.857467624332936,
+          "avg_days_held": 36.73529411764706,
+          "avg_abs_target_weight": 0.10317088331704867
+        },
+        "^TNX": {
+          "closed_trades": 43.0,
+          "net_pnl": 600052.7066601261,
+          "win_rate": 0.8372093023255814,
+          "profit_factor": 7.102638116229627,
+          "avg_days_held": 52.7906976744186,
+          "avg_abs_target_weight": 0.17705844075817306
+        }
+      },
+      "episode_summary": {
+        "all_other_periods": {
+          "all": {
+            "trades": 310.0,
+            "net_pnl": 1400289.0539000826,
+            "win_rate": 0.6129032258064516,
+            "profit_factor": 3.8603484586005816
+          },
+          "rates": {
+            "trades": 57.0,
+            "net_pnl": 498498.634664633,
+            "win_rate": 0.7368421052631579,
+            "profit_factor": 5.844315595232
+          },
+          "rates_top_symbols": [
+            {
+              "symbol": "2YY=F",
+              "pnl": 293278.9326893964
+            },
+            {
+              "symbol": "^FVX",
+              "pnl": 157004.37423086184
+            },
+            {
+              "symbol": "^TNX",
+              "pnl": 48015.50030937951
+            }
+          ]
+        },
+        "crisis_2007_2009": {
+          "all": {
+            "trades": 158.0,
+            "net_pnl": 272255.6946636983,
+            "win_rate": 0.5822784810126582,
+            "profit_factor": 3.203944718154948
+          },
+          "rates": {
+            "trades": 32.0,
+            "net_pnl": 17617.67093340023,
+            "win_rate": 0.65625,
+            "profit_factor": 3.2437992410474434
+          },
+          "rates_top_symbols": [
+            {
+              "symbol": "^TNX",
+              "pnl": 11493.860974408293
+            },
+            {
+              "symbol": "^FVX",
+              "pnl": 4513.795075635937
+            },
+            {
+              "symbol": "IEF",
+              "pnl": 1695.8091242232745
+            }
+          ]
+        },
+        "shock_2020": {
+          "all": {
+            "trades": 60.0,
+            "net_pnl": 959054.536631783,
+            "win_rate": 0.8166666666666667,
+            "profit_factor": 13.835644921185859
+          },
+          "rates": {
+            "trades": 11.0,
+            "net_pnl": 158799.27837036885,
+            "win_rate": 1.0,
+            "profit_factor": Infinity
+          },
+          "rates_top_symbols": [
+            {
+              "symbol": "^TNX",
+              "pnl": 92367.2550523596
+            },
+            {
+              "symbol": "^FVX",
+              "pnl": 44582.86024813424
+            },
+            {
+              "symbol": "TLT",
+              "pnl": 10723.47107848882
+            }
+          ]
+        },
+        "shock_2022": {
+          "all": {
+            "trades": 69.0,
+            "net_pnl": 2114954.4349933835,
+            "win_rate": 0.7391304347826086,
+            "profit_factor": 9.284730297758815
+          },
+          "rates": {
+            "trades": 32.0,
+            "net_pnl": 1209867.387885934,
+            "win_rate": 0.90625,
+            "profit_factor": 18.373221481379677
+          },
+          "rates_top_symbols": [
+            {
+              "symbol": "2YY=F",
+              "pnl": 773547.2238732026
+            },
+            {
+              "symbol": "^TNX",
+              "pnl": 436320.1640127313
+            }
+          ]
+        },
+        "transition_2014_2016": {
+          "all": {
+            "trades": 125.0,
+            "net_pnl": 319233.9541484715,
+            "win_rate": 0.632,
+            "profit_factor": 3.3237507008207894
+          },
+          "rates": {
+            "trades": 20.0,
+            "net_pnl": 2177.7030448348805,
+            "win_rate": 0.85,
+            "profit_factor": 1.0987395321707825
+          },
+          "rates_top_symbols": [
+            {
+              "symbol": "^TNX",
+              "pnl": 11855.926311247418
+            },
+            {
+              "symbol": "TLT",
+              "pnl": 3224.3962582490967
+            },
+            {
+              "symbol": "IEF",
+              "pnl": 1851.4442341785175
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "short105_long035",
+      "folder": "reports/market_wizards/rates_ev_gate_105",
+      "metrics": {
+        "annualized_return": 0.16217315910653296,
+        "sharpe_ratio": 1.1075624740262127,
+        "sortino_ratio": 1.3532761060489937,
+        "max_drawdown": -0.1978757700388598,
+        "calmar_ratio": 0.8195705774116993,
+        "win_rate": 0.6306429548563611,
+        "profit_factor": 5.500498785606826,
+        "num_closed_trades": 731.0,
+        "max_drawdown_duration_days": 1203.0
+      },
+      "diagnostics": {
+        "engine_b_phase3_ratio": 0.013105639396346307,
+        "rates_curve_active_ratio": 0.3083796664019063,
+        "rates_curve_gross_mean": 0.05328249669542003,
+        "rates_curve_futures_gross_mean": 0.04062346590162301,
+        "rates_curve_proxy_gross_mean": 0.012659030793797025,
+        "rates_curve_zero_contract_fallback_total": 2000.0,
+        "rates_curve_trend_filter_total": 1559.0
+      },
+      "by_engine": {
+        "ENGINE_A": {
+          "closed_trades": 106.0,
+          "net_pnl": 76808.07131334474,
+          "win_rate": 0.5660377358490566,
+          "profit_factor": 1.6631536529409023,
+          "avg_days_held": 119.71698113207547,
+          "avg_abs_target_weight": 0.129447508916051
+        },
+        "ENGINE_B": {
+          "closed_trades": 465.0,
+          "net_pnl": 2978576.2067179615,
+          "win_rate": 0.6064516129032258,
+          "profit_factor": 5.044110818748765,
+          "avg_days_held": 67.34408602150538,
+          "avg_abs_target_weight": 0.40324976066731627
+        },
+        "RATES_CURVE": {
+          "closed_trades": 160.0,
+          "net_pnl": 1658743.1413901018,
+          "win_rate": 0.74375,
+          "profit_factor": 9.500994300726624,
+          "avg_days_held": 58.1,
+          "avg_abs_target_weight": 0.11086590135953707
+        }
+      },
+      "by_symbol": {
+        "2YY=F": {
+          "closed_trades": 30.0,
+          "net_pnl": 984038.8013139097,
+          "win_rate": 0.9,
+          "profit_factor": 16.322918180949134,
+          "avg_days_held": 116.8,
+          "avg_abs_target_weight": 0.14384616773728745
+        },
+        "DBC": {
+          "closed_trades": 97.0,
+          "net_pnl": 782510.5875042321,
+          "win_rate": 0.5463917525773195,
+          "profit_factor": 4.328785111891309,
+          "avg_days_held": 75.77319587628865,
+          "avg_abs_target_weight": 0.5347669739581499
+        },
+        "EEM": {
+          "closed_trades": 147.0,
+          "net_pnl": 823853.0519716903,
+          "win_rate": 0.6326530612244898,
+          "profit_factor": 5.8051421728167005,
+          "avg_days_held": 67.63945578231292,
+          "avg_abs_target_weight": 0.38017218216263166
+        },
+        "HYG": {
+          "closed_trades": 54.0,
+          "net_pnl": 55194.88957539188,
+          "win_rate": 0.5185185185185185,
+          "profit_factor": 2.093286688306747,
+          "avg_days_held": 109.29629629629629,
+          "avg_abs_target_weight": 0.1302701920624606
+        },
+        "IEF": {
+          "closed_trades": 30.0,
+          "net_pnl": 13483.010651848439,
+          "win_rate": 0.6,
+          "profit_factor": 4.818407252567554,
+          "avg_days_held": 42.6,
+          "avg_abs_target_weight": 0.07125362190576669
+        },
+        "LQD": {
+          "closed_trades": 52.0,
+          "net_pnl": 21613.18173795287,
+          "win_rate": 0.6153846153846154,
+          "profit_factor": 1.3307946760891656,
+          "avg_days_held": 130.53846153846155,
+          "avg_abs_target_weight": 0.12859318411016415
+        },
+        "SPY": {
+          "closed_trades": 138.0,
+          "net_pnl": 386689.65540799673,
+          "win_rate": 0.5942028985507246,
+          "profit_factor": 2.749314344294465,
+          "avg_days_held": 71.55072463768116,
+          "avg_abs_target_weight": 0.4319150792115996
+        },
+        "TLT": {
+          "closed_trades": 35.0,
+          "net_pnl": 12324.33805886819,
+          "win_rate": 0.6571428571428571,
+          "profit_factor": 3.5336372997973626,
+          "avg_days_held": 43.285714285714285,
+          "avg_abs_target_weight": 0.03925803502503044
+        },
+        "USO": {
+          "closed_trades": 83.0,
+          "net_pnl": 985522.9118340425,
+          "win_rate": 0.6506024096385542,
+          "profit_factor": 10.046185790429739,
+          "avg_days_held": 49.975903614457835,
+          "avg_abs_target_weight": 0.24276084972595136
+        },
+        "ZN=F": {
+          "closed_trades": 1.0,
+          "net_pnl": 1266.0602490455517,
+          "win_rate": 1.0,
+          "profit_factor": Infinity,
+          "avg_days_held": 77.0,
+          "avg_abs_target_weight": 0.10237500000000001
+        },
+        "^FVX": {
+          "closed_trades": 27.0,
+          "net_pnl": 134757.55256187014,
+          "win_rate": 0.7407407407407407,
+          "profit_factor": 5.861381867435845,
+          "avg_days_held": 37.111111111111114,
+          "avg_abs_target_weight": 0.11072497282229693
+        },
+        "^TNX": {
+          "closed_trades": 37.0,
+          "net_pnl": 512873.37855455984,
+          "win_rate": 0.8108108108108109,
+          "profit_factor": 6.410741096335357,
+          "avg_days_held": 51.891891891891895,
+          "avg_abs_target_weight": 0.1843127036798979
+        }
+      },
+      "episode_summary": {
+        "all_other_periods": {
+          "all": {
+            "trades": 303.0,
+            "net_pnl": 1325180.1446604633,
+            "win_rate": 0.6105610561056105,
+            "profit_factor": 3.8229339996310236
+          },
+          "rates": {
+            "trades": 50.0,
+            "net_pnl": 459389.63711338124,
+            "win_rate": 0.74,
+            "profit_factor": 5.773118504037447
+          },
+          "rates_top_symbols": [
+            {
+              "symbol": "2YY=F",
+              "pnl": 271881.97995848075
+            },
+            {
+              "symbol": "^FVX",
+              "pnl": 143894.48814461502
+            },
+            {
+              "symbol": "^TNX",
+              "pnl": 43413.55052242003
+            }
+          ]
+        },
+        "crisis_2007_2009": {
+          "all": {
+            "trades": 158.0,
+            "net_pnl": 272565.8928981044,
+            "win_rate": 0.5822784810126582,
+            "profit_factor": 3.2065721758936383
+          },
+          "rates": {
+            "trades": 32.0,
+            "net_pnl": 17663.467084295742,
+            "win_rate": 0.65625,
+            "profit_factor": 3.248870245206884
+          },
+          "rates_top_symbols": [
+            {
+              "symbol": "^TNX",
+              "pnl": 11493.860974408293
+            },
+            {
+              "symbol": "^FVX",
+              "pnl": 4513.795075635937
+            },
+            {
+              "symbol": "IEF",
+              "pnl": 1696.3821662887049
+            }
+          ]
+        },
+        "shock_2020": {
+          "all": {
+            "trades": 56.0,
+            "net_pnl": 802381.1521756345,
+            "win_rate": 0.7857142857142857,
+            "profit_factor": 11.421355249579541
+          },
+          "rates": {
+            "trades": 6.0,
+            "net_pnl": 19689.97286736447,
+            "win_rate": 0.8333333333333334,
+            "profit_factor": 7.4234611006040465
+          },
+          "rates_top_symbols": [
+            {
+              "symbol": "TLT",
+              "pnl": 10603.853821178629
+            },
+            {
+              "symbol": "IEF",
+              "pnl": 9750.012505638337
+            },
+            {
+              "symbol": "ZN=F",
+              "pnl": 1266.0602490455517
+            }
+          ]
+        },
+        "shock_2022": {
+          "all": {
+            "trades": 68.0,
+            "net_pnl": 1996153.435146822,
+            "win_rate": 0.7352941176470589,
+            "profit_factor": 9.361180170568307
+          },
+          "rates": {
+            "trades": 31.0,
+            "net_pnl": 1161196.1093609347,
+            "win_rate": 0.9032258064516129,
+            "profit_factor": 19.081515639440834
+          },
+          "rates_top_symbols": [
+            {
+              "symbol": "2YY=F",
+              "pnl": 712156.8213554288
+            },
+            {
+              "symbol": "^TNX",
+              "pnl": 449039.28800550604
+            }
+          ]
+        },
+        "transition_2014_2016": {
+          "all": {
+            "trades": 146.0,
+            "net_pnl": 317846.79454038374,
+            "win_rate": 0.6164383561643836,
+            "profit_factor": 3.290375049206363
+          },
+          "rates": {
+            "trades": 41.0,
+            "net_pnl": 803.954964125458,
+            "win_rate": 0.6829268292682927,
+            "profit_factor": 1.0338671488834412
+          },
+          "rates_top_symbols": [
+            {
+              "symbol": "^TNX",
+              "pnl": 11992.000466799516
+            },
+            {
+              "symbol": "TLT",
+              "pnl": 1963.1638372574623
+            },
+            {
+              "symbol": "IEF",
+              "pnl": 1634.8890245252273
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

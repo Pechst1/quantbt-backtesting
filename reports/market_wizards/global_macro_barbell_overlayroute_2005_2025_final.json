@@ -1,0 +1,87 @@
+{
+  "metrics": {
+    "annualized_return": 0.12209121895552344,
+    "sharpe_ratio": 0.8880701990521467,
+    "sortino_ratio": 1.0521095116034862,
+    "max_drawdown": -0.23997956052262615,
+    "calmar_ratio": 0.5087567403225253,
+    "win_rate": 0.6140684410646388,
+    "profit_factor": 4.534012086401581,
+    "num_closed_trades": 526.0,
+    "max_drawdown_duration_days": 876.0
+  },
+  "submitted_orders": 1560,
+  "fills": 1560,
+  "risk_rejections": 12,
+  "margin_calls": 0,
+  "diagnostics": {
+    "carry_symbols": [
+      "HYG",
+      "LQD"
+    ],
+    "dislocation_symbols": [
+      "SPY",
+      "EEM",
+      "DBC",
+      "USO",
+      "UUP"
+    ],
+    "engine_a_last_trigger_reason": "CARRY_BASE",
+    "engine_a_last_trigger_metrics": {
+      "hyg_drawdown": -0.010547146102708238,
+      "credit_surprise_z": 0.7120866774088529,
+      "trailing_pnl_ratio": 0.0007123756756897543
+    },
+    "engine_a_trade_summary": {
+      "closed_trades": 105.0,
+      "net_pnl": 85391.46235617492,
+      "win_rate": 0.5619047619047619,
+      "profit_factor": 2.101102244810798
+    },
+    "engine_b_trade_summary": {
+      "closed_trades": 421.0,
+      "net_pnl": 2137571.967030007,
+      "win_rate": 0.6270783847980997,
+      "profit_factor": 4.876142608265513
+    },
+    "engine_a_avg_gross": 0.20037473202038217,
+    "engine_b_avg_gross": 0.3416772231005943,
+    "engine_a_shutoff_ratio": 0.20325849393999604,
+    "engine_b_dormant_ratio": 0.4667196503079674,
+    "engine_b_avg_max_score": 1.0637102761515822,
+    "engine_a_pnl_5d_ratio_mean": 4.876500510706654e-05,
+    "engine_a_pnl_21d_ratio_mean": 0.00048596592217527016,
+    "engine_b_a_stress_ratio": 0.2797536260679515,
+    "engine_b_a_euphoria_ratio": 0.20445062586926285,
+    "engine_b_long_threshold_multiplier_mean": 0.9591098748261474,
+    "engine_b_short_threshold_multiplier_mean": 0.9160739121796146,
+    "engine_b_velocity_signal_mean": 0.13171348992833876,
+    "engine_b_velocity_multiplier_mean": 1.003771345520351,
+    "engine_b_phase_mean": 0.5632492218027684,
+    "engine_b_phase3_ratio": 0.013113451221935227,
+    "engine_b_phase_stop_ratio": 0.16511027220345717,
+    "engine_b_velocity_exit_ratio": 0.0017881978939002583,
+    "engine_b_extreme_active_ratio": 0.020663620107291874,
+    "engine_b_extreme_coherence_mean": 0.2790143788658012,
+    "engine_b_extreme_threshold_mean": 0.7908980340365155,
+    "engine_a_reallocation_active_ratio": 0.022849195310947746,
+    "engine_a_reallocation_gross_mean": 0.006404988398309514,
+    "engine_a_reallocation_avg_active_count": 0.039936419630439104,
+    "overlay_active_ratio": 0.0,
+    "overlay_avg_active_count": 0.0,
+    "overlay_leader_mean": 0.025293194569008165,
+    "overlay_lag_mean": 0.01773478117844939,
+    "overlay_threshold_mean": 0.7659145605035622,
+    "overlay_weight_mean": 0.0,
+    "overlay_phase_mean": 0.0,
+    "overlay_phase_stop_ratio": 0.0,
+    "overlay_velocity_exit_ratio": 0.0,
+    "engine_a_final_pnl": 182171.13499925385,
+    "engine_b_final_pnl": 2128912.167036988,
+    "engine_a_reallocation_enabled": true,
+    "engine_b_asymmetric_phase_enabled": false,
+    "engine_b_extreme_concentration_enabled": true,
+    "engine_b_phase3_profit_rate_enabled": true,
+    "overlay_routing_enabled": true
+  }
+}

@@ -1,0 +1,4 @@
+symbol,effective_from,effective_to,net_income_ttm,shares_outstanding,revenue_ttm,eps_growth_yoy,revenue_growth_yoy,pe_ratio,pb_ratio,ev_ebitda,fcf_yield,cash_per_share,book_value_per_share
+AAPL,2023-11-03T00:00:00Z,2024-02-01T23:59:59Z,96995000000,15634100000,383285000000,0.08,0.03,28.0,42.0,21.0,0.031,4.2,4.8
+AAPL,2024-02-02T00:00:00Z,,100913000000,15500000000,391035000000,0.10,0.04,30.0,46.0,22.0,0.029,4.5,5.0
+RKT,2024-01-01T00:00:00Z,,-125000000,2020000000,4700000000,-0.35,-0.12,18.0,0.9,11.0,0.014,1.0,6.2

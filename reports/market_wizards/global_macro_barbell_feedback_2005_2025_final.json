@@ -1,0 +1,61 @@
+{
+  "metrics": {
+    "annualized_return": 0.08893167267005175,
+    "sharpe_ratio": 0.6901779551773866,
+    "sortino_ratio": 0.8182002043414816,
+    "max_drawdown": -0.21000697077222608,
+    "calmar_ratio": 0.42347009884022946,
+    "win_rate": 0.5421245421245421,
+    "profit_factor": 2.0614948004560176,
+    "num_closed_trades": 546.0,
+    "max_drawdown_duration_days": 1205.0
+  },
+  "submitted_orders": 1456,
+  "fills": 1456,
+  "risk_rejections": 21,
+  "margin_calls": 0,
+  "diagnostics": {
+    "carry_symbols": [
+      "HYG",
+      "LQD"
+    ],
+    "dislocation_symbols": [
+      "SPY",
+      "EEM",
+      "DBC",
+      "USO",
+      "UUP"
+    ],
+    "engine_a_last_trigger_reason": "CARRY_BASE",
+    "engine_a_last_trigger_metrics": {
+      "hyg_drawdown": -0.010547146102708238,
+      "credit_surprise_z": 0.7120866774088529,
+      "trailing_pnl_ratio": 0.0007225227094626817
+    },
+    "engine_a_trade_summary": {
+      "closed_trades": 107.0,
+      "net_pnl": 71488.74015013638,
+      "win_rate": 0.5794392523364486,
+      "profit_factor": 2.3352396211710227
+    },
+    "engine_b_trade_summary": {
+      "closed_trades": 439.0,
+      "net_pnl": 1095830.7021219917,
+      "win_rate": 0.5330296127562643,
+      "profit_factor": 2.0474851036901587
+    },
+    "engine_a_avg_gross": 0.19937508856635874,
+    "engine_b_avg_gross": 0.37579317375862165,
+    "engine_a_shutoff_ratio": 0.20325849393999604,
+    "engine_b_dormant_ratio": 0.4667196503079674,
+    "engine_b_avg_max_score": 1.0637102761515822,
+    "engine_a_pnl_5d_ratio_mean": 4.604829707498492e-05,
+    "engine_a_pnl_21d_ratio_mean": 0.0004812700236188162,
+    "engine_b_a_stress_ratio": 0.28114444665209615,
+    "engine_b_a_euphoria_ratio": 0.20683488972779654,
+    "engine_b_long_threshold_multiplier_mean": 0.9586330220544406,
+    "engine_b_short_threshold_multiplier_mean": 0.9156566660043711,
+    "engine_a_final_pnl": 123604.46330816756,
+    "engine_b_final_pnl": 1086287.2882625863
+  }
+}

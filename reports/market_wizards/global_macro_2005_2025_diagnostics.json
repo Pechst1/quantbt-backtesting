@@ -1,0 +1,195 @@
+{
+  "report_metrics": {
+    "annualized_return": 0.023678043101178492,
+    "sharpe_ratio": 0.5638003897733284,
+    "sortino_ratio": 0.5303836404437404,
+    "max_drawdown": -0.16972341410125635,
+    "calmar_ratio": 0.13950958520697834,
+    "win_rate": 0.6374622356495468,
+    "profit_factor": 1.9672102996625174,
+    "num_closed_trades": 331.0,
+    "max_drawdown_duration_days": 2968.0
+  },
+  "active_window": {
+    "start": "2005-01-21",
+    "end": "2024-12-20",
+    "metrics": {
+      "annualized_return": 0.023745255561284706,
+      "sharpe_ratio": 0.564868959411207,
+      "max_drawdown": -0.16972341410125635,
+      "avg_gross_exposure": 0.17594697332553402,
+      "avg_abs_net_exposure": 0.15399513799684905
+    }
+  },
+  "window": {
+    "start": "2005-01-03",
+    "end": "2024-12-31",
+    "first_trade": "2007-02-28",
+    "last_trade": "2024-12-19"
+  },
+  "drawdown": {
+    "peak_date": "2016-01-20",
+    "trough_date": "2020-01-08",
+    "recovery_date": "2024-03-07",
+    "max_drawdown": -0.16972341410125635
+  },
+  "exposure": {
+    "avg_gross_exposure": 0.17528275864379647,
+    "avg_abs_net_exposure": 0.15341379334714902,
+    "p95_gross_exposure": 0.45412735282319444,
+    "p95_abs_net_exposure": 0.4527789150680487
+  },
+  "trade_counts": {
+    "SPY": 40,
+    "EEM": 40,
+    "LQD": 34,
+    "EWJ": 31,
+    "GLD": 9,
+    "TIP": 2,
+    "DBC": 34,
+    "TLT": 20,
+    "IEF": 16,
+    "EFA": 26,
+    "HYG": 48,
+    "USO": 31
+  },
+  "trade_table": [
+    {
+      "symbol": "DBC",
+      "closed_trades": 34,
+      "net_pnl": 30489.93291895821,
+      "avg_pnl": 896.7627329105355,
+      "win_rate": 0.6176470588235294,
+      "profit_factor": 2.686971148692609
+    },
+    {
+      "symbol": "EEM",
+      "closed_trades": 40,
+      "net_pnl": 26574.503752004974,
+      "avg_pnl": 664.3625938001244,
+      "win_rate": 0.65,
+      "profit_factor": 2.301385110589948
+    },
+    {
+      "symbol": "USO",
+      "closed_trades": 31,
+      "net_pnl": 25584.44420162655,
+      "avg_pnl": 825.3046516653726,
+      "win_rate": 0.45161290322580644,
+      "profit_factor": 1.4901183599145802
+    },
+    {
+      "symbol": "LQD",
+      "closed_trades": 34,
+      "net_pnl": 23450.472186504532,
+      "avg_pnl": 689.7197701913097,
+      "win_rate": 0.8235294117647058,
+      "profit_factor": 8.995044010895976
+    },
+    {
+      "symbol": "HYG",
+      "closed_trades": 48,
+      "net_pnl": 21590.167259343452,
+      "avg_pnl": 449.79515123632194,
+      "win_rate": 0.8333333333333334,
+      "profit_factor": 3.1534959177374993
+    },
+    {
+      "symbol": "SPY",
+      "closed_trades": 40,
+      "net_pnl": 14704.007880413807,
+      "avg_pnl": 367.60019701034514,
+      "win_rate": 0.7,
+      "profit_factor": 1.9497940923480643
+    },
+    {
+      "symbol": "EWJ",
+      "closed_trades": 31,
+      "net_pnl": 10649.349260458372,
+      "avg_pnl": 343.52739549865714,
+      "win_rate": 0.5161290322580645,
+      "profit_factor": 1.7023804420422761
+    },
+    {
+      "symbol": "IEF",
+      "closed_trades": 16,
+      "net_pnl": 4489.548316147842,
+      "avg_pnl": 280.59676975924015,
+      "win_rate": 0.4375,
+      "profit_factor": 2.448181991897855
+    },
+    {
+      "symbol": "TLT",
+      "closed_trades": 20,
+      "net_pnl": 3633.6931019249096,
+      "avg_pnl": 181.68465509624548,
+      "win_rate": 0.55,
+      "profit_factor": 1.3538966593048578
+    },
+    {
+      "symbol": "EFA",
+      "closed_trades": 26,
+      "net_pnl": 2094.091440551169,
+      "avg_pnl": 80.54197848273726,
+      "win_rate": 0.6153846153846154,
+      "profit_factor": 1.163424529477512
+    },
+    {
+      "symbol": "TIP",
+      "closed_trades": 2,
+      "net_pnl": -508.0262483363328,
+      "avg_pnl": -254.0131241681664,
+      "win_rate": 0.5,
+      "profit_factor": 0.109031482414589
+    },
+    {
+      "symbol": "GLD",
+      "closed_trades": 9,
+      "net_pnl": -1917.4114076679068,
+      "avg_pnl": -213.04571196310076,
+      "win_rate": 0.3333333333333333,
+      "profit_factor": 0.6340243954690579
+    }
+  ],
+  "yearly_returns": {
+    "2006": 0.0,
+    "2007": -0.0174975343713476,
+    "2008": 0.27825972410581956,
+    "2009": 0.0015119407829480291,
+    "2010": 0.026464083014906103,
+    "2011": 0.0,
+    "2012": 0.0,
+    "2013": 0.0,
+    "2014": 0.0525325332603086,
+    "2015": 0.07708519408617631,
+    "2016": -0.03562992105544105,
+    "2017": 0.0018633005908479383,
+    "2018": 0.014012645636294785,
+    "2019": -0.09340525183387016,
+    "2020": 0.11664143362717194,
+    "2021": -0.006834139070626022,
+    "2022": 0.04795257070537251,
+    "2023": 0.01880953028381782,
+    "2024": 0.03664003149647521
+  },
+  "monthly_return_stats": {
+    "mean": 0.00203947175754552,
+    "median": 0.0,
+    "std": 0.012958077301339199,
+    "best": 0.0959737844740085,
+    "worst": -0.03307354415987662,
+    "positive_ratio": 0.36401673640167365
+  },
+  "rolling": {
+    "best_252d_ann_return": 0.3073201109939643,
+    "worst_252d_ann_return": -0.10355446452354633,
+    "best_252d_sharpe": 2.869242673857314,
+    "worst_252d_sharpe": -2.2902321260265315
+  },
+  "engine": {
+    "submitted_orders": 634,
+    "fills": 634,
+    "risk_rejections": 0,
+    "margin_calls": 0
+  }
+}

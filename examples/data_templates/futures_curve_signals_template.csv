@@ -1,0 +1,4 @@
+symbol,date,release_date,tradable_from,front_contract,second_contract,third_contract,front_price,second_price,third_price,roll_yield_1m,roll_yield_3m,carry_score,backwardation_score,liquidity_score,source_label
+CL=F,2020-01-31,2020-01-31,2020-02-03,CLH20,CLJ20,CLK20,51.56,51.98,52.30,-0.0969,-0.0570,-0.0969,-0.0081,1.0,TEMPLATE
+GC=F,2020-01-31,2020-01-31,2020-02-03,GCG20,GCJ20,GCM20,1587.90,1594.80,1602.60,-0.0519,-0.0367,-0.0519,-0.0043,1.0,TEMPLATE
+HG=F,2020-01-31,2020-01-31,2020-02-03,HGH20,HGK20,HGN20,2.5205,2.5360,2.5500,-0.0733,-0.0463,-0.0733,-0.0061,1.0,TEMPLATE
