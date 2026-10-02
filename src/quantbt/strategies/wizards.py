@@ -209,7 +209,8 @@ class CookBreadthTimingStrategy(_PanelStrategy):
     only its own past (expanding, at least ``min_history`` values).
 
     mode "cash":      flat normally; 100% SPY while a buy signal is on.
-    mode "levered":   100% SPY normally; 200% SPY while a buy signal is on.
+    mode "levered":   100% SPY normally; ``signal_exposure`` x SPY while a buy signal is on
+                      (only while SPY closes above its ``trend_sma``-day SMA, if set).
     mode "sell_tops": 100% SPY normally; cash while a sell signal is on.
     A buy signal starts when C < 5th percentile and ends on the first close with C >= median.
     A sell signal starts when C > 95th percentile and ends on the first close with C <= median.
@@ -227,9 +228,15 @@ class CookBreadthTimingStrategy(_PanelStrategy):
         min_history: int = 504,
         low_pct: float = 5.0,
         high_pct: float = 95.0,
+        signal_exposure: float = 2.0,
+        trend_sma: int | None = None,
         market_symbol: str = "SPY",
     ) -> None:
         super().__init__(symbols, is_member, window=2, market_symbol=market_symbol)
+        self.signal_exposure = signal_exposure
+        self.trend_sma = trend_sma
+        self._market_closes: list[float] = []
+        self.days_levered = 0
         if mode not in ("cash", "levered", "sell_tops"):
             raise ValueError(f"Unknown mode {mode!r}")
         self.mode = mode
@@ -252,7 +259,13 @@ class CookBreadthTimingStrategy(_PanelStrategy):
         if self.mode == "cash":
             return 1.0 if self.state == "buy" else 0.0
         if self.mode == "levered":
-            return 2.0 if self.state == "buy" else 1.0
+            if self.state != "buy":
+                return 1.0
+            if self.trend_sma is not None:
+                window = self._market_closes[-self.trend_sma :]
+                if len(window) < self.trend_sma or window[-1] <= sum(window) / len(window):
+                    return 1.0
+            return self.signal_exposure
         return 0.0 if self.state == "sell" else 1.0
 
     def _update_state(self, c: float, history: np.ndarray) -> None:
@@ -297,9 +310,11 @@ class CookBreadthTimingStrategy(_PanelStrategy):
         if stale[m]:
             return signals
         price = now[m]
+        self._market_closes.append(float(price))
+        exposure = self._target_exposure()
+        self.days_levered += exposure > 1.0
         pos = self.portfolio.positions.get(self.market_symbol)
         qty_now = int(pos.quantity) if pos else 0
-        exposure = self._target_exposure()
         # Trade only when the target exposure changes, not on drift from SPY's own moves.
         if exposure == self._last_exposure:
             return signals

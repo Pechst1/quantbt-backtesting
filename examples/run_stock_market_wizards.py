@@ -38,6 +38,11 @@ VARIANTS: dict[str, dict] = {
     "H2-A": dict(kind="cook", mode="cash"),
     "H2-B": dict(kind="cook", mode="levered"),
     "H2-C": dict(kind="cook", mode="sell_tops"),
+    # Follow-up overlays, pre-registered after the first nine runs.
+    "H2-D": dict(kind="cook", mode="levered", signal_exposure=1.25),
+    "H2-E": dict(kind="cook", mode="levered", signal_exposure=1.5),
+    "H2-F": dict(kind="cook", mode="levered", signal_exposure=1.5, trend_sma=200),
+    "H2-G": dict(kind="cook", mode="levered", signal_exposure=2.0, trend_sma=200),
     "H3-A": dict(kind="reversal", lookback=5, freq="W"),
     "H3-B": dict(kind="reversal_ls_vector", lookback=5, freq="W"),
     "H3-C": dict(kind="reversal", lookback=21, freq="M"),
@@ -208,7 +213,7 @@ def run_variant(args: argparse.Namespace, membership: IntervalMembership) -> Non
         strategy = OkumusDeepValueStrategy(symbols=data.active_symbols, is_member=membership.is_member, **rules)
     elif kind == "cook":
         strategy = CookBreadthTimingStrategy(symbols=data.active_symbols, is_member=membership.is_member, **rules)
-        leverage = 2.0 if rules["mode"] == "levered" else 1.0
+        leverage = 2.0 if rules["mode"] == "levered" else 1.0  # margin limit, not the exposure
     else:
         spy_index = source._frames["SPY"].loc[start : args.end].index
         signal_dates = period_end_dates(spy_index, rules.pop("freq"))

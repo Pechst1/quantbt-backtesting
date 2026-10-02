@@ -100,3 +100,23 @@ def test_cook_buys_spy_after_extreme_selling_breadth(tmp_path):
     assert (states.loc[index[655] :, "state"] == "buy").any()
     held = {t.symbol for t in portfolio.closed_trades} | {s for s, p in portfolio.positions.items() if p.quantity}
     assert held <= {"SPY"}
+
+
+def test_cook_overlay_size_and_trend_condition(tmp_path):
+    n = 700
+    index = pd.bdate_range("2010-01-01", periods=n)
+    rng = np.random.default_rng(1)
+    common = rng.normal(0, 0.01, n)
+    common[650:665] = -0.03
+    frames = {"SPY": _frame(100 * np.cumprod(1 + common), index)}
+    for k in range(60):
+        frames[f"S{k}"] = _frame(100 * np.cumprod(1 + common + rng.normal(0, 0.01, n)), index)
+    kwargs = dict(is_member=lambda s, d: True, mode="levered", min_history=300)
+    plain, pf = _run(frames, CookBreadthTimingStrategy, tmp_path, leverage=2.0, signal_exposure=1.5, **kwargs)
+    assert plain.days_levered > 0
+    # Exposure is set to 1.5x when the signal starts; it drifts with SPY until the next change.
+    first_levered = next(s.gross_exposure / s.equity for s in pf.history if s.gross_exposure / s.equity > 1.1)
+    assert 1.3 < first_levered < 1.6
+    # After a 15-day crash SPY is below its 200-day average, so the filtered overlay stays at 1x.
+    filtered, _ = _run(frames, CookBreadthTimingStrategy, tmp_path, leverage=2.0, signal_exposure=1.5, trend_sma=200, **kwargs)
+    assert filtered.days_levered < plain.days_levered
