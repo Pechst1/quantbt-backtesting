@@ -110,18 +110,21 @@ def run_variant(name: str, args: argparse.Namespace, tbill: pd.Series) -> dict:
         tradable = set(membership.symbols)
         start, report_start, periods_def = args.start, "1999-07-01", SPX_PERIODS
         extra = dict(is_member=membership.is_member)
+        cache_dir = Path(".cache/market_data")
     else:
         source = ParquetPanelSource(args.us_prices)
         symbols = source.symbols
         tradable = set(symbols) - {"SPY", "QQQ"}
         start, report_start, periods_def = "2021-10-04", "2022-04-01", US_PERIODS
         extra = dict(min_price=5.0, min_dollar_volume=5_000_000.0)
+        # Separate cache: the handler would otherwise reuse S&P panel files for shared tickers.
+        cache_dir = Path(".cache/market_data_us")
     data = PublicOHLCVDataHandler(
         DataHandlerConfig(
             symbols=symbols,
             start=datetime.fromisoformat(start),
             end=datetime.fromisoformat(args.end),
-            cache_dir=Path(".cache/market_data"),
+            cache_dir=cache_dir,
             required_symbols={"SPY", "QQQ"},
         ),
         source=source,
