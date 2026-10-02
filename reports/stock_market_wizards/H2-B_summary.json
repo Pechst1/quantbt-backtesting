@@ -61,6 +61,8 @@
     "market_symbol": "SPY",
     "dead_after_bars": 5,
     "bar_count": 7738,
+    "signal_exposure": 2.0,
+    "days_levered": 873,
     "mode": "levered",
     "quiet_band": 0.13333333333333333,
     "sum_window": 21,

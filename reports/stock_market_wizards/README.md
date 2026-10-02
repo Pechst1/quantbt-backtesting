@@ -22,7 +22,7 @@ default costs, cash earns nothing, margin 5%/yr. Sharpe uses rf = 0.
 | H3-C Monthly reversal, long bottom decile | 6.5% | 0.37 | -78% | 5.2% | 0.32 | -49% | 0.94 |
 
 Pre-registered pass bar: beat SPY's CAGR in both periods with no worse max drawdown.
-**No variant passes.** One result is worth following up (H2, below).
+**No variant passes**, including the follow-up overlays further down. One result is worth knowing about (H2, below).
 
 ## Reading
 
@@ -63,12 +63,34 @@ about 2,000 names a year. The market-neutral version (H3-B) loses about 2% a yea
 caps is smaller than retail trading costs. Shaw's edge depended on execution and data we
 cannot replicate with daily bars.
 
-## What this suggests next (not run, would need its own pre-registration)
+## Follow-up: overlay size and a 200-day condition (H2-D to H2-G)
 
-The only candidate with out-of-sample evidence is Cook's breadth signal used as a timing
-overlay. A natural next test is to size the overlay so it does not raise drawdown, for
-example 1.5x instead of 2x, or adding exposure only when SPY is above its 200-day average.
-Both would be new rules and must be fixed before any run.
+Pre-registered after the nine runs above (see the follow-up section of PREREGISTRATION.md),
+before any of these ran. All hold SPY normally and change only the exposure during a Cook
+buy signal. H2-B was re-run with the updated code and reproduced exactly.
+
+| | 1999–2019 CAGR | Sharpe | Max DD | 2020–2026 CAGR | Sharpe | Max DD | Days levered |
+|---|---|---|---|---|---|---|---|
+| SPY total return | 6.63% | 0.43 | -55.2% | 15.10% | 0.80 | -33.7% | 0 |
+| H2-D 1.25x on signal | 7.29% | 0.45 | -56.6% | 15.98% | 0.80 | -36.9% | 873 |
+| H2-E 1.5x on signal | 8.0% | 0.45 | -59% | 17.1% | 0.79 | -41% | 873 |
+| H2-B 2x on signal | 9.4% | 0.46 | -66% | 19.4% | 0.76 | -48% | 873 |
+| H2-F 1.5x, only above 200-day | 6.62% | 0.43 | -54.4% | 15.20% | 0.81 | -33.2% | 361 |
+| H2-G 2x, only above 200-day | 6.69% | 0.43 | -55.3% | 15.54% | 0.81 | -33.3% | 361 |
+
+**Still no pass.** The trade-off is nearly linear: each extra 0.25x on signals adds about
+0.7–1.0%/yr in both periods and costs 1.5–3.5 points of extra drawdown, so Sharpe never
+moves much above SPY's. The drawdown comes from signals that fire inside crashes (Oct 2008,
+Mar 2020); leverage there deepens the fall before the rebound pays.
+
+**The 200-day condition removes the edge.** It blocks 512 of the 873 signal days, because
+extreme selling breadth mostly happens when the market is already below its 200-day average.
+What remains is SPY with slightly lower drawdown and +0.1–0.4%/yr: no worse than SPY, but
+not the wide margin we are after.
+
+Bottom line for H2: Cook's breadth signal is the strongest out-of-sample finding in this
+project so far (p ≈ 0.0003, 10 of 11 hold-out trades won), but it fires about 1.5 times a
+year, so it can only add a few percent a year, and only by taking crash-time leverage risk.
 
 ## Caveats
 
