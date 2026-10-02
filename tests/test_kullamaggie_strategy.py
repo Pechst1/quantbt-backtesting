@@ -92,3 +92,24 @@ def test_breakout_buys_pivot_with_stop_order_and_trails_sma(tmp_path):
     assert trades
     assert all(t.entry_price == pytest.approx(top) for t in trades)
     assert all(p.quantity == 0 for p in portfolio.positions.values())
+
+
+def test_position_without_data_does_not_free_cash_for_new_entries(tmp_path):
+    # X is bought on an EP and then stops printing (delisted); Y gaps later. The stuck
+    # position must not be counted as cash, so Y is sized from real cash only.
+    x_rows = _gap_rows() + [(115, 117, 114, 116, 2e6)]
+    y_rows = [(100, 101, 99, 100, 1e6)] * 30 + [(112, 116, 112, 115, 5e6)] + [(115, 117, 114, 116, 2e6)] * 3
+    index = pd.bdate_range("2020-01-01", periods=len(y_rows))
+    x = _frame(x_rows)
+    y = _frame(y_rows)
+    y.index = index
+    data = PublicOHLCVDataHandler(
+        DataHandlerConfig(symbols=["X", "Y"], start=index[0].to_pydatetime(), end=index[-1].to_pydatetime(), cache_dir=tmp_path),
+        source=FrameSource({"X": x, "Y": y}),
+    )
+    strategy = KullamaggieStrategy(symbols=data.active_symbols, setup="ep", market_symbol=None, max_weight=1.0, risk_per_trade=1.0)
+    portfolio = Portfolio(initial_cash=100_000.0, leverage=1.0)
+    BacktestEngine(data_handler=data, strategy=strategy, portfolio=portfolio, execution_handler=SimulatedExecutionHandler(FREE)).run()
+    assert portfolio.positions["X"].quantity > 0  # stuck: no bar to sell into
+    assert portfolio.positions["Y"].quantity > 0
+    assert min(s.cash for s in portfolio.history) >= -1e-6

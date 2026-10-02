@@ -260,8 +260,8 @@ class KullamaggieStrategy(BaseStrategy):
             if not self._valid[i]:
                 bar = market_event.bars.get(symbol)
                 if bar is None or bar.is_stale:
+                    # Fills only if the symbol prints again, so its value is not spendable cash.
                     signals.append(self.sell_moo(timestamp=ts, symbol=symbol, quantity=qty, metadata={**meta, "reason": "NO_DATA"}))
-                    exit_value += qty * self._last_close(i)
                 continue
             close = float(self._close[-1, i])
             if np.isfinite(sma_trail[i]) and close < sma_trail[i]:
