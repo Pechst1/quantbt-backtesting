@@ -1,0 +1,95 @@
+{
+  "variant": "TS-ETF",
+  "spec": {
+    "setup": "TS",
+    "universe": "ETF",
+    "slots": 5,
+    "trend": null
+  },
+  "symbols": 18,
+  "start": "1998-01-02",
+  "end": "2026-09-30",
+  "periods": {
+    "full": {
+      "strategy": {
+        "cagr": 0.003058455491041334,
+        "ann_vol": 0.048499341321091224,
+        "sharpe": -0.3517289798162745,
+        "max_drawdown": -0.35593918964639304
+      },
+      "spy": {
+        "cagr": 0.09276672509721218,
+        "ann_vol": 0.1931972147550162,
+        "sharpe": 0.446528913832823,
+        "max_drawdown": -0.5518944026470529
+      },
+      "avg_exposure": 0.07804026021141679,
+      "trades": {
+        "count": 1179,
+        "win_rate": 0.4071246819338422,
+        "avg_return": -0.0009176740874977185,
+        "avg_win": 0.021778115060435276,
+        "avg_loss": -0.01650276534788089,
+        "median_hold_calendar_days": 3.0
+      }
+    },
+    "in_sample_1998_2019": {
+      "strategy": {
+        "cagr": -0.002452991847614272,
+        "ann_vol": 0.04385069371665337,
+        "sharpe": -0.46948575262438,
+        "max_drawdown": -0.3276776631277606
+      },
+      "spy": {
+        "cagr": 0.07507038740472805,
+        "ann_vol": 0.19092199869844917,
+        "sharpe": 0.375194840119691,
+        "max_drawdown": -0.5518944026470529
+      },
+      "avg_exposure": 0.07519437140324821,
+      "trades": {
+        "count": 881,
+        "win_rate": 0.3927355278093076,
+        "avg_return": -0.0014372877424128345,
+        "avg_win": 0.0213491868120899,
+        "avg_loss": -0.016173961005698716,
+        "median_hold_calendar_days": 3.0
+      }
+    },
+    "holdout_2020_2026": {
+      "strategy": {
+        "cagr": 0.021236288810783988,
+        "ann_vol": 0.061287624105417694,
+        "sharpe": -0.09046988487514883,
+        "max_drawdown": -0.1352183021411707
+      },
+      "spy": {
+        "cagr": 0.15102539224385958,
+        "ann_vol": 0.20049560862181556,
+        "sharpe": 0.6620962472014609,
+        "max_drawdown": -0.3371726392350439
+      },
+      "avg_exposure": 0.08733347233720624,
+      "trades": {
+        "count": 298,
+        "win_rate": 0.44966442953020136,
+        "avg_return": 0.0006184991674694535,
+        "avg_win": 0.022885646209147962,
+        "avg_loss": -0.01757538926902396,
+        "median_hold_calendar_days": 3.0
+      }
+    }
+  },
+  "setups_seen": 2273,
+  "orders_placed": 2057,
+  "exit_reasons": {
+    "STOP": 1125,
+    "TIME": 56
+  },
+  "engine": {
+    "fills": 2362,
+    "margin_calls": 0,
+    "cash_interest_earned": 70522.82283680976,
+    "margin_interest_paid": 0.30402142628053475
+  }
+}

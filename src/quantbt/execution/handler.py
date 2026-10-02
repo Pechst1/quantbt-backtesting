@@ -167,7 +167,8 @@ class SimulatedExecutionHandler:
 
     def _attempt_fill(self, order: OrderEvent, event: MarketEvent) -> FillEvent | str | None:
         bar = event.bars.get(order.symbol)
-        if bar is None:
+        if bar is None or bar.is_stale:
+            # A forward-filled bar is not a real trading session: keep the order pending.
             return None
         if self._is_short_restricted(order, event):
             return "REJECTED_SHORT"
@@ -209,14 +210,69 @@ class SimulatedExecutionHandler:
         self._pending_orders.extend(self._create_protective_orders(order, event.timestamp))
         return outcome
 
-    def on_market(self, event: MarketEvent) -> list[FillEvent]:
+    def _fill_priority(self, order: OrderEvent, event: MarketEvent) -> int:
+        """Order in which pending orders are resolved inside one bar.
+
+        Daily bars do not say whether the high or the low came first, so resolution is
+        pessimistic: anything that executes at the open goes first, then stops, then
+        limits/targets, and market-on-close orders last.
+        """
+        if order.order_type in (OrderType.MARKET, OrderType.MOO):
+            return 0
+        if order.order_type == OrderType.MOC:
+            return 3
+        bar = event.bars.get(order.symbol)
+        if bar is not None and self._match_order(order, bar) == bar.open:
+            return 0
+        if order.order_type == OrderType.STOP_LOSS:
+            return 1
+        return 2
+
+    def _reconcile_protective(self, order: OrderEvent, positions: dict[str, float]) -> OrderEvent | None:
+        """Drop or shrink a protective order so it can only reduce the current position."""
+        if not order.metadata.get("is_protective"):
+            return order
+        current = float(positions.get(order.symbol, 0.0))
+        reduces = (current > 0 and order.side == Side.SELL) or (current < 0 and order.side == Side.BUY)
+        if not reduces:
+            return None
+        max_qty = int(abs(current))
+        if max_qty <= 0:
+            return None
+        if order.quantity > max_qty:
+            order.quantity = max_qty
+        return order
+
+    def cancel_orphaned_protective_orders(self, positions: dict[str, float]) -> int:
+        """Cancel stop/target orders whose position was closed or reversed elsewhere."""
+        kept: list[OrderEvent] = []
+        cancelled = 0
+        for order in self._pending_orders:
+            if self._reconcile_protective(order, positions) is None:
+                cancelled += 1
+                continue
+            kept.append(order)
+        self._pending_orders = kept
+        return cancelled
+
+    def on_market(self, event: MarketEvent, positions: dict[str, float] | None = None) -> list[FillEvent]:
+        """Match pending orders against the new bar.
+
+        ``positions`` maps symbol to signed quantity before this bar. When given, protective
+        orders are reconciled against the running position so a stop or target can never
+        open a new position after the strategy has already exited.
+        """
         fills: list[FillEvent] = []
         remaining: list[OrderEvent] = []
-        new_orders: list[OrderEvent] = []
-        cancelled_ids: set[str] = set()
+        filled_oco_groups: set[str] = set()
+        running = None if positions is None else {k.upper(): float(v) for k, v in positions.items()}
 
-        for order in self._pending_orders:
-            if order.order_id in cancelled_ids:
+        queue = sorted(self._pending_orders, key=lambda order: self._fill_priority(order, event))
+        while queue:
+            order = queue.pop(0)
+            if order.oco_group and order.oco_group in filled_oco_groups:
+                continue
+            if running is not None and self._reconcile_protective(order, running) is None:
                 continue
             outcome = self._attempt_fill(order, event)
             if outcome is None:
@@ -227,15 +283,28 @@ class SimulatedExecutionHandler:
                 continue
 
             fills.append(outcome)
+            if running is not None:
+                signed = outcome.quantity if outcome.side == Side.BUY else -outcome.quantity
+                running[order.symbol] = running.get(order.symbol, 0.0) + signed
             if order.oco_group:
-                for pending in self._pending_orders:
-                    if pending.oco_group == order.oco_group and pending.order_id != order.order_id:
-                        cancelled_ids.add(pending.order_id)
-            new_orders.extend(self._create_protective_orders(order, event.timestamp))
+                filled_oco_groups.add(order.oco_group)
+
+            protective = self._create_protective_orders(order, event.timestamp)
+            if protective and order.order_type in (OrderType.MARKET, OrderType.MOO):
+                # The entry filled at the open, so the rest of this bar can already hit its
+                # stop or target. Resolve them against the same bar (stop first).
+                protective.sort(key=lambda child: self._fill_priority(child, event))
+                queue = protective + queue
+            else:
+                remaining.extend(protective)
 
         self._pending_orders = [
-            order for order in remaining if order.order_id not in cancelled_ids
-        ] + new_orders
+            order
+            for order in remaining
+            if not (order.oco_group and order.oco_group in filled_oco_groups)
+            # Day orders get exactly one bar to fill; protective children they spawned do not inherit this.
+            and not (order.metadata.get("time_in_force") == "DAY" and order.timestamp < event.timestamp)
+        ]
         return fills
 
     @property
