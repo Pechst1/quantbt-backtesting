@@ -74,6 +74,8 @@ def panel() -> tuple[dict[str, pd.DataFrame], pd.DataFrame]:
     frame["close"] = frame["adj_close"]
     out = {f: frame.pivot(index="date", columns="ticker", values=f).sort_index() for f in ("open", "high", "low", "close")}
     members = pd.read_csv(MEMBERSHIP, parse_dates=["effective_from", "effective_to"])
+    # Prices before the first membership date are kept only as indicator history.
+    out = {f: v.loc[pd.Timestamp(members["effective_from"].min()) - pd.Timedelta(days=400) :] for f, v in out.items()}
     member = pd.DataFrame(False, index=out["close"].index, columns=out["close"].columns)
     for row in members.itertuples():
         if row.symbol not in member.columns:
@@ -121,7 +123,7 @@ def schwartz(p: dict[str, pd.DataFrame], symbol: str, short: bool) -> pd.DataFra
 def seykota_spy(p: dict[str, pd.DataFrame], cap: float | None) -> pd.DataFrame:
     c = p["close"]["SPY"].dropna()
     a = atr(sub(p, ["SPY"]))["SPY"].reindex(c.index)
-    up = ema(c, 15) > ema(c, 150)
+    up = (ema(c, 15) > ema(c, 150)).astype(object)
     up.iloc[:150] = np.nan  # no signal before the slow average has 150 bars
     w = pd.Series(np.nan, index=c.index)
     held = 0.0
@@ -159,6 +161,7 @@ def seykota_hite_stocks(p: dict[str, pd.DataFrame], member: pd.DataFrame) -> pd.
     risk = 0.01 / (5.0 * atr(p) / c)
     dates = weekly_dates(c.index)
     w = risk.where(up & member).loc[dates].fillna(0.0)
+    w = w.loc[member.loc[dates].any(axis=1)]  # start once membership data exists
     total = w.sum(axis=1)
     scale = np.where(total > 1.0, 1.0 / total.replace(0, np.nan), 1.0)
     return w.mul(np.nan_to_num(scale, nan=1.0), axis=0)
@@ -176,17 +179,16 @@ def rogers(close: pd.DataFrame, lookback: int, n: int, change_filter: bool, elig
     rows = []
     for ts in dates:
         cand = ret.loc[ts][ok.loc[ts]]
+        if len(cand) < n:  # the control R3 also waits for n eligible funds, so it starts with R1/R2
+            continue
         w = pd.Series(0.0, index=m.columns)
         if equal_all:
-            if len(cand):
-                w[cand.index] = 1.0 / len(cand)
-        elif len(cand) >= n:
+            w[cand.index] = 1.0 / len(cand)
+        else:
             pick = cand.nsmallest(n).index
             if change_filter:
                 pick = [s for s in pick if m.at[ts, s] > sma10.at[ts, s]]
             w[pick] = 1.0 / n
-        else:
-            continue
         rows.append(w.rename(ts))
     return pd.DataFrame(rows)
 
@@ -249,7 +251,7 @@ def main(selected: list[str]) -> None:
     if want("R2"):
         run("R2", fp, rogers(fp["close"], 60, 4, False), rf, spy)
     if want("R3"):
-        run("R3", fp, rogers(fp["close"], 60, 0, False, equal_all=True), rf, spy)
+        run("R3", fp, rogers(fp["close"], 60, 4, False, equal_all=True), rf, spy)
 
     if want("K3") or want("R4"):
         sp, member = panel()
