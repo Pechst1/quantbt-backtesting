@@ -1,0 +1,97 @@
+{
+  "variant": "EP-10",
+  "spec": {
+    "universe": "SPX",
+    "setup": "ep",
+    "min_adr": null,
+    "trail": 10
+  },
+  "symbols": 832,
+  "start": "1999-07-01",
+  "end": "2026-09-30",
+  "periods": {
+    "full": {
+      "strategy": {
+        "cagr": 0.027921200561954018,
+        "ann_vol": 0.04512362991686768,
+        "sharpe": 0.19266255517101777,
+        "max_drawdown": -0.13317495476434071
+      },
+      "spy": {
+        "cagr": 0.08346516759834999,
+        "ann_vol": 0.19202059218536738,
+        "sharpe": 0.41066564306013964,
+        "max_drawdown": -0.5518944026470529
+      },
+      "avg_exposure": 0.04609001904975434,
+      "trades": {
+        "count": 446,
+        "win_rate": 0.4461883408071749,
+        "avg_return": 0.014231445739767798,
+        "avg_win": 0.06214758196116328,
+        "avg_loss": -0.024373052673421276,
+        "median_hold_calendar_days": 6.0
+      }
+    },
+    "in_sample_1999_2019": {
+      "strategy": {
+        "cagr": 0.031150515258469014,
+        "ann_vol": 0.04048610529477105,
+        "sharpe": 0.3570512247026237,
+        "max_drawdown": -0.06768019642986878
+      },
+      "spy": {
+        "cagr": 0.061661783738560016,
+        "ann_vol": 0.18916545305617466,
+        "sharpe": 0.3209997692527454,
+        "max_drawdown": -0.5518944026470529
+      },
+      "avg_exposure": 0.04423236564912348,
+      "trades": {
+        "count": 312,
+        "win_rate": 0.483974358974359,
+        "avg_return": 0.016371603253755012,
+        "avg_win": 0.059023934784152306,
+        "avg_loss": -0.023631515138108298,
+        "median_hold_calendar_days": 6.0
+      }
+    },
+    "holdout_2020_2026": {
+      "strategy": {
+        "cagr": 0.01817562698130959,
+        "ann_vol": 0.056988634573562014,
+        "sharpe": -0.15533899676361504,
+        "max_drawdown": -0.13317495476434071
+      },
+      "spy": {
+        "cagr": 0.15102539224385958,
+        "ann_vol": 0.20049560862181556,
+        "sharpe": 0.6620962472014609,
+        "max_drawdown": -0.3371726392350439
+      },
+      "avg_exposure": 0.05174517630477217,
+      "trades": {
+        "count": 134,
+        "win_rate": 0.3582089552238806,
+        "avg_return": 0.009248392423618466,
+        "avg_win": 0.07197405537217695,
+        "avg_loss": -0.025761279919763014,
+        "median_hold_calendar_days": 6.0
+      }
+    }
+  },
+  "setups_seen": 291,
+  "orders_placed": 287,
+  "exit_reasons": {
+    "PARTIAL": 166,
+    "TRAIL": 85,
+    "STOP": 200,
+    "NO_DATA": 1
+  },
+  "engine": {
+    "fills": 739,
+    "margin_calls": 0,
+    "cash_interest_earned": 84291.49169228903,
+    "margin_interest_paid": 0.17381985500402733
+  }
+}
