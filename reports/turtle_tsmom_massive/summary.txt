@@ -1,0 +1,6 @@
+             strategy window   CAGR Sharpe  MaxDD    Vol AvgLev
+      turtle_system_1   full -48.4%  -0.17 -95.0%  98.2%  14.28
+      turtle_system_2   full -69.7%  -0.35 -99.7% 122.4%  13.96
+turtle_combined_50_50   full -56.6%  -0.29 -98.4% 102.3%  14.12
+      tsmom_12m_25etf   full   4.5%   0.37 -23.1%  14.8%   3.46
+     spy_buy_and_hold   full  20.9%   1.31 -18.8%  15.4%   1.00
