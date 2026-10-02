@@ -248,8 +248,6 @@ def run_turtle(
             row = ind[sym].iloc[t]
             n = row["n"]
             ready = not (np.isnan(n) or np.isnan(row["entry_hi"]) or np.isnan(row["exit_hi"]))
-            if config.failsafe_lookback and ready:
-                ready = not np.isnan(row["fail_hi"])
 
             # --- System 1 last-breakout filter: resolve the hypothetical trade on this bar.
             if config.system == 1 and ready:
@@ -304,7 +302,7 @@ def run_turtle(
                         # Skipped (last breakout won) or not a fresh breakout under the filter's
                         # hypothetical trade: only the 55-day failsafe can enter.
                         direction = 0
-                if direction == 0 and config.system == 1:
+                if direction == 0 and config.system == 1 and not np.isnan(row["fail_hi"]):
                     fail_long = h > row["fail_hi"]
                     fail_short = lo < row["fail_lo"]
                     if fail_long != fail_short:

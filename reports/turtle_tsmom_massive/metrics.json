@@ -3,14 +3,14 @@
     "full": {
       "start": "2022-11-01",
       "end": "2026-10-01",
-      "cagr": -0.4854109500821946,
-      "sharpe": -0.17202239117959423,
-      "max_drawdown": -0.9500642132806747,
-      "calmar": -0.5109243599503848,
-      "annual_vol": 0.9811795803538637,
+      "cagr": -0.4841549145321533,
+      "sharpe": -0.16877984455360834,
+      "max_drawdown": -0.9498903577612536,
+      "calmar": -0.5096955775751134,
+      "annual_vol": 0.981874985006462,
       "max_drawdown_duration_days": 1337.0,
-      "avg_gross_leverage": 14.246583071726326,
-      "max_gross_leverage": 36.408622614106726
+      "avg_gross_leverage": 14.279118987622892,
+      "max_gross_leverage": 36.408961402487115
     }
   },
   "turtle_system_2": {
@@ -31,14 +31,14 @@
     "full": {
       "start": "2022-11-01",
       "end": "2026-10-01",
-      "cagr": -0.5661789969669986,
-      "sharpe": -0.29163373363882567,
-      "max_drawdown": -0.9844245626268985,
-      "calmar": -0.5751370074068165,
-      "annual_vol": 1.0224009545537103,
+      "cagr": -0.5656404179477743,
+      "sharpe": -0.2900435723773341,
+      "max_drawdown": -0.9843957721072147,
+      "calmar": -0.5746067120310305,
+      "annual_vol": 1.0227240345191704,
       "max_drawdown_duration_days": 1344.0,
-      "avg_gross_leverage": 14.104161500224807,
-      "max_gross_leverage": 36.141406770963435
+      "avg_gross_leverage": 14.120429458173088,
+      "max_gross_leverage": 36.17297476415835
     }
   },
   "tsmom_12m_25etf": {
@@ -100,7 +100,7 @@
       "VNQ": "2021-10-04"
     },
     "data_source": "massive",
-    "turtle_trades_s1": 529,
+    "turtle_trades_s1": 553,
     "turtle_trades_s2": 352,
     "cost_bps_per_side": 9.5,
     "cash_proxy": "BIL"

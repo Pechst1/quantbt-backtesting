@@ -6,7 +6,7 @@ The Massive plan only serves daily bars from 2021-10-04 onward (a rolling ~5-yea
 
 | Strategy | CAGR | Sharpe | Max DD | Vol | Avg gross lev |
 |---|---|---|---|---|---|
-| Turtle System 1 | -48.5% | -0.17 | -95.0% | 98% | 14.2x |
+| Turtle System 1 | -48.4% | -0.17 | -95.0% | 98% | 14.3x |
 | Turtle System 2 | -69.7% | -0.35 | -99.7% | 122% | 14.0x |
 | Turtle 50/50 | -56.6% | -0.29 | -98.4% | 102% | 14.1x |
 | TSMOM 12m, 25 ETFs | 4.5% | 0.37 | -23.1% | 15% | 3.5x |
