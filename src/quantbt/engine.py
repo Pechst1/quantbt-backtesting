@@ -29,6 +29,8 @@ class BacktestResult:
     risk_rejections: int = 0
     universe_rejections: int = 0
     borrow_fees_paid: float = 0.0
+    margin_interest_paid: float = 0.0
+    cash_interest_earned: float = 0.0
 
 
 class BacktestEngine:
@@ -41,6 +43,7 @@ class BacktestEngine:
         execution_handler: SimulatedExecutionHandler,
         reporter: TearSheetReporter | None = None,
         universe: PointInTimeIndexUniverse | None = None,
+        same_bar_moc_fills: bool = False,
     ) -> None:
         self.data_handler = data_handler
         self.strategy = strategy
@@ -48,6 +51,9 @@ class BacktestEngine:
         self.execution_handler = execution_handler
         self.reporter = reporter
         self.universe = universe
+        # Legacy behaviour: fill MOC orders at the close of the bar whose close produced the
+        # signal. That is look-ahead, so by default MOC orders fill at the next bar's close.
+        self.same_bar_moc_fills = same_bar_moc_fills
         self._queue: deque[MarketEvent | SignalEvent | OrderEvent | FillEvent] = deque()
 
         self.strategy.bind_portfolio(self.portfolio)
@@ -83,10 +89,18 @@ class BacktestEngine:
     def _handle_market_event(self, market_event: MarketEvent) -> None:
         self._current_market_event = market_event
 
-        fills = self.execution_handler.on_market(market_event)
+        # Interest accrues on the balance held overnight, before today's fills change it.
+        self.portfolio.apply_financing(
+            timestamp=market_event.timestamp,
+            previous_timestamp=self._last_timestamp,
+        )
+
+        fills = self.execution_handler.on_market(market_event, positions=self._signed_positions())
         for fill in fills:
             self.portfolio.on_fill(fill)
             self._fills += 1
+        if fills:
+            self._cancel_orphaned_protective_orders()
 
         self.portfolio.apply_borrow_fees(
             timestamp=market_event.timestamp,
@@ -110,6 +124,12 @@ class BacktestEngine:
 
         self._last_timestamp = market_event.timestamp
 
+    def _signed_positions(self) -> dict[str, float]:
+        return {symbol: float(position.quantity) for symbol, position in self.portfolio.positions.items()}
+
+    def _cancel_orphaned_protective_orders(self) -> None:
+        self.execution_handler.cancel_orphaned_protective_orders(self._signed_positions())
+
     def _handle_signal_event(self, signal_event: SignalEvent) -> None:
         latest_bar = self.data_handler.get_latest_bar(signal_event.symbol)
         order = self.portfolio.create_order_from_signal(signal_event, latest_bar)
@@ -119,7 +139,8 @@ class BacktestEngine:
     def _handle_order_event(self, order_event: OrderEvent) -> None:
         self._submitted_orders += 1
         if (
-            self._current_market_event is not None
+            self.same_bar_moc_fills
+            and self._current_market_event is not None
             and order_event.order_type == OrderType.MOC
             and order_event.timestamp == self._current_market_event.timestamp
         ):
@@ -127,12 +148,14 @@ class BacktestEngine:
             if fill is not None:
                 self.portfolio.on_fill(fill)
                 self._fills += 1
+                self._cancel_orphaned_protective_orders()
             return
         self.execution_handler.submit_order(order_event)
 
     def _handle_fill_event(self, fill_event: FillEvent) -> None:
         self.portfolio.on_fill(fill_event)
         self._fills += 1
+        self._cancel_orphaned_protective_orders()
 
     def _drain_queue(self) -> None:
         while self._queue:
@@ -169,4 +192,6 @@ class BacktestEngine:
             risk_rejections=self.portfolio.rejected_by_risk,
             universe_rejections=self._universe_rejections,
             borrow_fees_paid=self.portfolio.borrow_fees_paid,
+            margin_interest_paid=self.portfolio.margin_interest_paid,
+            cash_interest_earned=self.portfolio.cash_interest_earned,
         )

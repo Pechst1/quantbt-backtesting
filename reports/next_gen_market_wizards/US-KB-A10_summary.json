@@ -1,0 +1,50 @@
+{
+  "variant": "US-KB-A10",
+  "spec": {
+    "universe": "US",
+    "setup": "breakout",
+    "min_adr": 0.04,
+    "trail": 10
+  },
+  "symbols": 8347,
+  "start": "2022-04-01",
+  "end": "2026-09-30",
+  "periods": {
+    "us_2022_2026": {
+      "strategy": {
+        "cagr": -0.0820493461233297,
+        "ann_vol": 0.13949043449277362,
+        "sharpe": -0.8474748924638708,
+        "max_drawdown": -0.37586919601520674
+      },
+      "spy": {
+        "cagr": 0.12281014084697484,
+        "ann_vol": 0.17120847787150198,
+        "sharpe": 0.5216670564968463,
+        "max_drawdown": -0.21943957968476357
+      },
+      "avg_exposure": 0.2633995575733162,
+      "trades": {
+        "count": 668,
+        "win_rate": 0.3278443113772455,
+        "avg_return": 0.01605950794174519,
+        "avg_win": 0.1460470077215628,
+        "avg_loss": -0.0473419674519743,
+        "median_hold_calendar_days": 6.0
+      }
+    }
+  },
+  "setups_seen": 2369,
+  "orders_placed": 2087,
+  "exit_reasons": {
+    "STOP": 392,
+    "TRAIL": 97,
+    "PARTIAL": 185
+  },
+  "engine": {
+    "fills": 1166,
+    "margin_calls": 0,
+    "cash_interest_earned": 11025.684986236702,
+    "margin_interest_paid": 0.0
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "variant": "US-EP-10",
+  "spec": {
+    "universe": "US",
+    "setup": "ep",
+    "min_adr": null,
+    "trail": 10
+  },
+  "symbols": 8347,
+  "start": "2022-04-01",
+  "end": "2026-09-30",
+  "periods": {
+    "us_2022_2026": {
+      "strategy": {
+        "cagr": -0.19898420039510067,
+        "ann_vol": 0.2020096003865303,
+        "sharpe": -1.2104551459549504,
+        "max_drawdown": -0.6800938776524844
+      },
+      "spy": {
+        "cagr": 0.12281014084697484,
+        "ann_vol": 0.17120847787150198,
+        "sharpe": 0.5216670564968463,
+        "max_drawdown": -0.21943957968476357
+      },
+      "avg_exposure": 0.8233260917559063,
+      "trades": {
+        "count": 1222,
+        "win_rate": 0.35597381342062195,
+        "avg_return": 0.011604213220124747,
+        "avg_win": 0.18198973525924508,
+        "avg_loss": -0.08257329896159996,
+        "median_hold_calendar_days": 6.0
+      }
+    }
+  },
+  "setups_seen": 1661,
+  "orders_placed": 977,
+  "exit_reasons": {
+    "STOP": 705,
+    "PARTIAL": 425,
+    "TRAIL": 265
+  },
+  "engine": {
+    "fills": 2372,
+    "margin_calls": 0,
+    "cash_interest_earned": 1709.7622178342942,
+    "margin_interest_paid": 2.7137147948889324
+  }
+}

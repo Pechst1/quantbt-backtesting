@@ -15,6 +15,9 @@ class Bar:
     close: float
     volume: float
     adj_close: float | None = None
+    # True when the symbol had no real bar on this timestamp and the row was forward-filled
+    # from the last close. Such bars carry a price for marking only; nothing can trade on them.
+    is_stale: bool = False
 
     @property
     def mid(self) -> float:
