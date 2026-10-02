@@ -29,13 +29,13 @@ CASH_SYMBOL = "BIL"
 BENCHMARK = "SPY"
 
 
-def windows(series: pd.Series) -> dict[str, pd.Series]:
-    s = series[series.index >= EVAL_START]
-    return {
-        "full": s,
-        "2008_2019": s[s.index < HOLDOUT_START],
-        "2020_on": s[s.index >= HOLDOUT_START],
-    }
+def windows(series: pd.Series, eval_start: pd.Timestamp, holdout_start: pd.Timestamp) -> dict[str, pd.Series]:
+    s = series[series.index >= eval_start]
+    out = {"full": s}
+    if eval_start < holdout_start:
+        out[f"{eval_start.year}_{holdout_start.year - 1}"] = s[s.index < holdout_start]
+        out[f"{holdout_start.year}_on"] = s[s.index >= holdout_start]
+    return out
 
 
 def main() -> None:
@@ -43,9 +43,13 @@ def main() -> None:
     parser.add_argument("--data-dir", type=Path, default=None)
     parser.add_argument("--source", choices=["yahoo", "massive"], default="yahoo")
     parser.add_argument("--end", default=datetime.today().strftime("%Y-%m-%d"))
+    parser.add_argument("--start", default=DATA_START.strftime("%Y-%m-%d"), help="first bar to request")
+    parser.add_argument("--eval-start", default=str(EVAL_START.date()), help="first day scored (after warm-up)")
     parser.add_argument("--out", type=Path, default=Path("reports/turtle_tsmom"))
     args = parser.parse_args()
     end = datetime.strptime(args.end, "%Y-%m-%d")
+    start = datetime.strptime(args.start, "%Y-%m-%d")
+    eval_start = pd.Timestamp(args.eval_start)
 
     symbols = sorted(set(TURTLE_UNIVERSE) | set(TSMOM_UNIVERSE) | {CASH_SYMBOL, BENCHMARK})
     source = None
@@ -53,7 +57,7 @@ def main() -> None:
         from quantbt.data.massive import MassiveSource
 
         source = MassiveSource()
-    panel = load_panel(symbols, DATA_START, end, data_dir=args.data_dir, source=source)
+    panel = load_panel(symbols, start, end, data_dir=args.data_dir, source=source)
     first_bars = {s: str(panel.close[s].first_valid_index().date()) for s in panel.symbols}
     print("First bar per symbol:", first_bars)
     missing = sorted(set(symbols) - set(panel.symbols))
@@ -80,7 +84,7 @@ def main() -> None:
     results: dict[str, dict] = {}
     for name, (equity, lev) in curves.items():
         results[name] = {
-            label: summarize(curve, lev) for label, curve in windows(equity).items() if len(curve) > 2
+            label: summarize(curve, lev) for label, curve in windows(equity, eval_start, HOLDOUT_START).items() if len(curve) > 2
         }
     results["_notes"] = {
         "symbols_missing": missing,
