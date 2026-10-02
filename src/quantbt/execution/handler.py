@@ -299,7 +299,11 @@ class SimulatedExecutionHandler:
                 remaining.extend(protective)
 
         self._pending_orders = [
-            order for order in remaining if not (order.oco_group and order.oco_group in filled_oco_groups)
+            order
+            for order in remaining
+            if not (order.oco_group and order.oco_group in filled_oco_groups)
+            # Day orders get exactly one bar to fill; protective children they spawned do not inherit this.
+            and not (order.metadata.get("time_in_force") == "DAY" and order.timestamp < event.timestamp)
         ]
         return fills
 
