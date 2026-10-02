@@ -23,6 +23,7 @@ import numpy as np
 import pandas as pd
 
 from quantbt.systems.data import PricePanel, daily_cash_rate
+from quantbt.systems.overlay import NativeVolEstimator, VolTarget, capped_scale, financing_rate
 
 # 25 liquid US-listed ETFs covering the four asset classes in the paper, each with
 # inception before 2008: equity indices, government and credit bonds, commodities
@@ -66,6 +67,7 @@ class TsmomConfig:
     initial_equity: float = 1_000_000.0
     cost_bps_per_side: float = 9.5
     cash_symbol: str | None = "BIL"
+    borrow_spread_bps: float = 0.0
 
 
 @dataclass(slots=True)
@@ -75,6 +77,7 @@ class TsmomResult:
     weights: pd.DataFrame
     turnover: pd.Series
     config: TsmomConfig
+    scale: pd.Series | None = None
 
 
 def target_weights(panel: PricePanel, symbols: list[str], config: TsmomConfig) -> pd.DataFrame:
@@ -98,7 +101,13 @@ def target_weights(panel: PricePanel, symbols: list[str], config: TsmomConfig) -
     return raw.div(count, axis=0).fillna(0.0)
 
 
-def run_tsmom(panel: PricePanel, config: TsmomConfig | None = None, symbols: list[str] | None = None) -> TsmomResult:
+def run_tsmom(
+    panel: PricePanel,
+    config: TsmomConfig | None = None,
+    symbols: list[str] | None = None,
+    vol_target: VolTarget | None = None,
+) -> TsmomResult:
+    """Simulate the strategy; with `vol_target`, hold `k` times the published book (see `overlay`)."""
     config = config or TsmomConfig()
     symbols = symbols or [s for s in panel.symbols if s in TSMOM_UNIVERSE]
     if not symbols:
@@ -112,15 +121,21 @@ def run_tsmom(panel: PricePanel, config: TsmomConfig | None = None, symbols: lis
     index = panel.index
     decision_pos = {index.get_loc(ts): weights.loc[ts].to_numpy() for ts in weights.index}
 
-    qty = np.zeros(len(symbols))
+    native = np.zeros(len(symbols))  # the published book, in shares
+    qty = np.zeros(len(symbols))  # shares actually held
     last_close = np.full(len(symbols), np.nan)
     cash = config.initial_equity
     equity = cash
     pending: np.ndarray | None = None
-    equity_hist, lev_hist, turnover_hist = [], [], []
+    estimator = NativeVolEstimator(vol_target) if vol_target is not None else None
+    scale = 0.0
+    native_cash = 0.0
+    native_value = 0.0
+    equity_hist, lev_hist, turnover_hist, scale_hist = [], [], [], []
 
     for t in range(len(index)):
-        cash *= 1.0 + float(rf.iloc[t])
+        cash *= 1.0 + financing_rate(cash, float(rf.iloc[t]), config.borrow_spread_bps)
+        prior_equity = equity
         traded = 0.0
         if pending is not None:
             # Rebalance at today's open to the weights decided at the prior month-end close.
@@ -128,21 +143,43 @@ def run_tsmom(panel: PricePanel, config: TsmomConfig | None = None, symbols: lis
                 o = opens[t, j]
                 if np.isnan(o):
                     continue
-                target_qty = pending[j] * equity / o
-                delta = target_qty - qty[j]
-                if delta != 0.0:
-                    cash -= delta * o + abs(delta * o) * cost
-                    traded += abs(delta * o)
-                    qty[j] = target_qty
+                target_qty = pending[j] * prior_equity / o
+                delta = target_qty - native[j]
+                native_cash -= delta * o + abs(delta * o) * cost
+                native[j] = target_qty
             pending = None
+        if estimator is None:
+            target = native
+        else:
+            marks = np.where(np.isnan(opens[t]), last_close, opens[t])
+            native_gross = float(np.nansum(np.abs(native * marks)))
+            k = capped_scale(scale, native_gross, prior_equity, vol_target.max_gross)
+            target = k * native
+        for j in range(len(symbols)):
+            o = opens[t, j]
+            if np.isnan(o):
+                continue
+            delta = target[j] - qty[j]
+            if delta != 0.0:
+                cash -= delta * o + abs(delta * o) * cost
+                traded += abs(delta * o)
+                qty[j] = target[j]
         row = closes[t]
         valid = ~np.isnan(row)
         last_close[valid] = row[valid]
-        held = np.where(np.isnan(last_close), 0.0, qty * np.nan_to_num(last_close))
+        marks = np.nan_to_num(last_close)
+        held = np.where(np.isnan(last_close), 0.0, qty * marks)
         equity = cash + held.sum()
+        if estimator is not None:
+            value = native_cash + float(np.sum(native * marks))
+            if prior_equity > 0:
+                estimator.update((value - native_value) / prior_equity)
+            native_value = value
+            scale = estimator.scale()
         equity_hist.append(equity)
         lev_hist.append(np.abs(held).sum() / equity if equity > 0 else np.nan)
         turnover_hist.append(traded / equity if equity > 0 else np.nan)
+        scale_hist.append(scale)
         if t in decision_pos and t + 1 < len(index):
             pending = decision_pos[t]
         if equity <= 0:
@@ -155,4 +192,5 @@ def run_tsmom(panel: PricePanel, config: TsmomConfig | None = None, symbols: lis
         weights=weights,
         turnover=pd.Series(turnover_hist, index=out_index),
         config=config,
+        scale=pd.Series(scale_hist, index=out_index),
     )

@@ -35,6 +35,7 @@ import numpy as np
 import pandas as pd
 
 from quantbt.systems.data import PricePanel, daily_cash_rate
+from quantbt.systems.overlay import NativeVolEstimator, VolTarget, capped_scale, financing_rate
 
 # ETF proxies for the markets the Turtles traded (Faith, ch. "Markets"): US bonds and
 # notes, the CME currencies, the S&P 500, COMEX metals, NYMEX energy and the softs.
@@ -75,6 +76,7 @@ class TurtleConfig:
     initial_equity: float = 1_000_000.0
     cost_bps_per_side: float = 9.5
     cash_symbol: str | None = "BIL"
+    borrow_spread_bps: float = 0.0
 
     @property
     def entry_lookback(self) -> int:
@@ -93,7 +95,7 @@ class TurtleConfig:
 class _Position:
     direction: int
     entry_n: float
-    unit_qty: list[int] = field(default_factory=list)
+    unit_qty: list[float] = field(default_factory=list)
     unit_px: list[float] = field(default_factory=list)
     stop: float = 0.0
     entry_date: pd.Timestamp | None = None
@@ -126,6 +128,7 @@ class TurtleResult:
     gross_leverage: pd.Series
     trades: pd.DataFrame
     config: TurtleConfig
+    scale: pd.Series | None = None
 
 
 def wilder_n(high: pd.Series, low: pd.Series, close: pd.Series, period: int = 20) -> pd.Series:
@@ -178,7 +181,16 @@ def run_turtle(
     panel: PricePanel,
     config: TurtleConfig | None = None,
     groups: dict[str, tuple[str, str]] | None = None,
+    vol_target: VolTarget | None = None,
 ) -> TurtleResult:
+    """Simulate the system.
+
+    Without `vol_target` the account trades the published book. With it, the
+    published rules (minus the drawdown rule, which the overlay replaces) define a
+    native book of fractional units sized on current equity, and the account holds
+    `k` times it: rescaled at each open, with intraday entries and adds trimmed so
+    gross exposure stays within the cap (see `overlay`).
+    """
     config = config or TurtleConfig()
     if config.system not in (1, 2):
         raise ValueError("system must be 1 or 2")
@@ -188,6 +200,7 @@ def run_turtle(
         raise ValueError("None of the panel symbols are in the Turtle universe.")
     cost = config.cost_bps_per_side / 10_000.0
     rf = daily_cash_rate(panel, config.cash_symbol)
+    overlay = vol_target is not None
 
     ind = {s: _symbol_indicators(panel, s, config) for s in symbols}
     opens = panel.open[symbols].to_numpy()
@@ -197,16 +210,23 @@ def run_turtle(
     last_close = np.full(len(symbols), np.nan)
 
     cash = config.initial_equity
+    held = np.zeros(len(symbols))  # shares actually held; equals the native book without an overlay
     positions: dict[str, _Position] = {}
     shadows: dict[str, _Shadow] = {}
     last_breakout_winner: dict[str, bool] = {s: False for s in symbols}
     trades: list[dict] = []
     equity_hist: list[float] = []
     lev_hist: list[float] = []
+    scale_hist: list[float] = []
 
     equity = config.initial_equity
     year_start_equity = equity
     current_year: int | None = None
+    estimator = NativeVolEstimator(vol_target) if overlay else None
+    scale = 0.0
+    k = 1.0
+    native_cash = 0.0
+    native_value = 0.0
 
     def units_in(direction: int, key: int | None = None, value: str | None = None) -> int:
         total = 0
@@ -226,20 +246,56 @@ def run_turtle(
             and units_in(direction) < config.max_units_direction
         )
 
-    def unit_size(n: float, notional: float) -> int:
+    def unit_size(n: float, notional: float) -> float:
         if not (n > 0) or notional <= 0:
             return 0
-        return int(math.floor(config.risk_per_unit * notional / n))
+        size = config.risk_per_unit * notional / n
+        return size if overlay else int(math.floor(size))
+
+    def trade(j: int, delta: float, px: float) -> None:
+        nonlocal cash
+        if delta != 0.0:
+            cash -= delta * px + abs(delta * px) * cost
+            held[j] += delta
+
+    def native_fill(j: int, delta: float, px: float, marks: np.ndarray, prior_equity: float) -> None:
+        """A published-rule trade; the account mirrors it scaled by `k`, entries capped."""
+        nonlocal native_cash
+        if not overlay:
+            trade(j, delta, px)
+            return
+        native_cash -= delta * px + abs(delta * px) * cost
+        want = k * delta
+        others = float(np.nansum(np.abs(np.delete(held, j) * np.delete(marks, j))))
+        room = max(0.0, vol_target.max_gross * prior_equity - others) / px
+        new_qty = held[j] + want
+        if abs(new_qty) > room:
+            # Fill only up to the cap; never cut what is already held (the next open does that).
+            new_qty = math.copysign(max(room, abs(held[j])), new_qty)
+        trade(j, new_qty - held[j], px)
 
     for t, ts in enumerate(panel.index):
-        if current_year != ts.year:
-            current_year = ts.year
-            year_start_equity = equity
-        drawdown = max(0.0, 1.0 - equity / year_start_equity) if year_start_equity > 0 else 1.0
-        steps = int(math.floor(drawdown / config.drawdown_step + 1e-12))
-        notional = year_start_equity * (1.0 - config.notional_cut) ** steps
+        prior_equity = equity
+        if overlay:
+            notional = prior_equity
+        else:
+            if current_year != ts.year:
+                current_year = ts.year
+                year_start_equity = equity
+            drawdown = max(0.0, 1.0 - equity / year_start_equity) if year_start_equity > 0 else 1.0
+            steps = int(math.floor(drawdown / config.drawdown_step + 1e-12))
+            notional = year_start_equity * (1.0 - config.notional_cut) ** steps
 
-        cash *= 1.0 + float(rf.iloc[t])
+        cash *= 1.0 + financing_rate(cash, float(rf.iloc[t]), config.borrow_spread_bps)
+        marks = np.where(np.isnan(opens[t]), last_close, opens[t])
+
+        if overlay:
+            # Rescale the account to k times the native book at the open.
+            native_qty = np.array([positions[s].qty if s in positions else 0.0 for s in symbols])
+            k = capped_scale(scale, float(np.nansum(np.abs(native_qty * marks))), prior_equity, vol_target.max_gross)
+            for j in range(len(symbols)):
+                if not np.isnan(opens[t, j]):
+                    trade(j, k * native_qty[j] - held[j], opens[t, j])
 
         for j, sym in enumerate(symbols):
             o, h, lo, c = opens[t, j], highs[t, j], lows[t, j], closes[t, j]
@@ -312,7 +368,7 @@ def run_turtle(
                     qty = unit_size(n, notional)
                     if qty > 0:
                         px = _favourable_fill(direction, level, o)
-                        cash -= direction * qty * px + abs(qty * px) * cost
+                        native_fill(j, direction * qty, px, marks, prior_equity)
                         pos = _Position(direction=direction, entry_n=float(n), entry_date=ts)
                         pos.unit_qty.append(qty)
                         pos.unit_px.append(px)
@@ -329,7 +385,7 @@ def run_turtle(
                     if qty <= 0:
                         break
                     px = _favourable_fill(d, add_level, o)
-                    cash -= d * qty * px + abs(qty * px) * cost
+                    native_fill(j, d * qty, px, marks, prior_equity)
                     pos.unit_qty.append(qty)
                     pos.unit_px.append(px)
                     pos.stop = px - d * config.stop_n * pos.entry_n
@@ -346,8 +402,9 @@ def run_turtle(
                         level = pos.stop if stop_hit else exit_level
                         reason = "stop" if stop_hit else "exit"
                     px = _adverse_fill(d, level, o)
-                    qty = sum(pos.unit_qty)
-                    cash += d * qty * px - abs(qty * px) * cost
+                    if overlay:
+                        native_cash += pos.qty * px - abs(pos.qty * px) * cost
+                    trade(j, -held[j], px)
                     gross_pnl = d * sum(q * (px - p) for q, p in zip(pos.unit_qty, pos.unit_px))
                     trades.append(
                         {
@@ -366,18 +423,17 @@ def run_turtle(
 
             last_close[j] = c
 
-        market_value = 0.0
-        gross = 0.0
-        for j, sym in enumerate(symbols):
-            pos = positions.get(sym)
-            if pos is None:
-                continue
-            value = pos.qty * last_close[j]
-            market_value += value
-            gross += abs(value)
-        equity = cash + market_value
+        values = np.where(np.isnan(last_close), 0.0, held * np.nan_to_num(last_close))
+        equity = cash + values.sum()
+        if overlay:
+            value = native_cash + sum(pos.qty * last_close[symbols.index(s)] for s, pos in positions.items())
+            if prior_equity > 0:
+                estimator.update((value - native_value) / prior_equity)
+            native_value = value
+            scale = estimator.scale()
         equity_hist.append(equity)
-        lev_hist.append(gross / equity if equity > 0 else np.nan)
+        lev_hist.append(np.abs(values).sum() / equity if equity > 0 else np.nan)
+        scale_hist.append(k * (1.0 if overlay else 0.0))
         if equity <= 0:
             break
 
@@ -387,4 +443,5 @@ def run_turtle(
         gross_leverage=pd.Series(lev_hist, index=index),
         trades=pd.DataFrame(trades),
         config=config,
+        scale=pd.Series(scale_hist, index=index),
     )

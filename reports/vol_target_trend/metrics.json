@@ -1,0 +1,534 @@
+{
+  "turtle_s1_native": {
+    "full": {
+      "start": "2008-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.34629731942588327,
+      "sharpe": -0.021779061877538995,
+      "max_drawdown": -0.9998710217684815,
+      "calmar": -0.3463419900032545,
+      "annual_vol": 0.9010046041370103,
+      "max_drawdown_duration_days": 6494.0,
+      "avg_gross_leverage": 12.22015593072212,
+      "max_gross_leverage": 40.517928250819004
+    },
+    "2008_2019": {
+      "start": "2008-01-02",
+      "end": "2019-12-31",
+      "cagr": -0.36373164941567526,
+      "sharpe": -0.009598472983182015,
+      "max_drawdown": -0.9983945070660778,
+      "calmar": -0.3643165570737681,
+      "annual_vol": 0.9409029661499875,
+      "max_drawdown_duration_days": 4029.0,
+      "avg_gross_leverage": 12.957204685474224,
+      "max_gross_leverage": 40.517928250819004
+    },
+    "2020_on": {
+      "start": "2020-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.3071971604123195,
+      "sharpe": -0.03479131179788948,
+      "max_drawdown": -0.9835576235137892,
+      "calmar": -0.3123326514565038,
+      "annual_vol": 0.8247321253225876,
+      "max_drawdown_duration_days": 1969.0,
+      "avg_gross_leverage": 10.906513282871913,
+      "max_gross_leverage": 37.506381169435976
+    }
+  },
+  "turtle_s2_native": {
+    "full": {
+      "start": "2008-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.39267512398828586,
+      "sharpe": -0.13173816107504677,
+      "max_drawdown": -0.9999545806602483,
+      "calmar": -0.39269295984324704,
+      "annual_vol": 0.8719656170682814,
+      "max_drawdown_duration_days": 6494.0,
+      "avg_gross_leverage": 10.567316712018789,
+      "max_gross_leverage": 37.52592326307397
+    },
+    "2008_2019": {
+      "start": "2008-01-02",
+      "end": "2019-12-31",
+      "cagr": -0.4408161189209714,
+      "sharpe": -0.1528597788117886,
+      "max_drawdown": -0.9996308407194396,
+      "calmar": -0.4409789103782689,
+      "annual_vol": 0.9297263314617584,
+      "max_drawdown_duration_days": 4029.0,
+      "avg_gross_leverage": 11.674813507931818,
+      "max_gross_leverage": 37.52592326307397
+    },
+    "2020_on": {
+      "start": "2020-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.29353467140405265,
+      "sharpe": -0.0819134627583877,
+      "max_drawdown": -0.9859352054295175,
+      "calmar": -0.29772207117421656,
+      "annual_vol": 0.7580986552607598,
+      "max_drawdown_duration_days": 1969.0,
+      "avg_gross_leverage": 8.593424192577338,
+      "max_gross_leverage": 32.8177204992679
+    }
+  },
+  "turtle_50_50_native": {
+    "full": {
+      "start": "2008-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.3386565919162986,
+      "sharpe": -0.08095670372880921,
+      "max_drawdown": -0.9998207143886365,
+      "calmar": -0.3387173190579253,
+      "annual_vol": 0.8306550028841526,
+      "max_drawdown_duration_days": 6494.0,
+      "avg_gross_leverage": 11.393736321370454,
+      "max_gross_leverage": 33.57121935662102
+    },
+    "2008_2019": {
+      "start": "2008-01-02",
+      "end": "2019-12-31",
+      "cagr": -0.3704513017602431,
+      "sharpe": -0.08622114260787453,
+      "max_drawdown": -0.9985473996422927,
+      "calmar": -0.37099020226075297,
+      "annual_vol": 0.8765193113395485,
+      "max_drawdown_duration_days": 4029.0,
+      "avg_gross_leverage": 12.31600909670302,
+      "max_gross_leverage": 33.57121935662102
+    },
+    "2020_on": {
+      "start": "2020-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.27291026719756384,
+      "sharpe": -0.06120597775311642,
+      "max_drawdown": -0.9812572370207421,
+      "calmar": -0.27812306182440416,
+      "annual_vol": 0.7416922482060766,
+      "max_drawdown_duration_days": 1969.0,
+      "avg_gross_leverage": 9.749968737724625,
+      "max_gross_leverage": 32.424248849394395
+    }
+  },
+  "tsmom_native": {
+    "full": {
+      "start": "2008-01-02",
+      "end": "2026-09-30",
+      "cagr": 0.06612955471632564,
+      "sharpe": 0.46524012430812944,
+      "max_drawdown": -0.3101981402231385,
+      "calmar": 0.21318488456686388,
+      "annual_vol": 0.16801851631746212,
+      "max_drawdown_duration_days": 1512.0,
+      "avg_gross_leverage": 3.378792579845995,
+      "max_gross_leverage": 5.838864327368069
+    },
+    "2008_2019": {
+      "start": "2008-01-02",
+      "end": "2019-12-31",
+      "cagr": 0.05427406365532672,
+      "sharpe": 0.39278677225287345,
+      "max_drawdown": -0.3101981402231385,
+      "calmar": 0.17496579320651345,
+      "annual_vol": 0.17239093475514058,
+      "max_drawdown_duration_days": 777.0,
+      "avg_gross_leverage": 3.407937645106872,
+      "max_gross_leverage": 5.838864327368069
+    },
+    "2020_on": {
+      "start": "2020-01-02",
+      "end": "2026-09-30",
+      "cagr": 0.08462588163433993,
+      "sharpe": 0.5884113561645753,
+      "max_drawdown": -0.2534287580766461,
+      "calmar": 0.3339237514976338,
+      "annual_vol": 0.15976467418766954,
+      "max_drawdown_duration_days": 1183.0,
+      "avg_gross_leverage": 3.326847304239442,
+      "max_gross_leverage": 4.99235766534065
+    }
+  },
+  "turtle_s1_vt15": {
+    "full": {
+      "start": "2008-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.03080760261062576,
+      "sharpe": -0.1512468627524167,
+      "max_drawdown": -0.5779703248555134,
+      "calmar": -0.05330308717550048,
+      "annual_vol": 0.1410054847847127,
+      "max_drawdown_duration_days": 6495.0,
+      "avg_gross_leverage": 1.8572165100787956,
+      "max_gross_leverage": 3.138480784361686
+    },
+    "2008_2019": {
+      "start": "2008-01-02",
+      "end": "2019-12-31",
+      "cagr": -0.03886539190881355,
+      "sharpe": -0.2164778761131177,
+      "max_drawdown": -0.4963595475102991,
+      "calmar": -0.07830088512200346,
+      "annual_vol": 0.13864774742584557,
+      "max_drawdown_duration_days": 4030.0,
+      "avg_gross_leverage": 1.8461124766587427,
+      "max_gross_leverage": 3.0957076531886805
+    },
+    "2020_on": {
+      "start": "2020-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.014809691597793107,
+      "sharpe": -0.029953129554197752,
+      "max_drawdown": -0.3611954693435482,
+      "calmar": -0.04100187531341094,
+      "annual_vol": 0.14505580760032047,
+      "max_drawdown_duration_days": 1969.0,
+      "avg_gross_leverage": 1.8770072386699352,
+      "max_gross_leverage": 3.138480784361686
+    }
+  },
+  "turtle_s2_vt15": {
+    "full": {
+      "start": "2008-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.018023621820376978,
+      "sharpe": -0.05324389250677825,
+      "max_drawdown": -0.48595007808678137,
+      "calmar": -0.03708945143364769,
+      "annual_vol": 0.14460161356192178,
+      "max_drawdown_duration_days": 5754.0,
+      "avg_gross_leverage": 1.6990089397719081,
+      "max_gross_leverage": 3.104104071035085
+    },
+    "2008_2019": {
+      "start": "2008-01-02",
+      "end": "2019-12-31",
+      "cagr": -0.02247387412527957,
+      "sharpe": -0.08958364593074744,
+      "max_drawdown": -0.48545682265039347,
+      "calmar": -0.046294280102155146,
+      "annual_vol": 0.14158201166024775,
+      "max_drawdown_duration_days": 3289.0,
+      "avg_gross_leverage": 1.7193937657107854,
+      "max_gross_leverage": 3.104104071035085
+    },
+    "2020_on": {
+      "start": "2020-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.009541870413668052,
+      "sharpe": 0.011323184933703004,
+      "max_drawdown": -0.3979291327077866,
+      "calmar": -0.02397881841105357,
+      "annual_vol": 0.14982510405091795,
+      "max_drawdown_duration_days": 1969.0,
+      "avg_gross_leverage": 1.662677046461379,
+      "max_gross_leverage": 3.0835802081821475
+    }
+  },
+  "turtle_50_50_vt15": {
+    "full": {
+      "start": "2008-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.02343687547188278,
+      "sharpe": -0.10712810005893393,
+      "max_drawdown": -0.48937700206888957,
+      "calmar": -0.047891248204964834,
+      "annual_vol": 0.13547234552559156,
+      "max_drawdown_duration_days": 6494.0,
+      "avg_gross_leverage": 1.778112724925352,
+      "max_gross_leverage": 3.10907456817971
+    },
+    "2008_2019": {
+      "start": "2008-01-02",
+      "end": "2019-12-31",
+      "cagr": -0.029690219316552136,
+      "sharpe": -0.16116825796811196,
+      "max_drawdown": -0.44779303960947403,
+      "calmar": -0.06630344085393858,
+      "annual_vol": 0.1324628162879226,
+      "max_drawdown_duration_days": 4029.0,
+      "avg_gross_leverage": 1.782753121184764,
+      "max_gross_leverage": 3.0884580870827896
+    },
+    "2020_on": {
+      "start": "2020-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.011205080157655423,
+      "sharpe": -0.009414827128181867,
+      "max_drawdown": -0.3601321780031226,
+      "calmar": -0.031113798882915336,
+      "annual_vol": 0.14064931839438963,
+      "max_drawdown_duration_days": 1969.0,
+      "avg_gross_leverage": 1.7698421425656572,
+      "max_gross_leverage": 3.10907456817971
+    }
+  },
+  "tsmom_vt15": {
+    "full": {
+      "start": "2008-01-02",
+      "end": "2026-09-30",
+      "cagr": 0.0570214840968295,
+      "sharpe": 0.5043122224843275,
+      "max_drawdown": -0.23724042864378725,
+      "calmar": 0.2403531490092119,
+      "annual_vol": 0.12560701650724387,
+      "max_drawdown_duration_days": 2252.0,
+      "avg_gross_leverage": 2.6167924206806816,
+      "max_gross_leverage": 3.1249243984367254
+    },
+    "2008_2019": {
+      "start": "2008-01-02",
+      "end": "2019-12-31",
+      "cagr": 0.04456829104616089,
+      "sharpe": 0.4081606938677627,
+      "max_drawdown": -0.23724042864378725,
+      "calmar": 0.1878612819111007,
+      "annual_vol": 0.12637859532790488,
+      "max_drawdown_duration_days": 1441.0,
+      "avg_gross_leverage": 2.568715381658496,
+      "max_gross_leverage": 3.1249243984367254
+    },
+    "2020_on": {
+      "start": "2020-01-02",
+      "end": "2026-09-30",
+      "cagr": 0.07768594710421795,
+      "sharpe": 0.6646485438053056,
+      "max_drawdown": -0.15653911906789553,
+      "calmar": 0.49627177900830854,
+      "annual_vol": 0.12412511087850801,
+      "max_drawdown_duration_days": 1085.0,
+      "avg_gross_leverage": 2.702480169875977,
+      "max_gross_leverage": 3.1246796644183057
+    }
+  },
+  "turtle_s1_vt20": {
+    "full": {
+      "start": "2008-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.0518623061184289,
+      "sharpe": -0.2262657024469417,
+      "max_drawdown": -0.728774563627756,
+      "calmar": -0.0711637160609233,
+      "annual_vol": 0.17070321774370825,
+      "max_drawdown_duration_days": 6495.0,
+      "avg_gross_leverage": 2.1845688288436125,
+      "max_gross_leverage": 3.1389349060314573
+    },
+    "2008_2019": {
+      "start": "2008-01-02",
+      "end": "2019-12-31",
+      "cagr": -0.054292954962285034,
+      "sharpe": -0.24638910174471568,
+      "max_drawdown": -0.5967791233833627,
+      "calmar": -0.09097663245067637,
+      "annual_vol": 0.16869989359849114,
+      "max_drawdown_duration_days": 4030.0,
+      "avg_gross_leverage": 2.1728574889514043,
+      "max_gross_leverage": 3.1236686739573485
+    },
+    "2020_on": {
+      "start": "2020-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.046175534858069134,
+      "sharpe": -0.1834569540989187,
+      "max_drawdown": -0.48508444005925055,
+      "calmar": -0.09519071535757574,
+      "annual_vol": 0.1741778712154838,
+      "max_drawdown_duration_days": 1969.0,
+      "avg_gross_leverage": 2.2054419602975126,
+      "max_gross_leverage": 3.1389349060314573
+    }
+  },
+  "turtle_s2_vt20": {
+    "full": {
+      "start": "2008-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.03684261896366248,
+      "sharpe": -0.12205931457804653,
+      "max_drawdown": -0.6693442082817862,
+      "calmar": -0.05504285912660375,
+      "annual_vol": 0.17759512607007366,
+      "max_drawdown_duration_days": 5754.0,
+      "avg_gross_leverage": 2.0316841967436132,
+      "max_gross_leverage": 3.1205520382883334
+    },
+    "2008_2019": {
+      "start": "2008-01-02",
+      "end": "2019-12-31",
+      "cagr": -0.03763138915797626,
+      "sharpe": -0.13366710287922912,
+      "max_drawdown": -0.5978636150465315,
+      "calmar": -0.06294309974867332,
+      "annual_vol": 0.17371730145772546,
+      "max_drawdown_duration_days": 3289.0,
+      "avg_gross_leverage": 2.037629605217009,
+      "max_gross_leverage": 3.1205520382883334
+    },
+    "2020_on": {
+      "start": "2020-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.034789340140133906,
+      "sharpe": -0.09895859149330351,
+      "max_drawdown": -0.5126354128273987,
+      "calmar": -0.06786370833855615,
+      "annual_vol": 0.18429587006974496,
+      "max_drawdown_duration_days": 1969.0,
+      "avg_gross_leverage": 2.021087689960057,
+      "max_gross_leverage": 3.109007979830665
+    }
+  },
+  "turtle_50_50_vt20": {
+    "full": {
+      "start": "2008-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.04285822446836518,
+      "sharpe": -0.18293625815045156,
+      "max_drawdown": -0.669791584685206,
+      "calmar": -0.0639874036167654,
+      "annual_vol": 0.16481539374128573,
+      "max_drawdown_duration_days": 6494.0,
+      "avg_gross_leverage": 2.1081265127936133,
+      "max_gross_leverage": 3.109044442120803
+    },
+    "2008_2019": {
+      "start": "2008-01-02",
+      "end": "2019-12-31",
+      "cagr": -0.044473616324907095,
+      "sharpe": -0.20039028821909624,
+      "max_drawdown": -0.5569739392079909,
+      "calmar": -0.07984864855283526,
+      "annual_vol": 0.16164980905456666,
+      "max_drawdown_duration_days": 4029.0,
+      "avg_gross_leverage": 2.105243547084207,
+      "max_gross_leverage": 3.088291267285098
+    },
+    "2020_on": {
+      "start": "2020-01-02",
+      "end": "2026-09-30",
+      "cagr": -0.03897567619771802,
+      "sharpe": -0.14737170516927814,
+      "max_drawdown": -0.4884303531222134,
+      "calmar": -0.07979781753646596,
+      "annual_vol": 0.17028981712299807,
+      "max_drawdown_duration_days": 1969.0,
+      "avg_gross_leverage": 2.113264825128785,
+      "max_gross_leverage": 3.109044442120803
+    }
+  },
+  "tsmom_vt20": {
+    "full": {
+      "start": "2008-01-02",
+      "end": "2026-09-30",
+      "cagr": 0.05602347569018207,
+      "sharpe": 0.45432729319648935,
+      "max_drawdown": -0.27280277089224025,
+      "calmar": 0.2053625610434576,
+      "annual_vol": 0.14226260508797803,
+      "max_drawdown_duration_days": 2269.0,
+      "avg_gross_leverage": 2.7939941901825023,
+      "max_gross_leverage": 3.143264213698614
+    },
+    "2008_2019": {
+      "start": "2008-01-02",
+      "end": "2019-12-31",
+      "cagr": 0.04422369897556644,
+      "sharpe": 0.37111675933628574,
+      "max_drawdown": -0.27280277089224025,
+      "calmar": 0.16210868691299044,
+      "annual_vol": 0.14486872059752556,
+      "max_drawdown_duration_days": 1441.0,
+      "avg_gross_leverage": 2.758754061212036,
+      "max_gross_leverage": 3.143264213698614
+    },
+    "2020_on": {
+      "start": "2020-01-02",
+      "end": "2026-09-30",
+      "cagr": 0.07548864471498673,
+      "sharpe": 0.5981959826629325,
+      "max_drawdown": -0.21136179417144874,
+      "calmar": 0.3571536900077276,
+      "annual_vol": 0.1374110552176857,
+      "max_drawdown_duration_days": 1166.0,
+      "avg_gross_leverage": 2.8568027032325216,
+      "max_gross_leverage": 3.1246796644183066
+    }
+  },
+  "spy_buy_and_hold": {
+    "full": {
+      "start": "2008-01-02",
+      "end": "2026-09-30",
+      "cagr": 0.11295166227653919,
+      "sharpe": 0.641287080624165,
+      "max_drawdown": -0.5187376370729924,
+      "calmar": 0.2177433334389916,
+      "annual_vol": 0.1972262847722017,
+      "max_drawdown_duration_days": 1210.0
+    },
+    "2008_2019": {
+      "start": "2008-01-02",
+      "end": "2019-12-31",
+      "cagr": 0.09106952009107894,
+      "sharpe": 0.5436146632288918,
+      "max_drawdown": -0.5187376370729924,
+      "calmar": 0.17555988534964237,
+      "annual_vol": 0.19540837437200326,
+      "max_drawdown_duration_days": 1210.0
+    },
+    "2020_on": {
+      "start": "2020-01-02",
+      "end": "2026-09-30",
+      "cagr": 0.15153377966248893,
+      "sharpe": 0.8043978288817227,
+      "max_drawdown": -0.33717268745960116,
+      "calmar": 0.4494248356953443,
+      "annual_vol": 0.20037734715178657,
+      "max_drawdown_duration_days": 708.0
+    }
+  },
+  "_notes": {
+    "data_source": "yahoo",
+    "first_bar": {
+      "BIL": "2007-05-30",
+      "DBA": "2007-01-05",
+      "DBB": "2007-01-05",
+      "DBC": "2006-02-06",
+      "EEM": "2004-01-02",
+      "EFA": "2004-01-02",
+      "EWJ": "2004-01-02",
+      "FXA": "2006-06-26",
+      "FXB": "2006-06-26",
+      "FXC": "2006-06-26",
+      "FXE": "2005-12-12",
+      "FXF": "2006-06-26",
+      "FXY": "2007-02-13",
+      "GLD": "2004-11-18",
+      "HYG": "2007-04-11",
+      "IEF": "2004-01-02",
+      "IWM": "2004-01-02",
+      "LQD": "2004-01-02",
+      "QQQ": "2004-01-02",
+      "SLV": "2006-04-28",
+      "SPY": "2004-01-02",
+      "TIP": "2004-01-02",
+      "TLT": "2004-01-02",
+      "UGA": "2008-02-28",
+      "UNG": "2007-04-18",
+      "USO": "2006-04-10",
+      "VGK": "2005-03-10",
+      "VNQ": "2004-09-29"
+    },
+    "trade_counts": {
+      "turtle_s1_native": 2192,
+      "turtle_s2_native": 1350,
+      "turtle_s1_vt15": 2267,
+      "turtle_s2_vt15": 1454,
+      "turtle_s1_vt20": 2267,
+      "turtle_s2_vt20": 1454
+    },
+    "cost_bps_per_side": 9.5,
+    "borrow_spread_bps": 50.0,
+    "max_gross": 3.0
+  }
+}
