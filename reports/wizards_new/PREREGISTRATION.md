@@ -121,3 +121,35 @@ real SVXY fell 88% while the rebuild fell only 32%. From 2011-10 to 2018-02-26 t
 about, so H2 uses the **real SVXY** as the short-volatility instrument instead (−1× until
 2018-02-27, −0.5× after; history from 2011-10-04). Everything else stays: V1 is buy-and-hold
 SVXY, V6 holds 50% SVXY and 50% T-bills when on. In-sample starts 2011-11-01.
+
+## H4. Slower reversal (added 2026-10-02, after H1-H3 were reported, before any H4 run)
+
+**Why this exists, and what it already knows.** H3 showed the weekly reversal earns 15-18% a
+year before costs in both periods, but turns over its whole book every week, which costs about
+20% a year at 10 bps per side. H4 asks whether a slower version keeps enough of that edge to
+survive costs. These variants were chosen knowing that H3 failed on turnover; they were *not*
+chosen by running anything. Their parameters are the standard ones from the literature, not
+values searched for here:
+
+- Overlapping holding periods (Jegadeesh & Titman 1993; Lehmann 1990): form a new weekly
+  portfolio every week exactly as in H3, hold each for K weeks, and run K cohorts side by
+  side with 1/K of the capital each. The book's target is the average of the last K weekly
+  portfolios, so each week only about 1/K of it changes. K = 2 and K = 4.
+- Monthly reversal (Jegadeesh 1990; the Fama-French short-term reversal factor): rank on the
+  prior month's return (21 trading days, minus SPY's), rebalance on the last trading day of
+  each month, trade at the next open, hold one month.
+
+Everything else is as H3: point-in-time members with 60+ days of history, equal weights,
+decile groups, 100% long and 100% short of equity for long/short books, 10 bps per side,
+T-bills on equity, 0.5%/yr borrow on shorts, in-sample 1999-2019, hold-out 2020-2026-09.
+
+| Variant | Ranking | Rebalance | Hold | Book |
+|---|---|---|---|---|
+| R1 | 5-day return minus SPY | weekly | 2 weeks (2 cohorts) | long/short deciles |
+| R2 | 5-day return minus SPY | weekly | 4 weeks (4 cohorts) | long/short deciles |
+| R3 | 21-day return minus SPY | monthly | 1 month | long/short deciles |
+| R4 | as R2 | weekly | 4 weeks | long-only bottom decile |
+| R5 | as R3 | monthly | 1 month | long-only bottom decile |
+
+Long-only books are compared with both SPY and the equal-weight member basket, because a
+long-only losers book is mostly equal-weight market exposure. Same success bar as before.
