@@ -298,6 +298,16 @@ Zusatzmodelle:
 - Spread-Proxies (bps) + volumenbasierte Impact-Slippage
 - Kommissionen (fix + prozentual) + SEC/Exchange Fees
 - Shorting Constraints (Hard-to-Borrow Rejects)
+- Finanzierung: Zinsen auf Cash abzueglich Short-Erloesen: negativ zahlt `Portfolio(margin_interest_rate=0.05)`, positiv erhaelt `cash_interest_rate=0.0`; beide als Konstante oder `Callable[[date], float]`
+
+Fill-Regeln (konservativ, ohne Look-ahead):
+
+- `MARKET`/`MOO` fuellen zum Open des naechsten Bars.
+- `MOC` fuellt zum Close des naechsten Bars. Das alte Verhalten (Close des Signal-Bars) gibt es nur noch per `BacktestEngine(same_bar_moc_fills=True)`.
+- Beruehrt ein Bar Stop und Target, gewinnt der Stop, ausser das Open gapt bereits durch das Target.
+- Stop/Target einer per `MARKET`/`MOO` eroeffneten Position koennen schon im Einstiegs-Bar ausloesen.
+- Stop/Target-Orders werden storniert oder verkleinert, sobald die Position anderweitig geschlossen oder reduziert wurde; sie koennen nie eine neue Position eroeffnen.
+- Vorwaerts aufgefuellte Bars (Symbol hatte an dem Tag keinen Handel) dienen nur zur Bewertung; Orders bleiben bis zum naechsten echten Bar offen.
 
 ## Wichtige Metriken im Tear-Sheet
 
