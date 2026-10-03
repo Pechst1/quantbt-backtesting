@@ -47,6 +47,11 @@ def load_volume_panel(
     if end is not None:
         frame = frame[frame["date"] <= pd.Timestamp(end)]
     frame = frame[(frame["close"] > 0) & (frame["open"] > 0) & frame["adj_close"].notna()]
+    # Drop stray non-trading dates (the panel has one row on Good Friday 2017): a date with
+    # under half the usual number of names would blank every rolling window for weeks.
+    counts = frame.groupby("date").size()
+    usual = counts.rolling(21, center=True, min_periods=1).median()
+    frame = frame[frame["date"].isin(counts.index[counts >= 0.5 * usual])]
     factor = frame["adj_close"] / frame["close"]
     frame = frame.assign(
         dv=frame["close"] * frame["volume"].fillna(0.0),
@@ -157,7 +162,7 @@ class Inputs:
 
 
 def build_inputs(panel: VolumePanel, spy: pd.Series, tbill: pd.Series, cook: pd.Series,
-                 lookback: int = 5, dv_window: int = 63) -> Inputs:
+                 lookback: int = 5, dv_window: int = 63, week_anchor: str = "W-FRI") -> Inputs:
     close = panel.close
     index = close.index
     spy = spy.reindex(index).ffill()
@@ -167,7 +172,7 @@ def build_inputs(panel: VolumePanel, spy: pd.Series, tbill: pd.Series, cook: pd.
     eligible = panel.member & (history >= dv_window) & close.notna() & rel.notna() & dv.notna()
     last_valid = close.apply(lambda s: s.last_valid_index())
     last_row = index.get_indexer(pd.DatetimeIndex(last_valid.values))
-    period = index.to_period("W-FRI")
+    period = index.to_period(week_anchor)
     weekly = np.r_[period[1:] != period[:-1], True]
     tb = tbill.reindex(index).fillna(0.0)
     trends = trend_signals(spy, tb)
@@ -351,9 +356,12 @@ def equal_weight_megacaps(inp: Inputs, top_n: int, start: str, end: str) -> pd.S
 
 def stats(equity: pd.Series) -> dict[str, float]:
     equity = equity.dropna()
+    ruined = bool((equity <= 0).any())
+    if ruined:  # fees and losses used up the whole account; stop the record there
+        equity = equity.loc[: equity[equity <= 0].index[0]].clip(lower=1e-9)
     returns = equity.pct_change().dropna()
     years = (equity.index[-1] - equity.index[0]).days / 365.25
-    cagr = (equity.iloc[-1] / equity.iloc[0]) ** (1.0 / years) - 1.0
+    cagr = -1.0 if ruined else (equity.iloc[-1] / equity.iloc[0]) ** (1.0 / years) - 1.0
     sharpe = returns.mean() / returns.std() * math.sqrt(TRADING_DAYS) if returns.std() > 0 else float("nan")
     yearly = equity.resample("YE").last()
     first = pd.Series([equity.iloc[0]], index=[equity.index[0] - pd.Timedelta(days=1)])
@@ -364,4 +372,5 @@ def stats(equity: pd.Series) -> dict[str, float]:
         "max_dd": float((equity / equity.cummax() - 1.0).min()),
         "worst_year": float(calendar.min()),
         "calendar": {str(k.year): float(v) for k, v in calendar.items()},
+        "ruined": ruined,
     }
