@@ -172,6 +172,9 @@ class PublicOHLCVDataHandler:
 
     def _align_symbol(self, frame: pd.DataFrame, index: pd.Index) -> pd.DataFrame:
         aligned = frame.reindex(index)
+        # Rows the source did not have are marked stale: they keep a price for marking but
+        # are not tradable (execution skips them).
+        aligned["is_stale"] = aligned["close"].isna()
         # Forward-only fill avoids look-ahead bias before a symbol's first real bar.
         aligned["close"] = aligned["close"].ffill()
         aligned["adj_close"] = aligned["adj_close"].fillna(aligned["close"])
@@ -233,6 +236,7 @@ class PublicOHLCVDataHandler:
                 close=float(row["close"]),
                 volume=float(row["volume"]),
                 adj_close=float(row["adj_close"]),
+                is_stale=bool(row.get("is_stale", False)),
             )
             self.latest_bars[symbol] = bar
             bars[symbol] = bar
