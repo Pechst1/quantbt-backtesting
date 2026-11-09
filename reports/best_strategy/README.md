@@ -69,7 +69,7 @@ traded), against the rest of the time ([audit.json](audit.json)):
 - The direction is the same in all three windows. No single window is statistically
   significant on its own, so treat this as a tilt with a sound reason behind it (returns are
   higher after forced selling), not a proven edge.
-- 34 of the 42 episodes since 1999 ended with SPY higher. The losers were the ones that matter
+- 35 of the 42 episodes since 1999 ended with SPY higher. The losers were the ones that matter
   for leverage: June-August 2002 (-5%, -20% at the worst point), October-December 2008 (-7%,
   -23%), March-April 2020 (-5%, -23%).
 - R1 beats constant leverage with the same average exposure: 15.8% against 14.5% for a
