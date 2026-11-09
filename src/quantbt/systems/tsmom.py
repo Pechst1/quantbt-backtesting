@@ -106,6 +106,7 @@ def run_tsmom(
     config: TsmomConfig | None = None,
     symbols: list[str] | None = None,
     vol_target: VolTarget | None = None,
+    weights: pd.DataFrame | None = None,
 ) -> TsmomResult:
     """Simulate the strategy; with `vol_target`, hold `k` times the published book (see `overlay`)."""
     config = config or TsmomConfig()
@@ -114,7 +115,10 @@ def run_tsmom(
         raise ValueError("No TSMOM universe symbols in panel.")
     cost = config.cost_bps_per_side / 10_000.0
     rf = daily_cash_rate(panel, config.cash_symbol)
-    weights = target_weights(panel, symbols, config)
+    if weights is None:
+        weights = target_weights(panel, symbols, config)
+    else:  # caller-supplied month-end weights (same timing: decided on a close, traded at the next open)
+        weights = weights[symbols]
 
     opens = panel.open[symbols].to_numpy()
     closes = panel.close[symbols].to_numpy()
