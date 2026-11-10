@@ -15,10 +15,14 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from run_best_strategy import OUT, RUN_START, VARIANTS, window_stats  # noqa: E402
+from run_best_strategy import OUT, RUN_START, VARIANTS, window_stats
 
 from quantbt.research import best_strategy as bs
-from quantbt.research.megacap_reversal import cook_breadth_state, daily_tbill, load_volume_panel
+from quantbt.research.megacap_reversal import (
+    cook_breadth_state,
+    daily_tbill,
+    load_volume_panel,
+)
 from quantbt.research.wizards_new import fetch_yahoo_close
 
 GENERALISE = ["QQQ", "IWM", "MDY", "EFA", "EEM"]
@@ -172,8 +176,9 @@ def write_markdown(out: dict) -> None:
         q = "yes" if v["qualifies"] else "no: " + "; ".join(v["fail_reasons"])
         lines.append(f"| {name} {v['label']} | {cells(v['windows'])} | {pct(v['windows']['1999-2026']['max_dd'])} | "
                      f"{v['avg_exposure']:.2f} | {pct(v['constant_leverage']['2010-2026']['cagr'])} | {v['orders_per_year']:.0f} | {q} |")
-    lines += ["", f"**Winner: {out['winner'] or 'none'}**. Highest return among those failing only the drawdown limit: "
-              f"{out['aggressive'] or 'none'}.", ""]
+    summary = (f"**Winner: {out['winner'] or 'none'}**. Highest return among those failing only the drawdown limit: "
+               f"{out['aggressive'] or 'none'}.")
+    lines += ["", summary, ""]
     if out.get("robustness"):
         lines += [f"## Robustness of {out['winner']} (not selectable)", "",
                   "| | 2010-2019 | 2020-2026 | 2010-2026 | Worst DD 1999-2026 | After 2026-09-30 |", "|---|---|---|---|---|---|"]

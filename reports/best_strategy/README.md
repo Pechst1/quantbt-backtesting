@@ -1,5 +1,9 @@
 # Best-strategy search: vol-scaled momentum, panic-only reversal, trend sleeve
 
+> **Round 2 (2026-11-10) is at the end of this file.** It changes the recommendation for someone
+> who wants the highest return: a trend-and-volatility leverage rule on the S&P 500, validated on
+> 1928-1998, with the Cook panic signal as an override. Round 1 below is unchanged.
+
 Run date: 2026-11-09, data through 2026-11-05. Rules, the 11 variants, costs and the selection
 rule were committed in [PREREGISTRATION.md](PREREGISTRATION.md) before the first run. Every
 variant is reported in [results.md](results.md). Reproduce with
@@ -110,3 +114,133 @@ The Sharpe falls as leverage rises (0.82 at 1.5x, 0.67 at 3x), so the dial buys 
 - C2 is combined from daily return series, not simulated order by order.
 - After this report, 40-odd variants have been tried on this data across the project. A 1.7
   point edge with a t-statistic below 2 in each window could still be luck.
+
+---
+
+# Round 2 (2026-11-10): pushing for return
+
+Rules were fixed before each part was run, in
+[PREREGISTRATION_ROUND2.md](PREREGISTRATION_ROUND2.md). Generated tables: [round2.md](round2.md),
+[century.md](century.md). Reproduce with `python examples/run_best_strategy_round2.py`,
+`python examples/run_century_leverage.py` and `python examples/run_century_part4.py`.
+
+**Bottom line.** The highest-returning strategy the evidence supports is a three-state rule on
+the S&P 500, called TC below:
+
+1. **Index above its 200-day average:** hold it with leverage of 30% divided by the last
+   21 days' annualised volatility, capped at 3x (about 2.4x on average in those periods).
+2. **Index below its 200-day average:** T-bills.
+3. **Cook panic state on:** at least 1.5x, whatever the first two say.
+
+In the Part 3 framework it made 15.6% a year over 1999-2026 against 8.7% for the index, and
+20.5% against 14.2% over 2010-2026, with a worst drawdown of -50% against -55%. Its worst
+calendar year was -34% (2015). The first two states were validated on 1928-1998, which no earlier
+test had used. The third state and the combination rest on 1999-2026 only, which had been seen.
+
+## Part 1: the Cook signal on other indices. Fails the bar
+
+Return on days after the S&P 500 Cook state was on, against other days, 2010-2026:
+
+| | On, annualised | Off, annualised | t-stat |
+|---|---|---|---|
+| QQQ | 53.5% | 16.1% | 1.51 |
+| IWM | 38.1% | 10.0% | 1.06 |
+| MDY | 42.8% | 9.6% | 1.32 |
+| EFA | 30.6% | 5.9% | 1.07 |
+| EEM | 29.9% | 4.7% | 0.97 |
+| Average of the five | 39.0% | 9.2% | 1.27 |
+
+The difference is positive on all five, but the pooled t-statistic is 1.27, below the 2.0 I
+required. Almost all of it comes from 2010-2019; in 2020-2026 the pooled difference is close to
+zero (t = 0.14). So the panic signal is a plausible tilt, not an established edge.
+
+## Part 2: more leverage in panics, a loss stop, momentum plus panic. Nothing recommended
+
+| Scalable costs | 2010-2019 | 2020-2026 | 2010-2026 | Worst DD 1999-2026 | Constant leverage, same exposure |
+|---|---|---|---|---|---|
+| SPY | 13.3% | 15.1% | 14.1% | -55% | |
+| L1 SPY; 2x in panic | 17.3% | 18.0% | 17.6% | -67% | 15.0% |
+| L2 SPY; 2x in panic, 7% stop | 16.4% | 17.5% | 16.9% | -65% | 14.9% |
+| L3 SPY; 3x in panic, 7% stop | 19.3% | 19.7% | 19.5% | -73% | 15.6% |
+| QQQ | 17.7% | 20.7% | 19.0% | -83% | |
+| Q1 QQQ; 1.5x in panic | 19.9% | 23.0% | 21.2% | -82% | 19.7% |
+| Q2 QQQ; 2x in panic, 7% stop | 21.1% | 22.8% | 21.9% | -86% | 20.0% |
+| M1 momentum; 1.5x SPY in panic | 8.5% | 16.1% | 11.6% | -68% | 14.6% |
+| M2 momentum; 2x SPY in panic, 7% stop | 9.6% | 17.3% | 12.8% | -70% | 14.9% |
+
+- Only L2 meets the three rules, and because Part 1 failed, the rule says not to recommend it
+  over R1.
+- **The loss stop did not help.** It cost 0.7 points a year and improved the worst drawdown by
+  two points. The damage in 2002, 2008 and 2020 came faster than a 7% stop could act on.
+- **Momentum plus panic leverage is worse than either part.** Swapping ten stocks for the index
+  and back a few times a year costs more than it gains.
+- The QQQ versions return more only because QQQ did; their timing gain is 1.5-2 points, and
+  QQQ lost 83% in 2000-2002.
+
+## Part 3: leverage rules on the S&P 500 since 1928. A winner on unseen data
+
+Daily-reset leverage on the index with dividends, borrowing at the cash rate + 1.5%, 5 bps per
+change, and one full day between a reading and the position it sets. CAGR / worst drawdown:
+
+| | 1928-1949 | 1950-1974 | 1975-1998 | 1999-2026 | 1928-2026 | Qualifies |
+|---|---|---|---|---|---|---|
+| 1x | 5.3% / -84% | 10.0% / -45% | 16.9% / -33% | 8.7% / -55% | 10.2% / -84% | |
+| Constant 2x | 0.2% / -99% | 13.5% / -76% | 22.7% / -61% | 10.0% / -88% | 11.6% / -99% | no |
+| Constant 3x | -11.5% / -100% | 15.5% / -90% | 25.5% / -80% | 7.2% / -98% | 8.8% / -100% | no |
+| T2: 2x above the 200-day, else T-bills | 10.0% / -80% | 19.1% / -29% | 19.6% / -33% | 10.2% / -44% | 14.6% / -80% | yes |
+| T3: 3x above the 200-day, else T-bills | 9.5% / -93% | 25.9% / -41% | 23.2% / -48% | 11.7% / -63% | 17.3% / -93% | no |
+| V2: volatility-managed, cap 2x | 6.4% / -68% | 13.5% / -55% | 19.0% / -40% | 9.2% / -60% | 12.0% / -68% | yes |
+| **TV3: above the 200-day, 30% / volatility, cap 3x** | 10.2% / -62% | 23.5% / -39% | 19.3% / -39% | 10.0% / -43% | **15.5% / -62%** | **yes** |
+
+- **Constant leverage does not pay.** Over 98 years 2x added 1.4 points a year for a -99%
+  drawdown, and 3x ended below the unlevered index. This is Thorp's point about betting too big.
+- **Leverage only in uptrends and only when markets are calm does pay.** TV3 beat the index in
+  all four windows, including the three that no test in this project had touched, with a
+  smaller worst drawdown than the index itself.
+- **The edge is much thinner in the modern period.** Over 2010-2026 TV3 made 14.6% against
+  14.2% for the index, with a lower Sharpe (0.63 against 0.86). Recoveries since 2009 have been
+  fast, and the rule buys back late.
+- **It is fragile to its settings.** With a 100-day average it made 11.7% over the full period
+  and 5.8% in 1999-2026 (below the index). At 20 bps per change it made 12.4% and 6.9%. The
+  150- and 250-day versions made 15.0% and 14.1%. It needs cheap trading: about 30 small
+  adjustments a year.
+
+## Part 4 (exploratory, seen data): TV3 with the Cook override
+
+TV3 is in T-bills on most panic days, and round 1 found those days were the best ones for SPY.
+One combined variant, declared before it was run, on 1999-2026:
+
+| Part 3 framework | 1999-2009 | 2010-2019 | 2020-2026 | 2010-2026 | 1999-2026 | Worst DD |
+|---|---|---|---|---|---|---|
+| 1x | 0.9% | 13.3% | 15.3% | 14.2% | 8.7% | -55% |
+| R1: 1x; 1.5x in panic | 1.8% | 15.4% | 16.6% | 16.0% | 10.2% | -60% |
+| TV3 | 3.0% | 13.6% | 15.6% | 14.6% | 10.0% | -43% |
+| **TC: TV3, at least 1.5x in panic** | 8.0% | 19.6% | 21.4% | **20.5%** | **15.6%** | -50% |
+
+- TC spends 19% of days in T-bills and 53% above 2x; average leverage is 1.9x.
+- Calendar years swing widely: +81% in 2013, +67% in 2017, -34% in 2015, -16% in 2008, +3% in
+  2020, -3% in 2022.
+- Descriptive checks, 1999-2026 CAGR: 150-day average 14.2%; 250-day 14.5%; two days of delay
+  15.2%; borrowing at cash + 3% 13.7%; 20 bps per change 12.2%; panic floor 1.0x 14.0%; panic
+  floor 2.0x 16.6%; a tamer version capped at 2x with a 20% volatility target 13.8% (worst
+  drawdown -46%). All stay well above the index's 8.7%.
+- **Why this is weaker evidence than Part 3:** both ingredients were chosen after seeing
+  1999-2026, the Cook leg failed Part 1's significance bar, and the combination gains most of its
+  lead from holding 1.5x instead of T-bills on panic days, which triples the size of the bet that
+  R1 makes. If the panic effect was luck, TC falls back to roughly TV3, which only matched the
+  index in 2010-2026.
+
+## Recommendation after round 2
+
+- **For the highest return: TC.** Expect it to be worth less than the table: the honest range is
+  from "about the index" (if the panic effect does not persist) to several points a year above it.
+- **For a smaller, simpler bet: R1** from round 1 (index, 1.5x in panics, 3 orders a year).
+- **How TC would be traded:** an S&P 500 ETF, a 2x and a 3x daily S&P 500 product, and a
+  money-market ETF, mixed to the wanted leverage; reviewed after each close and changed when the
+  wanted leverage moves by more than 0.1. Daily-reset products match the backtest's mechanics.
+- **State on 2026-11-10:** the index is above its 200-day average, 21-day volatility is 21%, so
+  the wanted leverage is 1.4x. The Cook state is off (last on 2026-09-23 to 2026-10-20).
+- **Not modelled:** the EUR/USD rate, taxes on about 36 adjustments a year, tracking error and
+  fees of leveraged products beyond the 1.5% financing spread, and the fixed order fee (small for
+  accounts of EUR 25k and up, since each change is one or two orders).
+- Before real money: paper-trade TC next to the index for at least six months.
