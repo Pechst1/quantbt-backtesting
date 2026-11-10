@@ -55,7 +55,7 @@ from quantbt.core import (
     Side,
     SignalEvent,
 )
-from quantbt.data import DataHandlerConfig, DataSource, PublicOHLCVDataHandler, YahooFinanceSource
+from quantbt.data import DataHandlerConfig, DataSource, MassiveSource, PublicOHLCVDataHandler, YahooFinanceSource
 from quantbt.engine import BacktestEngine, BacktestResult
 from quantbt.execution import ExecutionConfig, SimulatedExecutionHandler
 from quantbt.portfolio import (
@@ -147,6 +147,7 @@ __all__ = [
     "MacroSnapshot",
     "MarkitBorrowCSVSource",
     "MarketEvent",
+    "MassiveSource",
     "Momentum121Strategy",
     "OrderEvent",
     "OrderType",
