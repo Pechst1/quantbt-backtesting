@@ -50,7 +50,8 @@ class Data:
     tbill: np.ndarray
 
 
-def build_data(panel: VolumePanel, tbill: pd.Series, cook: pd.Series, vix: pd.Series) -> Data:
+def build_data(panel: VolumePanel, tbill: pd.Series, cook: pd.Series, vix: pd.Series,
+               etfs: tuple[str, ...] = ()) -> Data:
     close = panel.close
     index = close.index
     if SPY not in close.columns:
@@ -69,7 +70,9 @@ def build_data(panel: VolumePanel, tbill: pd.Series, cook: pd.Series, vix: pd.Se
     mega_ok = member & (close.notna().cumsum() >= 63) & close.notna() & rel5.notna() & dv.notna()
     dv_rank = dv.where(mega_ok).rank(axis=1, ascending=False, method="first")
     big = dv_rank <= 50
-    big[SPY] = True
+    for etf in (SPY, *etfs):
+        big[etf] = True
+        member[etf] = False
 
     last_valid = close.apply(lambda s: s.last_valid_index())
     last_row = index.get_indexer(pd.DatetimeIndex(last_valid.values))
@@ -135,7 +138,12 @@ class Config:
     vol_target: float = 0.20
     vol_window: int = 63
     max_lev: float = 1.0
-    panic: str = "none"  # "none", "lev_spy", "reversal" (replaces SPY) or "fill" (uses idle capital)
+    index: str = SPY  # the index ETF held by core "spy" and by panic mode "to_index"
+    # "none"; "lev_spy" (core "spy": lever the index); "reversal" (core "spy": losers replace the index);
+    # "fill" (core "mom": idle capital into losers); "to_index" (core "mom": the levered index replaces the book)
+    panic: str = "none"
+    panic_stop: float | None = None  # index loss since the panic began that ends the extra leverage
+    panic_delay: int = 0  # extra days to wait before acting on the panic state
     trigger: str = "cook"  # "cook" or "cook_or_vix"
     panic_lev: float = 1.5
     rebalance_day: int = 1  # trading day of the month
@@ -205,6 +213,9 @@ def run(d: Data, cfg: Config, costs: Costs, start: str, end: str | None = None) 
     exposure_now = 1.0
     band_in = True
     panic_prev = False
+    stopped = False
+    stop_ref = float("nan")
+    index_col = int(d.names.get_loc(cfg.index))
     orders = 0
     fees = 0.0
     spread_cost = 0.0
@@ -265,10 +276,19 @@ def run(d: Data, cfg: Config, costs: Costs, start: str, end: str | None = None) 
         first = i == s
         monthly = d.month_day[i] == cfg.rebalance_day
         weekly = bool(d.weekly[i])
-        panic_on = bool(d.cook[i]) or (cfg.trigger == "cook_or_vix" and bool(d.vix_high[i]))
+        j = i - cfg.panic_delay
+        panic_on = bool(d.cook[j]) or (cfg.trigger == "cook_or_vix" and bool(d.vix_high[j]))
         if cfg.panic == "none":
             panic_on = False
         act = first
+        if cfg.panic_stop is not None:
+            if panic_on and not panic_prev:
+                stop_ref, stopped = d.mark[i, index_col], False
+            elif panic_on and not stopped and d.mark[i, index_col] < stop_ref * (1.0 - cfg.panic_stop):
+                stopped, act = True, True
+            elif not panic_on:
+                stopped = False
+        lev_on = panic_on and not stopped
 
         if cfg.core == "mom" and (monthly or first or not book):
             new_book = momentum_book(d, i, [c for c in book if d.last_row[c] > i], cfg)
@@ -317,7 +337,9 @@ def run(d: Data, cfg: Config, costs: Costs, start: str, end: str | None = None) 
                 if cfg.panic == "reversal" and panic_on and losers:
                     w[losers] = 1.0 / len(losers)
                 else:
-                    w[d.spy_col] = cfg.panic_lev if (cfg.panic == "lev_spy" and panic_on) else 1.0
+                    w[index_col] = cfg.panic_lev if (cfg.panic == "lev_spy" and lev_on) else 1.0
+            elif cfg.panic == "to_index" and panic_on:
+                w[index_col] = cfg.panic_lev if lev_on else 1.0
             else:
                 if book:
                     w[book] = exposure_now / cfg.top_n

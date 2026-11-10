@@ -69,3 +69,57 @@ and 2 but not the drawdown limit, for someone who accepts deeper drawdowns.
 
 Robustness for the winner only, not selectable: stops of 5% and 10%; the leverage applied one
 day later; "US broker" and zero costs; borrowing at T-bills + 1%; and the days after 2026-09-30.
+
+---
+
+# Part 3 (added 2026-11-10, after Parts 1 and 2 were run and before any Part 3 run)
+
+Parts 1 and 2 are done and reported as they came out: Part 1 failed (pooled t = 1.27), so no
+round-2 variant is recommended over R1. Everything the project has tested so far used 1999-2026.
+Part 3 asks the remaining return question on data no thread has touched: **how much leverage on
+the index, switched by which simple rule, gave the highest long-run growth over 1928-1998**, with
+1999-2026 as the already-seen check. This is Ed Thorp's Kelly question (how big to bet) and Paul
+Tudor Jones' 200-day rule, both from the books. Earlier results that shaped the choice of rules:
+PR #7 found 3x SPY with a 200-day filter unreliable on 1999-2026 and sensitive to the filter
+length; round 1 found volatility scaling unhelpful on a momentum book.
+
+## Data
+
+- S&P 500 (S&P 90 before 1957) daily closes from Yahoo `^GSPC`, 1927-12-30 onward.
+- Dividends: Shiller's monthly dividend series (github.com/datasets/s-and-p-500), added as
+  dividend / price / 252 per day, last known yield carried forward.
+- Cash rate: FRED `TB3MS` (previous month's value) from 1934; before that Shiller's long
+  government yield as a stand-in.
+
+## Mechanics
+
+- Daily-reset leverage L on the total-return index, like a leveraged ETF.
+- A rule's reading on the close of day t sets the position that earns the return of day t+2
+  (one full day of delay, since there are no opening prices).
+- Borrowed money (L - 1) pays the cash rate + 1.5% a year (a leveraged ETF's swap spread plus
+  fee); money not invested earns the cash rate. Each change in L costs 5 bps of the amount traded.
+
+## Variants
+
+| | Rule |
+|---|---|
+| K1.5, K2, K3 | Constant 1.5x, 2x, 3x |
+| T1, T2, T3 | 1x, 2x, 3x while the index closes above its 200-day average; T-bills otherwise |
+| TB2 | 2x above the 200-day average; 1x below |
+| V2 | Volatility-managed: L = 20% / 21-day realised volatility, capped at 2x; traded when L moves by more than 0.1 |
+| V3 | As V2 with a 30% target, capped at 3x |
+| TV3 | Above the 200-day average: 30% / 21-day volatility capped at 3x; below: T-bills |
+
+Benchmark: 1x total return.
+
+## Windows and selection
+
+Windows: 1928-1949, 1950-1974, 1975-1998 (all unseen), 1999-2026-09 (seen).
+
+A variant **qualifies** if its CAGR beats the 1x benchmark in at least 3 of the 4 windows,
+including at least 2 of the 3 unseen ones, and its worst drawdown over 1928-2026 is no deeper
+than the benchmark's own.
+
+**Winner: the qualifying variant with the highest 1928-2026 CAGR.** If none qualifies, the report
+says so. Robustness for the winner only, not selectable: averages of 100, 150 and 250 days;
+borrowing at cash + 3%; 20 bps per change; two days of delay.
