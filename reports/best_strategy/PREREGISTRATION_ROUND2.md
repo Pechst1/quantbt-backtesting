@@ -123,3 +123,19 @@ than the benchmark's own.
 **Winner: the qualifying variant with the highest 1928-2026 CAGR.** If none qualifies, the report
 says so. Robustness for the winner only, not selectable: averages of 100, 150 and 250 days;
 borrowing at cash + 3%; 20 bps per change; two days of delay.
+
+---
+
+# Part 4 (added 2026-11-10 after Part 3 was run; exploratory, on data already seen)
+
+Part 3's winner is TV3. It sits in T-bills below the 200-day average, which is where most Cook
+panic days fall, and round 1 showed those days were good for SPY in 1999-2026. One combined
+variant is run to see which rule is right on those days, in the Part 3 framework (index total
+return, one day of delay, same financing and costs), on 1999-2026 only:
+
+- **TC**: TV3, but while the Cook state is on the leverage is at least 1.5x.
+- For comparison in the same framework: 1x, TV3, and R1 (1x; 1.5x while the Cook state is on).
+
+Reported for 1999-2009, 2010-2019, 2020-2026-09 and 2010-2026. This cannot be a clean test:
+both ingredients were chosen after seeing this period. It is reported as a description only and
+does not change Part 3's winner.
